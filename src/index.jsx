@@ -12,6 +12,7 @@ import Error from "./pages/Error";
 // rooter import
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
+import GlobalStyle from "./utils/style/GlobalStyle";
 
 /* --------------------------------------------- */
 /*          Components creation section          */
@@ -19,6 +20,7 @@ import Header from "./components/Header";
 ReactDOM.render(
    <React.StrictMode>
       <Router>
+         <GlobalStyle />
          <Header />
          <Routes>
             <Route exact path="/" element={<Home />} />

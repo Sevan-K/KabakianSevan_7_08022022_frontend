@@ -2,12 +2,19 @@
 /*          Secrtion des imports          */
 /* -------------------------------------- */
 
+import Auth from "../../components/Auth";
+
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
 // component function
 function Profile() {
-   return <h1>Page pour les profils</h1>;
+   return (
+      <div>
+         <h1>Page pour les profils</h1>
+         <Auth signUp={true} />
+      </div>
+   );
 }
 
 // exporting component

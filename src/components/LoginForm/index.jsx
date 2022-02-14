@@ -2,13 +2,21 @@
 /*          Secrtion des imports          */
 /* -------------------------------------- */
 
+/* ------------------------------------------- */
+/*          Styled components section          */
+/* ------------------------------------------- */
+
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
-// component function
-function Error() {
-   return <h1>Oups il y a eu un problèmes</h1>;
+// Authentification component function
+function LoginForm() {
+   return (
+      <div>
+         <p>LoginForm</p>
+      </div>
+   );
 }
 
 // exporting component
-export default Error;
+export default LoginForm;
