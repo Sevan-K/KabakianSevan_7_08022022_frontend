@@ -7,7 +7,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 // importing components
-import LoginForm from "../LoginForm";
+import LogInForm from "../LogInForm";
 import SignUpForm from "../SignUpForm";
 
 /* ------------------------------------------- */
@@ -43,7 +43,7 @@ function Auth({ signUp }) {
             </StyledButton>
          </div>
 
-         {signUpModal ? <SignUpForm /> : <LoginForm />}
+         {signUpModal ? <SignUpForm /> : <LogInForm />}
       </div>
    );
 }
