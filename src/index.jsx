@@ -3,16 +3,21 @@
 /* -------------------------------------- */
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // pages import
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Error from "./pages/Error";
 
-// rooter import
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// components import
 import Header from "./components/Header";
+
+// global style import
 import GlobalStyle from "./utils/style/GlobalStyle";
+
+// authentification context provider import
+import { AuthProvider } from "./utils/context";
 
 /* --------------------------------------------- */
 /*          Components creation section          */
@@ -20,13 +25,15 @@ import GlobalStyle from "./utils/style/GlobalStyle";
 ReactDOM.render(
    <React.StrictMode>
       <Router>
-         <GlobalStyle />
-         <Header />
-         <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="*" element={<Error />} />
-         </Routes>
+         <AuthProvider>
+            <GlobalStyle />
+            <Header />
+            <Routes>
+               <Route exact path="/" element={<Home />} />
+               <Route path="/profile" element={<Profile />} />
+               <Route path="*" element={<Error />} />
+            </Routes>
+         </AuthProvider>
       </Router>
    </React.StrictMode>,
    document.getElementById("root")
