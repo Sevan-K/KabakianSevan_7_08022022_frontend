@@ -3,9 +3,9 @@
 /* --------------------------------- */
 import { createContext, useState } from "react";
 
-/* ------------------------------------------------------- */
-/*          Section pour le contexte lié au theme          */
-/* ------------------------------------------------------- */
+/* -------------------------------------------------- */
+/*          Authentification context section          */
+/* -------------------------------------------------- */
 
 // auth context creation
 export const AuthContext = createContext();

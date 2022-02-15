@@ -2,8 +2,9 @@
 /*          Imports section          */
 /* --------------------------------- */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { useAuth } from "../../utils/hooks";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -19,11 +20,14 @@ function LogInForm() {
    const [password, setPassword] = useState("");
 
    // error message local states
-   const [emailError, updateEmailError] = useState("");
-   const [passwordError, updatePasswordError] = useState("");
+   const [emailError, setEmailError] = useState("");
+   const [passwordError, setPasswordError] = useState("");
+
+   // using Token and store token from auth token thought useAuth
+   const { token, storeToken } = useAuth();
 
    // function to handle action on submit
-   const handleSubmit = async (event) => {
+   const handleLogIn = async (event) => {
       event.preventDefault();
       // appel à l'API avec axios (post pour le login)
       try {
@@ -38,12 +42,13 @@ function LogInForm() {
          if (response.data.errors) {
             // !!!!!!!! check how the errors are send by the back
             console.log(response.data.errors);
-            updateEmailError(response.data.errors.email);
-            updatePasswordError(response.data.errors.password);
+            setEmailError(response.data.errors.email);
+            setPasswordError(response.data.errors.password);
          }
          // if there is no error then we go to home page
          else {
             // store token
+            storeToken(response.data.token);
             window.location = "/";
          }
       } catch (error) {
@@ -51,9 +56,12 @@ function LogInForm() {
       }
    };
 
+   // useEffect to control token value
+   useEffect(() => console.log(token), [token]);
+
    // component to return
    return (
-      <form action="" onSubmit={handleSubmit} id="login-form">
+      <form action="" onSubmit={handleLogIn} id="login-form">
          <p>LogInForm</p>
          <label htmlFor="email">Email</label>
          <input
@@ -63,7 +71,7 @@ function LogInForm() {
             value={email}
             onChange={(event) => setEmail(event.target.value)}
          />
-         {emailError && <p className="error email">Erreur sur l'email</p>}
+         {emailError && <p>{emailError}</p>}
          <label htmlFor="password">Mot de passe</label>
          <input
             type="password"
@@ -72,9 +80,7 @@ function LogInForm() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
          />
-         {passwordError && (
-            <p className="error password">Erreur sur l'password</p>
-         )}
+         {passwordError && <p>{passwordError}</p>}
          <input type="submit" value="Test" />
       </form>
    );
