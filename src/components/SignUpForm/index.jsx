@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 /*          Components creation section          */
 /* --------------------------------------------- */
 // Authentification component function
-function SignUpForm() {
+function SignUpForm({ setSignUpFormSubmit }) {
    // local state is employed to store data from user
    const [pseudo, setPseudo] = useState("");
    const [email, setEmail] = useState("");
@@ -45,7 +45,7 @@ function SignUpForm() {
          setPseudoError("Veuillez renseigner un pseudo valide");
       }
 
-      const isEmailValid = emailRegex.test(pseudo);
+      const isEmailValid = emailRegex.test(email);
       // if the email  match the regex
       if (isEmailValid) {
          setEmailError("");
@@ -55,14 +55,14 @@ function SignUpForm() {
          setEmailError("Veuillez renseigner un email valide");
       }
 
-      const isPasswordValid = passwordRegex.test(pseudo);
+      const isPasswordValid = passwordRegex.test(password);
       // if the email  match the regex
       if (isPasswordValid) {
          setPasswordError("");
       }
       // if the email does not match the regex
       else {
-         setPasswordError("Veuillez renseigner un email valide");
+         setPasswordError("Veuillez renseigner un mot de passe valide");
       }
       return isPseudoValid && isEmailValid && isPasswordValid;
    };
@@ -85,11 +85,15 @@ function SignUpForm() {
             // checking the response
             console.log("=== response ===>", response);
             if (response.data.errors) {
+               // set pseudo error to the value sent in the response to display it
                setPseudoError(response.data.errors.pseudo);
+               // set email error to the value sent in the response to display it
                setEmailError(response.data.errors.email);
+               // set password error to the value sent in the response to display it
                setPasswordError(response.data.errors.password);
             } else {
-               // action to do !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+               // the form has been suucessfully submitted
+               setSignUpFormSubmit(true);
             }
          }
       } catch (error) {
@@ -106,6 +110,7 @@ function SignUpForm() {
             type="text"
             name="pseudo"
             id="pseudo"
+            aria-label="pseudo"
             value={pseudo}
             onChange={(event) => setPseudo(event.target.value)}
          />
@@ -115,6 +120,8 @@ function SignUpForm() {
             type="email"
             name="email"
             id="email"
+            placeholder="email"
+            aria-label="email adress"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
          />
@@ -124,6 +131,7 @@ function SignUpForm() {
             type="password"
             name="password"
             id="password"
+            aria-label="mot de passe"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
          />

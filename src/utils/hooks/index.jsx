@@ -3,12 +3,20 @@
 /* --------------------------------- */
 
 import { useContext } from "react";
-import { AuthContext } from "../context";
+import { TokenContext, UserIdContext } from "../context";
 
-/* ------------------------------------------------------ */
-/*          Hook to get Authentification context          */
-/* ------------------------------------------------------ */
-export function useAuth() {
-   const { token, storeToken } = useContext(AuthContext);
+/* ------------------------------------------- */
+/*          Hook to get token context          */
+/* ------------------------------------------- */
+export function useToken() {
+   const { token, storeToken } = useContext(TokenContext);
    return { token, storeToken };
+}
+
+/* ------------------------------------------- */
+/*          Hook to get userId context          */
+/* ------------------------------------------- */
+export function useUserId() {
+   const { userId, getUserId } = useContext(UserIdContext);
+   return { userId, getUserId };
 }

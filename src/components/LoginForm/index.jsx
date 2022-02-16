@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useAuth } from "../../utils/hooks";
+import { useToken } from "../../utils/hooks";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -23,8 +23,8 @@ function LogInForm() {
    const [emailError, setEmailError] = useState("");
    const [passwordError, setPasswordError] = useState("");
 
-   // using Token and store token from auth token thought useAuth
-   const { token, storeToken } = useAuth();
+   // using Token and store token from auth token thought useToken
+   const { token, storeToken } = useToken();
 
    // function to handle action on submit
    const handleLogIn = async (event) => {

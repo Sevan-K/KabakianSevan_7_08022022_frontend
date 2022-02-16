@@ -17,7 +17,7 @@ import Header from "./components/Header";
 import GlobalStyle from "./utils/style/GlobalStyle";
 
 // authentification context provider import
-import { AuthProvider } from "./utils/context";
+import { TokenProvider, UserIdProvider } from "./utils/context";
 
 /* --------------------------------------------- */
 /*          Components creation section          */
@@ -25,15 +25,17 @@ import { AuthProvider } from "./utils/context";
 ReactDOM.render(
    <React.StrictMode>
       <Router>
-         <AuthProvider>
-            <GlobalStyle />
-            <Header />
-            <Routes>
-               <Route exact path="/" element={<Home />} />
-               <Route path="/profile" element={<Profile />} />
-               <Route path="*" element={<Error />} />
-            </Routes>
-         </AuthProvider>
+         <TokenProvider>
+            <UserIdProvider>
+               <GlobalStyle />
+               <Header />
+               <Routes>
+                  <Route exact path="/" element={<Home />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="*" element={<Error />} />
+               </Routes>
+            </UserIdProvider>
+         </TokenProvider>
       </Router>
    </React.StrictMode>,
    document.getElementById("root")

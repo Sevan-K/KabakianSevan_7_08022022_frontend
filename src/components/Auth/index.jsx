@@ -25,6 +25,13 @@ const StyledButton = styled.button`
 function Auth({ signUp }) {
    // local state to know if the user want to log in or to sign up
    const [signUpModal, setSignUpModal] = useState(signUp);
+
+   // local state to know if the signUpForm has been submited with success
+   const [signUpFormSubmit, setSignUpFormSubmit] = useState(false);
+
+   // component to return
+   // signUp form if signUpModal is true
+   // logIn form if signUpModal is false or signUpFormSubmit is true
    return (
       <div>
          <p>Auth</p>
@@ -42,8 +49,14 @@ function Auth({ signUp }) {
                SignUp
             </StyledButton>
          </div>
-
-         {signUpModal ? <SignUpForm /> : <LogInForm />}
+         {signUpFormSubmit && (
+            <p>Votre compte a été crée avec succès, connectez vous !</p>
+         )}
+         {signUpModal && !signUpFormSubmit ? (
+            <SignUpForm setSignUpFormSubmit={setSignUpFormSubmit} />
+         ) : (
+            <LogInForm />
+         )}
       </div>
    );
 }
