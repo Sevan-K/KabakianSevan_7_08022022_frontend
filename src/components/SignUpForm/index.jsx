@@ -3,7 +3,7 @@
 /* -------------------------------------- */
 
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -78,8 +78,8 @@ function SignUpForm({ setSignUpFormSubmit }) {
             // call to the API using axios
             const response = await axios({
                method: "post",
-               url: `${process.env.REACT_APP_API_URL}api/user/signup`,
-               withCredentials: true,
+               url: `http://localhost:3000/api/auth/signup`,
+               // withCredentials: true,
                data: { pseudo, email, password },
             });
             // checking the response
@@ -93,7 +93,7 @@ function SignUpForm({ setSignUpFormSubmit }) {
                setPasswordError(response.data.errors.password);
             } else {
                // the form has been suucessfully submitted
-               setSignUpFormSubmit(true);
+               // setSignUpFormSubmit(true);
             }
          }
       } catch (error) {

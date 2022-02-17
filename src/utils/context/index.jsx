@@ -6,26 +6,26 @@ import { createContext, useEffect, useState } from "react";
 import { useToken } from "../hooks";
 
 /* -------------------------------------------------- */
-/*          Token context section          */
+/*          Auth context section          */
 /* -------------------------------------------------- */
 
-// token context creation
-export const TokenContext = createContext();
+// Auth context creation
+export const AuthContext = createContext();
 
 // token provider component creation
-export function TokenProvider({ children }) {
+export function AuthProvider({ children }) {
    // a local state is declared to store the token
-   const [token, setToken] = useState("");
+   const [auth, setAuth] = useState({});
    // function to setToken value
-   const storeToken = (recievedToken) => {
-      setToken(recievedToken);
+   const storeAuth = (recievedAuth) => {
+      setAuth(recievedAuth);
    };
 
-   // returning the provider with the token context
+   // returning the provider with the Auth context
    return (
-      <TokenContext.Provider value={{ token, storeToken }}>
+      <AuthContext.Provider value={{ auth, storeAuth }}>
          {children}
-      </TokenContext.Provider>
+      </AuthContext.Provider>
    );
 }
 
@@ -42,27 +42,26 @@ export function UserIdProvider({ children }) {
    const [userId, setUserId] = useState(null);
 
    // useEffect to get userId on first render
-   const getUserId = async (token) => {
-      // try {
-      //    const response = await axios({
-      //       method: "get",
-      //       url: `^${process.env.REACT_APP_API_URL}token`,
-      //       withCredentials: true,
-      //       headers: {
-      //          Authorization: `Baerer ${token}`,
-      //       },
-      //    });
-      //    console.log("=== response ===>", response);
-      //    const { userId } = response.json();
-      //    setUserId(userId);
-      // } catch (err) {
-      //    console.log(err);
-      // }
-      setUserId(token);
-   };
+   useEffect(() => {
+      const getUserId = async () => {
+         try {
+            const response = await axios({
+               method: "get",
+               url: `^${process.env.REACT_APP_API_URL}token`,
+               withCredentials: true,
+            });
+            console.log("=== response ===>", response);
+            const { userId } = response.json();
+            setUserId(userId);
+         } catch (err) {
+            console.log(err);
+         }
+      };
+      getUserId();
+   }, []);
 
    return (
-      <UserIdContext.Provider value={{ userId, getUserId }}>
+      <UserIdContext.Provider value={{ userId }}>
          {children}
       </UserIdContext.Provider>
    );

@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useToken } from "../../utils/hooks";
+import { useAuth } from "../../utils/hooks";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -23,8 +23,8 @@ function LogInForm() {
    const [emailError, setEmailError] = useState("");
    const [passwordError, setPasswordError] = useState("");
 
-   // using Token and store token from auth token thought useToken
-   const { token, storeToken } = useToken();
+   // using auth and store auth from auth auth thought useAuth
+   const { auth, storeAuth } = useAuth();
 
    // function to handle action on submit
    const handleLogIn = async (event) => {
@@ -47,8 +47,8 @@ function LogInForm() {
          }
          // if there is no error then we go to home page
          else {
-            // store token
-            storeToken(response.data.token);
+            // store auth
+            storeAuth(response.data.auth);
             window.location = "/";
          }
       } catch (error) {
@@ -57,7 +57,7 @@ function LogInForm() {
    };
 
    // useEffect to control token value
-   useEffect(() => console.log(token), [token]);
+   useEffect(() => console.log(auth), [auth]);
 
    // component to return
    return (
