@@ -33,8 +33,8 @@ function LogInForm() {
       try {
          const response = await axios({
             method: "post",
-            url: `${process.env.REACT_APP_API_URL}api/user/login`,
-            withCredentials: true,
+            url: `${process.env.REACT_APP_API_URL}auth/login`,
+            // withCredentials: true,
             data: { email: email, password: password },
          });
          console.log("=== response ===>", response);
@@ -47,9 +47,12 @@ function LogInForm() {
          }
          // if there is no error then we go to home page
          else {
+            const { auth } = response.data;
+            console.log("=== auth ===>", auth);
             // store auth
-            storeAuth(response.data.auth);
-            window.location = "/";
+            storeAuth(auth);
+            // go to home page
+            // window.location = "/";
          }
       } catch (error) {
          console.log(error);

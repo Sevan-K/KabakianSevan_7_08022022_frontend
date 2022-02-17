@@ -2,7 +2,6 @@
 /*          Secrtion des imports          */
 /* -------------------------------------- */
 
-import { useEffect } from "react";
 import Auth from "../../components/Auth";
 import { useAuth } from "../../utils/hooks";
 
@@ -20,7 +19,11 @@ function Profile() {
    return (
       <div>
          <h1>Page pour les profils</h1>
-         {auth ? <div>Profil de l'utilisateur</div> : <Auth signUp={true} />}
+         {auth.userId ? (
+            <div>Profil de l'utilisateur</div>
+         ) : (
+            <Auth signUp={true} />
+         )}
       </div>
    );
 }

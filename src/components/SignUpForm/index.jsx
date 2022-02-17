@@ -70,7 +70,7 @@ function SignUpForm({ setSignUpFormSubmit }) {
    // function to handle form submit
    const handleSignUp = async (event) => {
       event.preventDefault();
-      console.log("=== data ===>", { pseudo, email, password });
+      // console.log("=== data ===>", { pseudo, email, password });
       try {
          // cheching if the form is valid or not
          if (!checkForm()) {
@@ -78,7 +78,7 @@ function SignUpForm({ setSignUpFormSubmit }) {
             // call to the API using axios
             const response = await axios({
                method: "post",
-               url: `http://localhost:3000/api/auth/signup`,
+               url: `${process.env.REACT_APP_API_URL}auth/signup`,
                // withCredentials: true,
                data: { pseudo, email, password },
             });
@@ -96,8 +96,8 @@ function SignUpForm({ setSignUpFormSubmit }) {
                // setSignUpFormSubmit(true);
             }
          }
-      } catch (error) {
-         console.log(error);
+      } catch (err) {
+         console.log("=== err ===>", err);
       }
    };
 
