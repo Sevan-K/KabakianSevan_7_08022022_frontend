@@ -38,13 +38,16 @@ function Auth({ signUp }) {
          <div>
             <StyledButton
                onClick={() => setSignUpModal(false)}
-               $isSelected={!signUpModal}
+               $isSelected={!signUpModal || signUpFormSubmit}
             >
                Login
             </StyledButton>
             <StyledButton
-               onClick={() => setSignUpModal(true)}
-               $isSelected={signUpModal}
+               onClick={() => {
+                  setSignUpModal(true);
+                  setSignUpFormSubmit(false);
+               }}
+               $isSelected={signUpModal && !signUpFormSubmit}
             >
                SignUp
             </StyledButton>

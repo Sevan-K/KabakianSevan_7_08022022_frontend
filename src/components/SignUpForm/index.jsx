@@ -93,11 +93,11 @@ function SignUpForm({ setSignUpFormSubmit }) {
                setPasswordError(response.data.errors.password);
             } else {
                // the form has been suucessfully submitted
-               // setSignUpFormSubmit(true);
+               setSignUpFormSubmit(true);
             }
          }
       } catch (err) {
-         console.log("=== err ===>", err);
+         console.log("=== err ===>", err.message);
       }
    };
 

@@ -4,8 +4,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import headerLogo from "../../assets/icon-left-font.svg";
-import axios from "axios";
 import { useUserId } from "../../utils/hooks";
+import Logout from "../Logout";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -19,6 +19,13 @@ const StyledHeader = styled.header`
    flex-direction: column;
 `;
 
+// styled component for the upper raw
+const UpperRaw = styled.div`
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+`;
+
 // styled component for navigator
 const LinkWrapper = styled.nav`
    display: flex;
@@ -27,8 +34,9 @@ const LinkWrapper = styled.nav`
 
 // styled component for the <p> where the image is
 const ImageWrapper = styled.p`
+   margin-right: auto;
    align-self: center;
-   width: 80%;
+   width: 50%;
    height: 10rem;
 `;
 
@@ -38,30 +46,25 @@ const ImageWrapper = styled.p`
 // Header component function
 function Header() {
    const { userId } = useUserId();
-   const handleLogOut = async () => {
-      try {
-         await axios({
-            method: "GET",
-            url: `${process.env.REACT_APP_API_URL}auth/logout`,
-            withCredentials: true,
-         });
-
-         window.location = "/";
-      } catch (err) {
-         console.log(err.message);
-      }
-   };
    return (
       <StyledHeader>
-         <ImageWrapper>
-            <img src={headerLogo} alt="Logo groupomania" />
-         </ImageWrapper>
-         <button onClick={handleLogOut}>Log Out</button>
+         <UpperRaw>
+            <ImageWrapper>
+               <img src={headerLogo} alt="Logo groupomania" />
+            </ImageWrapper>
+            {userId ? (
+               <>
+                  <p>Salut {userId} ?</p>
+                  <Logout />
+               </>
+            ) : (
+               <Link to="/profile">Connection</Link>
+            )}
+         </UpperRaw>
          <LinkWrapper>
             <Link to="/">Accueil</Link>
             <Link to="/profile">Profil</Link>
          </LinkWrapper>
-         {userId && <p>Salut {userId} ?</p>}
       </StyledHeader>
    );
 }

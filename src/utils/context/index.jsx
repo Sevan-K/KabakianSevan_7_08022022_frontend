@@ -49,7 +49,6 @@ export function UserIdProvider({ children }) {
                url: `${process.env.REACT_APP_API_URL}auth/tokentoid`,
                withCredentials: true,
             });
-            // console.log("=== response ===>", response);
             const { userId } = response.data;
             console.log("=== userId ===>", userId);
             setUserId(userId);
