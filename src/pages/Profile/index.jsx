@@ -3,15 +3,15 @@
 /* -------------------------------------- */
 
 import Auth from "../../components/Auth";
-import { useAuth } from "../../utils/hooks";
+import { useUserId } from "../../utils/hooks";
 
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
 // component function
 function Profile() {
-   // using auth
-   const { auth } = useAuth();
+   // getting userId from its hook
+   const { userId } = useUserId();
 
    // component code
    // if user is connected show his profile page
@@ -19,11 +19,7 @@ function Profile() {
    return (
       <div>
          <h1>Page pour les profils</h1>
-         {auth.userId ? (
-            <div>Profil de l'utilisateur</div>
-         ) : (
-            <Auth signUp={true} />
-         )}
+         {userId ? <div>Profil de l'utilisateur</div> : <Auth signUp={true} />}
       </div>
    );
 }

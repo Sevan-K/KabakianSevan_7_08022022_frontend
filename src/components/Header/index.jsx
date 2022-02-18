@@ -4,6 +4,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import headerLogo from "../../assets/icon-left-font.svg";
+import axios from "axios";
+import { useUserId } from "../../utils/hooks";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -35,16 +37,31 @@ const ImageWrapper = styled.p`
 /* --------------------------------------------- */
 // Header component function
 function Header() {
+   const { userId } = useUserId();
+   const handleLogOut = async () => {
+      try {
+         await axios({
+            method: "GET",
+            url: `${process.env.REACT_APP_API_URL}auth/logout`,
+            withCredentials: true,
+         });
+
+         window.location = "/";
+      } catch (err) {
+         console.log(err.message);
+      }
+   };
    return (
       <StyledHeader>
          <ImageWrapper>
             <img src={headerLogo} alt="Logo groupomania" />
          </ImageWrapper>
+         <button onClick={handleLogOut}>Log Out</button>
          <LinkWrapper>
             <Link to="/">Accueil</Link>
             <Link to="/profile">Profil</Link>
-            <p>Log Out</p>
          </LinkWrapper>
+         {userId && <p>Salut {userId} ?</p>}
       </StyledHeader>
    );
 }

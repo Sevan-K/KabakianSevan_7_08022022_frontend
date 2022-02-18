@@ -79,7 +79,7 @@ function SignUpForm({ setSignUpFormSubmit }) {
             const response = await axios({
                method: "post",
                url: `${process.env.REACT_APP_API_URL}auth/signup`,
-               // withCredentials: true,
+               withCredentials: true,
                data: { pseudo, email, password },
             });
             // checking the response

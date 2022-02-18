@@ -46,14 +46,15 @@ export function UserIdProvider({ children }) {
          try {
             const response = await axios({
                method: "get",
-               url: `^${process.env.REACT_APP_API_URL}token`,
+               url: `${process.env.REACT_APP_API_URL}auth/tokentoid`,
                withCredentials: true,
             });
-            console.log("=== response ===>", response);
-            const { userId } = response.json();
+            // console.log("=== response ===>", response);
+            const { userId } = response.data;
+            console.log("=== userId ===>", userId);
             setUserId(userId);
          } catch (err) {
-            console.log(err);
+            console.log("=== err ===>", err);
          }
       };
       getUserId();
