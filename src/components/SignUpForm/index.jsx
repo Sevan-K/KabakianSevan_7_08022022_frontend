@@ -96,8 +96,8 @@ function SignUpForm({ setSignUpFormSubmit }) {
                setSignUpFormSubmit(true);
             }
          }
-      } catch (err) {
-         console.log("=== err ===>", err.message);
+      } catch (error) {
+         console.log(error.message);
       }
    };
 
