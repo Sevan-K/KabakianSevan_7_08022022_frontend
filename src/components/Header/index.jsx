@@ -1,6 +1,7 @@
 /* -------------------------------------- */
 /*          Secrtion des imports          */
 /* -------------------------------------- */
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import headerLogo from "../../assets/icon-left-font.svg";
@@ -46,6 +47,7 @@ const ImageWrapper = styled.p`
 // Header component function
 function Header() {
    const { userId } = useUserId();
+   const user = useSelector((state) => state.userReducer);
    return (
       <StyledHeader>
          <UpperRaw>
@@ -54,7 +56,7 @@ function Header() {
             </ImageWrapper>
             {userId ? (
                <>
-                  <p>Salut {userId} ?</p>
+                  <p>Bienvenue {user.pseudo}</p>
                   <Logout />
                </>
             ) : (

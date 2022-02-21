@@ -14,22 +14,22 @@ import { useUserId } from "../../utils/hooks";
 function Profile() {
    // getting userId from its hook
    const { userId } = useUserId();
-   const [user, setUser] = useState({});
-   useEffect(() => {
-      if (!!userId) {
-         const getUserData = async () => {
-            const response = await axios({
-               method: "get",
-               url: `${process.env.REACT_APP_API_URL}users/${userId}`,
-               withCredentials: true,
-            });
-            const { user } = response.data;
-            console.log("=== user ===>", user);
-            setUser(user);
-         };
-         getUserData();
-      }
-   }, [userId]);
+   // const [user, setUser] = useState({});
+   // useEffect(() => {
+   //    if (!!userId) {
+   //       const getUserData = async () => {
+   //          const response = await axios({
+   //             method: "get",
+   //             url: `${process.env.REACT_APP_API_URL}users/${userId}`,
+   //             withCredentials: true,
+   //          });
+   //          const { user } = response.data;
+   //          console.log("=== user ===>", user);
+   //          setUser(user);
+   //       };
+   //       getUserData();
+   //    }
+   // }, [userId]);
 
    // component code
    // if user is connected show his profile page
@@ -38,7 +38,7 @@ function Profile() {
       <div>
          <h1>Page pour les profils</h1>
          {userId ? (
-            <div>Profil de l'utilisateur {user.pseudo}</div>
+            <div>Profil de l'utilisateur</div>
          ) : (
             <Auth signUp={true} />
          )}
