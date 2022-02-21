@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import headerLogo from "../../assets/icon-left-font.svg";
 import { useUserId } from "../../utils/hooks";
-import Logout from "../Logout";
+import Logout from "./Logout";
 
 /* ------------------------------------------- */
 /*          Styled components section          */

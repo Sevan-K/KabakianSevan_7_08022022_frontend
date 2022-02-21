@@ -7,8 +7,8 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 // importing components
-import LogInForm from "../LoginForm";
-import SignUpForm from "../SignUpForm";
+import LogInForm from "./LoginForm";
+import SignUpForm from "./SignUpForm";
 
 /* ------------------------------------------- */
 /*          Styled components section          */

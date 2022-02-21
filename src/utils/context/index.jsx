@@ -66,7 +66,7 @@ export function UserIdProvider({ children }) {
    useEffect(() => {
       // if userId exist
       if (!!userId) {
-         console.log("=== userId ===>", userId);
+         // console.log("=== userId ===>", userId);
          // call the action get user
          dispatch(getUser(userId));
       }
