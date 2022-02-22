@@ -33,7 +33,7 @@ function LogInForm() {
             method: "post",
             url: `${process.env.REACT_APP_API_URL}auth/login`,
             withCredentials: true,
-            data: { email: email, password: password },
+            data: { email, password },
          });
          // console.log("=== response ===>", response);
          // code to handle potential errors

@@ -2,8 +2,9 @@
 /*          Imports Section          */
 /* --------------------------------- */
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { updateUser } from "../../../actions/user.actions";
 import { ProfileImageWrapper } from "../../../utils/style/Atoms";
 
 /* ------------------------------------------- */
@@ -16,11 +17,16 @@ import { ProfileImageWrapper } from "../../../utils/style/Atoms";
 function UserProfileForm({ setEditingUserProfile }) {
    // getting the user data from userReducer
    const user = useSelector((state) => state.userReducer);
+   // constant to call a redux action
+   const dispatch = useDispatch();
 
    // local state to keep track of the file
    const [file, updateFile] = useState(null);
    // local state to update bio value
    const [bio, updateBio] = useState("");
+
+   // local state for image url
+   const [profileImageUrl, updateProfileImageUrl] = useState(user.imageUrl);
 
    // function to handle change on image profile file input
    const handleFileChange = (event) => {
@@ -28,6 +34,8 @@ function UserProfileForm({ setEditingUserProfile }) {
       const [file] = event.target.files;
       // update file state
       updateFile(file);
+      // update profile image
+      updateProfileImageUrl(URL.createObjectURL(file));
    };
 
    // function to handle change on bio text area
@@ -38,9 +46,18 @@ function UserProfileForm({ setEditingUserProfile }) {
 
    // function to handle form submit
    const handleUpdateProfile = (event) => {
+      // preventing page reload
       event.preventDefault();
+      // building user to send for the update
       const userToUpdate = { ...user, bio: bio };
-      console.log({ file, user: userToUpdate });
+      // building the formdata to send
+      const dataToSend = new FormData();
+      dataToSend.append("user", JSON.stringify(userToUpdate));
+      dataToSend.append("image", file);
+      // launch action to update user profile data
+      dispatch(updateUser(dataToSend, user.id));
+      // end profile edition
+      setEditingUserProfile(false);
    };
 
    // component to return
@@ -57,7 +74,7 @@ function UserProfileForm({ setEditingUserProfile }) {
             </button>
             <h2>Photo de profil</h2>
             <ProfileImageWrapper>
-               <img src={user.imageUrl} alt="Profil de l'utilisateur" />
+               <img src={profileImageUrl} alt="Profil de l'utilisateur" />
             </ProfileImageWrapper>
             <input
                type="file"

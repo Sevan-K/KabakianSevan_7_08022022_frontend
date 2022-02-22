@@ -36,17 +36,16 @@ export function UserIdProvider({ children }) {
          }
       };
       getUserId();
-   }, []);
-
-   // useEffect to call get user action whenever userId changes
-   useEffect(() => {
       // if userId exist
       if (!!userId) {
          console.log("=== userId ===>", userId);
          // call the action get user
          dispatch(getUser(userId));
       }
-   }, [userId, dispatch]);
+   }, [userId]);
+
+   // useEffect to call get user action whenever userId changes
+   useEffect(() => {}, [userId, dispatch]);
 
    return (
       <UserIdContext.Provider value={{ userId }}>
