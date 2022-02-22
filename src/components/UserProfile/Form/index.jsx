@@ -23,7 +23,7 @@ function UserProfileForm({ setEditingUserProfile }) {
    // local state to keep track of the file
    const [file, updateFile] = useState(null);
    // local state to update bio value
-   const [bio, updateBio] = useState("");
+   const [bio, updateBio] = useState(user.bio);
 
    // local state for image url
    const [profileImageUrl, updateProfileImageUrl] = useState(user.imageUrl);
@@ -50,10 +50,17 @@ function UserProfileForm({ setEditingUserProfile }) {
       event.preventDefault();
       // building user to send for the update
       const userToUpdate = { ...user, bio: bio };
-      // building the formdata to send
-      const dataToSend = new FormData();
-      dataToSend.append("user", JSON.stringify(userToUpdate));
-      dataToSend.append("image", file);
+      console.log("=== userToUpdate ===>", userToUpdate);
+      let dataToSend;
+      if (!!file) {
+         // building the formdata to send
+         dataToSend = new FormData();
+         dataToSend.append("user", JSON.stringify(userToUpdate));
+         dataToSend.append("image", file);
+      } else {
+         dataToSend = userToUpdate;
+      }
+
       // launch action to update user profile data
       dispatch(updateUser(dataToSend, user.id));
       // end profile edition
@@ -88,7 +95,7 @@ function UserProfileForm({ setEditingUserProfile }) {
             <textarea
                name="profile_bio"
                id="profile_bio"
-               value={bio || user.bio}
+               value={bio}
                onChange={handleBioChange}
             ></textarea>
          </article>

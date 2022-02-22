@@ -44,7 +44,9 @@ export const updateUser = (dataToSend, userId) => {
          withCredentials: true,
          data: dataToSend,
       })
-         .then(dispatch({ type: UPDATE_USER, payload: {} }))
+         .then((response) =>
+            dispatch({ type: UPDATE_USER, payload: response.data.user })
+         )
          .catch((err) => console.log(err));
    };
 };
