@@ -1,14 +1,13 @@
-/* -------------------------------------- */
-/*          Secrtion des imports          */
-/* -------------------------------------- */
-
+/* --------------------------------- */
+/*          Imports Section          */
+/* --------------------------------- */
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 // default profile picture
 import defaultProfileImage from "../../assets/icon.svg";
-import UserProfileData from "./_Data";
-import UserProfileForm from "./_Form";
+import UserProfileData from "./Data";
+import UserProfileForm from "./Form";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -27,9 +26,15 @@ function UserProfile() {
       <main>
          <h1>Profil de {user.pseudo}</h1>
          {editingUserProfile ? (
-            <UserProfileForm />
+            <UserProfileForm setEditingUserProfile={setEditingUserProfile} />
          ) : (
             <UserProfileData setEditingUserProfile={setEditingUserProfile} />
+         )}
+         {user.createdAt && (
+            <p>
+               Membre de Groupomania depuis le {user.createdAt.split("T")[0]} à{" "}
+               {user.createdAt.split("T")[1].split(".")[0]}
+            </p>
          )}
       </main>
    );

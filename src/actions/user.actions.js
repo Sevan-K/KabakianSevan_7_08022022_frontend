@@ -1,8 +1,16 @@
+/* --------------------------------- */
+/*          Imports Section          */
+/* --------------------------------- */
 // import axios
 import axios from "axios";
 
-export const GET_USER = "GET_USER";
 
+/* --------------------------------- */
+/*          Imports Section          */
+/* --------------------------------- */
+// exporting GET_USER type
+export const GET_USER = "GET_USER";
+// exporting GET_USER type
 export const getUser = (userId) => {
    // return what you want to add to store
    return (dispatch) => {

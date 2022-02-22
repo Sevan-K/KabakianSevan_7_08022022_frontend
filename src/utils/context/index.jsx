@@ -6,30 +6,6 @@ import { createContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getUser } from "../../actions/user.actions";
 
-/* -------------------------------------------------- */
-/*          Auth context section          */
-/* -------------------------------------------------- */
-
-// Auth context creation
-export const AuthContext = createContext();
-
-// token provider component creation
-export function AuthProvider({ children }) {
-   // a local state is declared to store the token
-   const [auth, setAuth] = useState({});
-   // function to setToken value
-   const storeAuth = (recievedAuth) => {
-      setAuth(recievedAuth);
-   };
-
-   // returning the provider with the Auth context
-   return (
-      <AuthContext.Provider value={{ auth, storeAuth }}>
-         {children}
-      </AuthContext.Provider>
-   );
-}
-
 /* ---------------------------------------- */
 /*          UserId context section          */
 /* ---------------------------------------- */
@@ -40,7 +16,7 @@ export const UserIdContext = createContext();
 // userId provider component creation
 export function UserIdProvider({ children }) {
    // local state to store userId
-   const [userId, setUserId] = useState("");
+   const [userId, setUserId] = useState(null);
    // call the dispatch hook
    const dispatch = useDispatch();
 
@@ -53,8 +29,8 @@ export function UserIdProvider({ children }) {
                url: `${process.env.REACT_APP_API_URL}auth/tokentoid`,
                withCredentials: true,
             });
-            // const { userId } = response.data;
-            setUserId(response.data.userId);
+            const { userId } = response.data;
+            setUserId(userId);
          } catch (err) {
             console.log("=== err ===>", err.message);
          }
@@ -66,11 +42,11 @@ export function UserIdProvider({ children }) {
    useEffect(() => {
       // if userId exist
       if (!!userId) {
-         // console.log("=== userId ===>", userId);
+         console.log("=== userId ===>", userId);
          // call the action get user
          dispatch(getUser(userId));
       }
-   }, [userId]);
+   }, [userId, dispatch]);
 
    return (
       <UserIdContext.Provider value={{ userId }}>

@@ -1,3 +1,6 @@
+/* --------------------------------- */
+/*          Imports Section          */
+/* --------------------------------- */
 import { GET_USER } from "../actions/user.actions";
 
 // initial state (required for all reducers)
