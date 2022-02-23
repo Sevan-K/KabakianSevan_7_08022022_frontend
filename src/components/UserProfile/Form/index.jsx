@@ -14,7 +14,7 @@ import { ProfileImageWrapper } from "../../../utils/style/Atoms";
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
-function UserProfileForm({ setEditingUserProfile }) {
+function UserProfileForm({ setEditingUserProfile, defaultProfileImage }) {
    // getting the user data from userReducer
    const user = useSelector((state) => state.userReducer);
    // constant to call a redux action
@@ -23,10 +23,14 @@ function UserProfileForm({ setEditingUserProfile }) {
    // local state to keep track of the file
    const [file, updateFile] = useState(null);
    // local state to update bio value
-   const [bio, updateBio] = useState(user.bio);
+   const [bio, updateBio] = useState(
+      user.bio || "Dites quelque chose de vous ici !"
+   );
 
    // local state for image url
-   const [profileImageUrl, updateProfileImageUrl] = useState(user.imageUrl);
+   const [profileImageUrl, updateProfileImageUrl] = useState(
+      user.imageUrl || defaultProfileImage
+   );
 
    // function to handle change on image profile file input
    const handleFileChange = (event) => {

@@ -26,9 +26,15 @@ function UserProfile() {
       <main>
          <h1>Profil de {user.pseudo}</h1>
          {editingUserProfile ? (
-            <UserProfileForm setEditingUserProfile={setEditingUserProfile} />
+            <UserProfileForm
+               setEditingUserProfile={setEditingUserProfile}
+               defaultProfileImage={defaultProfileImage}
+            />
          ) : (
-            <UserProfileData setEditingUserProfile={setEditingUserProfile} />
+            <UserProfileData
+               setEditingUserProfile={setEditingUserProfile}
+               defaultProfileImage={defaultProfileImage}
+            />
          )}
          {user.createdAt && (
             <p>

@@ -13,7 +13,7 @@ import { ProfileImageWrapper } from "../../../utils/style/Atoms";
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
-function UserProfileData({ setEditingUserProfile }) {
+function UserProfileData({ setEditingUserProfile, defaultProfileImage }) {
    // getting the user data from userReducer
    const user = useSelector((state) => state.userReducer);
 
@@ -40,12 +40,15 @@ function UserProfileData({ setEditingUserProfile }) {
          <article>
             <h2>Photo de profil</h2>
             <ProfileImageWrapper>
-               <img src={user.imageUrl} alt="Profil de l'utilisateur" />
+               <img
+                  src={user.imageUrl || defaultProfileImage}
+                  alt="Profil de l'utilisateur"
+               />
             </ProfileImageWrapper>
          </article>
          <article>
             <h2>A propos de {user.pseudo}</h2>
-            <p>{user.bio}</p>
+            <p>{user.bio || "Pas de description pour le moment..."}</p>
          </article>
       </div>
    );
