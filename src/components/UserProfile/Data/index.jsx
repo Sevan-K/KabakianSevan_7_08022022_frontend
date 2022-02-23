@@ -1,8 +1,9 @@
 /* --------------------------------- */
 /*          Imports Section          */
 /* --------------------------------- */
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { deleteUser } from "../../../actions/user.actions";
 import { ProfileImageWrapper } from "../../../utils/style/Atoms";
 
 /* ------------------------------------------- */
@@ -15,13 +16,27 @@ import { ProfileImageWrapper } from "../../../utils/style/Atoms";
 function UserProfileData({ setEditingUserProfile }) {
    // getting the user data from userReducer
    const user = useSelector((state) => state.userReducer);
-   // component to return
 
+   // getting acces to redux actions
+   const dispatch = useDispatch();
+
+   // function to handle delete profile
+   const handleDeleteProfile = () => {
+      // using delete user action
+      dispatch(deleteUser(user.id)).then(
+         () =>
+            // go back to
+            (window.location = "/")
+      );
+   };
+
+   // component to return
    return (
       <div>
          <button onClick={() => setEditingUserProfile(true)}>
             Editer le profil
          </button>
+         <button onClick={handleDeleteProfile}>Supprimer le profil</button>
          <article>
             <h2>Photo de profil</h2>
             <ProfileImageWrapper>

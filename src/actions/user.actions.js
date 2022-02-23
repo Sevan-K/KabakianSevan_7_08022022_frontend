@@ -37,16 +37,39 @@ export const UPDATE_USER = "UPDATE_USER";
 // exporting UPDATE_USER type
 export const updateUser = (dataToSend, userId) => {
    // return what you want to add to store
-   return (dispatch) => {
-      return axios({
-         method: "PUT",
-         url: `${process.env.REACT_APP_API_URL}users/${userId}`,
-         withCredentials: true,
-         data: dataToSend,
-      })
-         .then((response) =>
-            dispatch({ type: UPDATE_USER, payload: response.data.user })
-         )
-         .catch((err) => console.log(err));
+   return async (dispatch) => {
+      try {
+         const response = await axios({
+            method: "PUT",
+            url: `${process.env.REACT_APP_API_URL}users/${userId}`,
+            withCredentials: true,
+            data: dataToSend,
+         });
+         return dispatch({ type: UPDATE_USER, payload: response.data.user });
+      } catch (err) {
+         return console.log(err);
+      }
+   };
+};
+
+/* -------------------------------------------- */
+/*          DELETE_USER Action Section          */
+/* -------------------------------------------- */
+// exporting DELETE_USER type
+export const DELETE_USER = "DELETE_USER";
+// exporting DELETE_USER type
+export const deleteUser = (userId) => {
+   // return what you want to add to store
+   return async (dispatch) => {
+      try {
+         await axios({
+            method: "delete",
+            url: `${process.env.REACT_APP_API_URL}users/${userId}`,
+            withCredentials: true,
+         });
+         return dispatch({ type: DELETE_USER, payload: {} });
+      } catch (err) {
+         return console.log(err);
+      }
    };
 };

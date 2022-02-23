@@ -1,7 +1,7 @@
 /* --------------------------------- */
 /*          Imports Section          */
 /* --------------------------------- */
-import { GET_USER, UPDATE_USER } from "../actions/user.actions";
+import { DELETE_USER, GET_USER, UPDATE_USER } from "../actions/user.actions";
 
 // initial state (required for all reducers)
 const initialState = {};
@@ -14,6 +14,8 @@ function userReducer(state = initialState, action) {
          return action.payload;
       case UPDATE_USER:
          return { ...action.payload };
+      case DELETE_USER:
+         return {...action.payload};
       default:
          return state;
    }
