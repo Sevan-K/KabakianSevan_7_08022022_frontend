@@ -49,16 +49,16 @@ function UserProfileForm({ setEditingUserProfile }) {
       // preventing page reload
       event.preventDefault();
       // building user to send for the update
-      const userToUpdate = { ...user, bio: bio };
-      console.log("=== userToUpdate ===>", userToUpdate);
+      const modifiedUser = { ...user, bio: bio };
+      console.log("=== modifiedUser ===>", modifiedUser);
       let dataToSend;
       if (!!file) {
          // building the formdata to send
          dataToSend = new FormData();
-         dataToSend.append("user", JSON.stringify(userToUpdate));
+         dataToSend.append("user", JSON.stringify(modifiedUser));
          dataToSend.append("image", file);
       } else {
-         dataToSend = userToUpdate;
+         dataToSend = modifiedUser;
       }
 
       // launch action to update user profile data
@@ -88,6 +88,7 @@ function UserProfileForm({ setEditingUserProfile }) {
                id="profile_image"
                name="profile_image"
                onChange={handleFileChange}
+               accept="image/png, image/jpeg,image/jpg"
             />
          </article>
          <article>
