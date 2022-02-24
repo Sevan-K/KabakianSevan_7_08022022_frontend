@@ -3,6 +3,11 @@
 /* --------------------------------- */
 import { DELETE_USER, GET_USER, UPDATE_USER } from "../actions/user.actions";
 
+
+/* -------------------------------------------- */
+/*          Reducer definition section          */
+/* -------------------------------------------- */
+
 // initial state (required for all reducers)
 const initialState = {};
 

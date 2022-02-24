@@ -4,8 +4,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { updateUser } from "../../../actions/user.actions";
-import { ProfileImageWrapper } from "../../../utils/style/Atoms";
+import { updateUser } from "../../actions/user.actions";
+import { ProfileImageWrapper } from "../../utils/style/Atoms";
 
 /* ------------------------------------------- */
 /*          Styled components section          */

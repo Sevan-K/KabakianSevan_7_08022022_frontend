@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 // default profile picture
 import defaultProfileImage from "../../assets/icon.svg";
-import UserProfileData from "./Data";
-import UserProfileForm from "./Form";
+import UserProfileData from "./UserProfileData";
+import UserProfileForm from "./UserProfileForm";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
