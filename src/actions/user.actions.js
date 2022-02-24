@@ -9,7 +9,7 @@ import axios from "axios";
 /* ----------------------------------------- */
 // exporting GET_USER type
 export const GET_USER = "GET_USER";
-// exporting GET_USER type
+// exporting GET_USER action
 export const getUser = (userId) => {
    // return what you want to add to store
    return (dispatch) => {
@@ -34,7 +34,7 @@ export const getUser = (userId) => {
 /* -------------------------------------------- */
 // exporting UPDATE_USER type
 export const UPDATE_USER = "UPDATE_USER";
-// exporting UPDATE_USER type
+// exporting UPDATE_USER action
 export const updateUser = (dataToSend, userId) => {
    // return what you want to add to store
    return async (dispatch) => {
@@ -57,7 +57,7 @@ export const updateUser = (dataToSend, userId) => {
 /* -------------------------------------------- */
 // exporting DELETE_USER type
 export const DELETE_USER = "DELETE_USER";
-// exporting DELETE_USER type
+// exporting DELETE_USER action
 export const deleteUser = (userId) => {
    // return what you want to add to store
    return async (dispatch) => {

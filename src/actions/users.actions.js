@@ -1,29 +1,24 @@
 /* --------------------------------- */
 /*          Imports Section          */
 /* --------------------------------- */
-
+// import axios
 import axios from "axios";
 
 /* ----------------------------------------- */
-/*          GET_ALL_POSTS action section          */
+/*          GET_ALL_USER Action Section          */
 /* ----------------------------------------- */
-
-// creating and axporting an action type
-export const GET_ALL_POSTS = "GET_ALL_POSTS";
-
-// creating an action
-export const getAllPosts = () => {
+// exporting GET_ALL_USER
+export const GET_ALL_USER = "GET_ALL_USER";
+// exporting getAllUsers action
+export const getAllUsers = () => {
    return async (dispatch) => {
       try {
          const response = await axios({
-            method: "GET",
-            url: `${process.env.REACT_APP_API_URL}posts`,
+            method: "get",
+            url: `${process.env.REACT_APP_API_URL}users`,
             withCredentials: true,
          });
-         return dispatch({
-            type: GET_ALL_POSTS,
-            payload: response.data.posts,
-         });
+         return dispatch({ type: GET_ALL_USER, payload: response.data.users });
       } catch (err) {
          return console.log(err);
       }

@@ -12,19 +12,6 @@ import Thread from "../../components/Thread";
 /*          Components creation section          */
 /* --------------------------------------------- */
 
-const testPost = [
-   {
-      id: 1,
-      content: "Post 1",
-      userId: 1,
-   },
-   {
-      id: 2,
-      content: "Post 2",
-      userId: 1,
-   },
-];
-
 // component function
 function Home() {
    return (

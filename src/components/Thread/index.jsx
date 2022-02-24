@@ -50,12 +50,26 @@ function Thread() {
    const postsList = useSelector((state) => state.allPostsReducer);
 
    // the posts list is mapped to return a post component of each post
-   const PostsComponents = testPostSList.map(({ id, content, userId }) => (
-      <Post key={id} content={content} userId={userId} id={id} />
-   ));
+   const PostsComponents =
+      postsList.length !== 0 &&
+      postsList.map(({ id, content, imageUrl, userId, updatedAt, likes }) => (
+         <Post
+            key={id}
+            content={content}
+            userId={userId}
+            id={id}
+            likes={likes}
+            updatedAt={updatedAt}
+            imageUrl={imageUrl}
+         />
+      ));
 
    // component to return
-   return <div>{PostsComponents}</div>;
+   return (
+      <div>
+         <ul>{PostsComponents}</ul>
+      </div>
+   );
 }
 
 // export the create component

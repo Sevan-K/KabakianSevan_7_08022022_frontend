@@ -24,17 +24,22 @@ import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension"; // dev-tool
 import thunk from "redux-thunk"; // ne pas enlever pour la mise en prod
-import logger from "redux-logger"; // dev-tool
+// import logger from "redux-logger"; // dev-tool
 
 // importing the combined reducers
 import rootReducer from "./reducers";
+// importing action to get all users from DB
+import { getAllUsers } from "./actions/users.actions";
 
 // store creation
 // adding (for dev) the dev tool
 const store = createStore(
    rootReducer,
-   composeWithDevTools(applyMiddleware(thunk, logger))
+   composeWithDevTools(applyMiddleware(thunk /* , logger */))
 );
+
+// as soon as possible all users are required
+store.dispatch(getAllUsers());
 
 /* --------------------------------------------- */
 /*          Components creation section          */
