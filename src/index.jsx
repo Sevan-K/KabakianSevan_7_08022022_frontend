@@ -31,6 +31,9 @@ import rootReducer from "./reducers";
 // importing action to get all users from DB
 import { getAllUsers } from "./actions/users.actions";
 
+// ====== !!!!!!!!!!!!!!!! ====== for dev ====== !!!!!!!!!!!!!!!!!!! ======
+import "./utils/style/dev.css";
+
 // store creation
 // adding (for dev) the dev tool
 const store = createStore(
