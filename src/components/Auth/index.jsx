@@ -9,10 +9,20 @@ import PropTypes from "prop-types";
 // importing components
 import LogInForm from "./LogInForm";
 import SignUpForm from "./SignUpForm";
+import { mainSize } from "../../utils/style/variables";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
 /* ------------------------------------------- */
+// styled component for the main element
+const MainAuth = styled.main`
+   width: ${mainSize};
+   margin: auto;
+   padding: 2rem;
+   border: 1px solid black;
+`;
+
+// styled component fo the button
 const StyledButton = styled.button`
    padding: 1rem;
    background-color: ${({ $isSelected }) => $isSelected && "red"};
@@ -33,7 +43,7 @@ function Auth({ signUp }) {
    // signUp form if signUpModal is true
    // logIn form if signUpModal is false or signUpFormSubmit is true
    return (
-      <div>
+      <MainAuth>
          <p>Auth</p>
          <div>
             <StyledButton
@@ -60,7 +70,7 @@ function Auth({ signUp }) {
          ) : (
             <LogInForm />
          )}
-      </div>
+      </MainAuth>
    );
 }
 

@@ -79,6 +79,8 @@ function UserProfileForm({ setEditingUserProfile, defaultProfileImage }) {
          id="profile_update_form"
          onSubmit={handleUpdateProfile}
       >
+         <h2>Profil de {user.pseudo}</h2>
+
          <article>
             <button onClick={() => setEditingUserProfile(false)}>
                Retour au profil

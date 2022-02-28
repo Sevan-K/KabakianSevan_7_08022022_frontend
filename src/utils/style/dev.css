@@ -1,11 +1,3 @@
 .dev {
-  display: flex;
-  flex-direction: row;
-  padding: 1rem;
-  align-items: center;
-  justify-content: space-evenly;
-  border-radius: 3rem;
-}
-.dev:hover {
-  box-shadow: 0.25rem 0.25rem 0.5rem gray;
+  background-color: #ffe6e6;
 }/*# sourceMappingURL=dev.css.map */

@@ -13,10 +13,9 @@ import Logout from "./LogOut";
 
 // assets
 import headerLogo from "../../assets/icon-left-font.svg";
-import logInSvg from "../../assets/right-to-bracket-solid.svg";
 
 // style variables
-import { colors } from "../../utils/style/colors";
+import { colors } from "../../utils/style/variables";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -97,10 +96,10 @@ const NavBar = styled.nav`
 // styled component for the nav in link
 const NavLink = styled(Link)`
    font-size: 2.1rem;
-   color: ${({ active }) =>
-      active === "true" ? colors.primary : colors.unactiveLink};
+   color: ${({ $isConcerned }) =>
+      $isConcerned ? colors.primary : colors.unactiveLink};
    border-bottom: 0.2rem solid
-      ${({ active }) => (active === "true" ? colors.primary : "transparent")};
+      ${({ $isConcerned }) => ($isConcerned ? colors.primary : "transparent")};
    flex: 1;
    text-align: center;
    padding: 0.5rem;
@@ -151,7 +150,7 @@ function Header() {
                onClick={() => {
                   setOnHome(true);
                }}
-               active={onHome ? "true" : "false"}
+               $isConcerned={onHome}
             >
                <FontAwesomeIcon icon={faHomeSolid} />
             </NavLink>
@@ -160,7 +159,7 @@ function Header() {
                onClick={() => {
                   setOnHome(false);
                }}
-               active={onHome ? "false" : "true"}
+               $isConcerned={!onHome}
             >
                <FontAwesomeIcon icon={faUserSolid} />
             </NavLink>

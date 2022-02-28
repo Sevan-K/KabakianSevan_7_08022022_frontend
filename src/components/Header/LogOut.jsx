@@ -5,7 +5,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { colors } from "../../utils/style/colors";
+import { colors } from "../../utils/style/variables";
 
 /* ------------------------------------------- */
 /*          Styled components section          */

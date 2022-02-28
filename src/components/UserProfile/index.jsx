@@ -6,12 +6,21 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 // default profile picture
 import defaultProfileImage from "../../assets/icon.svg";
+import { colors, mainSize } from "../../utils/style/variables";
 import UserProfileData from "./UserProfileData";
 import UserProfileForm from "./UserProfileForm";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
 /* ------------------------------------------- */
+// styled component for the main element
+const MainUserProfileData = styled.main`
+   width: ${mainSize};
+   margin: auto;
+   padding: 3rem;
+   background-color: ${colors.backgroundLight};
+   border-radius:3rem;
+`;
 
 /* --------------------------------------------- */
 /*          Components creation section          */
@@ -23,8 +32,7 @@ function UserProfile() {
    const user = useSelector((state) => state.userReducer);
    // components to return
    return (
-      <main>
-         <h1>Profil de {user.pseudo}</h1>
+      <MainUserProfileData>
          {editingUserProfile ? (
             <UserProfileForm
                setEditingUserProfile={setEditingUserProfile}
@@ -42,7 +50,7 @@ function UserProfile() {
                {user.createdAt.split("T")[1].split(".")[0]}
             </p>
          )}
-      </main>
+      </MainUserProfileData>
    );
 }
 <article>
