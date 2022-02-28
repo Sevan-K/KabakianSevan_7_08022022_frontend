@@ -34,8 +34,11 @@ import { getAllUsers } from "./actions/users.actions";
 // ====== !!!!!!!!!!!!!!!! ====== for dev ====== !!!!!!!!!!!!!!!!!!! ======
 import "./utils/style/dev.css";
 
+/* ---------------------------------------- */
+/*          Store creation section          */
+/* ---------------------------------------- */
+
 // store creation
-// adding (for dev) the dev tool
 const store = createStore(
    rootReducer,
    composeWithDevTools(applyMiddleware(thunk /* , logger */))

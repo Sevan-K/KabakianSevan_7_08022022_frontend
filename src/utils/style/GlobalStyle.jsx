@@ -15,6 +15,8 @@ const StyledGlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: inherit;
+        scroll-behavior: smooth;
+        font-family: 'Trebuchet MS', Helvetica, sans-serif;
     }
     html {
         font-size: 62.5%;

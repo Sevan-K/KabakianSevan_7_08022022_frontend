@@ -1,23 +1,29 @@
 /* -------------------------------------- */
 /*          Secrtion des imports          */
 /* -------------------------------------- */
+// react tools
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import headerLogo from "../../assets/icon-left-font.svg";
 import { useUserId } from "../../utils/hooks";
+import { useState } from "react";
+
+// components
 import Logout from "./LogOut";
 
+// assets
+import headerLogo from "../../assets/icon-left-font.svg";
 import logInSvg from "../../assets/right-to-bracket-solid.svg";
 
+// style variables
 import { colors } from "../../utils/style/colors";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
    faHome as faHomeSolid,
    faUser as faUserSolid,
+   faRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
 // import { faUser as faUserRegular,  } from "@fortawesome/free-regular-svg-icons";
 
 /* ------------------------------------------- */
@@ -39,6 +45,48 @@ const UpperRaw = styled.div`
    align-items: center;
 `;
 
+// styled component for the <p> where the image is
+const LogoWrapper = styled.p`
+   margin-right: auto;
+   align-self: center;
+   width: 40%;
+   max-width: 50rem;
+   height: 7rem;
+`;
+
+// styled component for the profile in link
+const ProfilLink = styled(Link)`
+   display: flex;
+   flex-direction: row;
+   padding: 1rem;
+   align-items: center;
+   justify-content: space-evenly;
+   border-radius: 3rem;
+   color: ${colors.unactiveLink};
+   font-weight: bold;
+   &:hover {
+      box-shadow: 0.25rem 0.25rem 0.5rem ${colors.unactiveLink};
+   }
+`;
+
+// styled component for the <p> where the image is
+const ImageWrapper = styled.p`
+   align-self: center;
+   width: 20%;
+   max-width: 10rem;
+`;
+
+// styled component for the log in link
+const LogInLink = styled(Link)`
+   padding: 1rem;
+   font-size: 2.1rem;
+   background: none;
+   color: ${colors.unactiveLink};
+   &:hover {
+      color: ${colors.primary};
+   }
+`;
+
 // styled component for navigator
 const NavBar = styled.nav`
    display: flex;
@@ -58,22 +106,6 @@ const NavLink = styled(Link)`
    padding: 0.5rem;
 `;
 
-// styled component for the <p> where the image is
-const ImageWrapper = styled.p`
-   margin-right: auto;
-   align-self: center;
-   width: 40%;
-   max-width: 50rem;
-   height: 7rem;
-`;
-
-// styled component for the log in link
-const LogInLink = styled(Link)`
-   margin: 1rem;
-   width: 2rem;
-   opacity: 0.5;
-`;
-
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
@@ -84,37 +116,36 @@ function Header() {
    // logged in user is required from the store
    const user = useSelector((state) => state.userReducer);
 
+   // local state to know if we are on home page or not
    const [onHome, setOnHome] = useState(true);
 
-   useEffect(() => {
-      // const urlText = window.location.href;
-      // const actualUrl = new URL(urlText);
-      // console.log("=== url ===>", actualUrl);
-      console.log("=== onHome ===>", onHome);
-   }, [onHome]);
-
+   // component to return
    return (
       <StyledHeader>
          <UpperRaw>
-            <ImageWrapper>
+            <LogoWrapper>
                <img src={headerLogo} alt="Logo groupomania" />
-            </ImageWrapper>
+            </LogoWrapper>
             {userId ? (
                <>
-                  <p>Bienvenue {user.pseudo}</p>
+                  <ProfilLink to="/profile" onClick={() => setOnHome(false)}>
+                     <ImageWrapper>
+                        <img
+                           src={user.imageUrl}
+                           alt="Profil de l'utilisateur"
+                        />
+                     </ImageWrapper>
+                     <p>Bienvenue {user.pseudo}</p>
+                  </ProfilLink>
                   <Logout />
                </>
             ) : (
-               <LogInLink to="/profile">
-                  <img
-                     src={logInSvg}
-                     alt="Flèche vert la droite et l'intérieur pour se connecter"
-                  />
-                  {/* <FontAwesomeIcon icon={faStar} />{" "} */}
+               <LogInLink to="/profile" onClick={() => setOnHome(false)}>
+                  <FontAwesomeIcon icon={faRightToBracket} />
                </LogInLink>
             )}
          </UpperRaw>
-         <NavBar className="dev">
+         <NavBar>
             <NavLink
                to="/"
                onClick={() => {
