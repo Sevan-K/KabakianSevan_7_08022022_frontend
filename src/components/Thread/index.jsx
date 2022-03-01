@@ -22,20 +22,21 @@ function Thread() {
    // getting acces to redux actions by using useDispatch hook
    const dispatch = useDispatch();
 
-   // useEffect to get all the post when thread component is rendered
+   // building posts list from the store
+   const postsList = useSelector((state) => state.allPostsReducer);
+
+   // useEffect to get all the post when thread component is rendered (needed for infinite scroll)
    useEffect(() => {
       if (loadPosts) {
          dispatch(getAllPosts());
          setLoadPosts(false);
       }
-   }, [loadPosts]);
-
-   // building posts list from the store
-   const postsList = useSelector((state) => state.allPostsReducer);
+   }, [loadPosts, dispatch]);
 
    // the posts list is mapped to return a post component of each post
    const PostsComponents =
-      postsList.length !== 0 && postsList.map((post) => <Post post={post} key={post.id}/>);
+      postsList.length !== 0 &&
+      postsList.map((post) => <Post post={post} key={post.id} />);
 
    // component to return
    return (

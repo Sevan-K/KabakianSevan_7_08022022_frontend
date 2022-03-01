@@ -2,7 +2,7 @@
 /*          Secrtion des imports          */
 /* -------------------------------------- */
 import styled from "styled-components";
-import { colors } from "./variables";
+import { colors, padding } from "./variables";
 
 /* ----------------------------------------------- */
 /*          Section des styles à exporter          */
@@ -12,13 +12,13 @@ export const ProfileImageWrapper = styled.p`
    width: 10%;
 `;
 
-
 // styled component for the log in link
 export const IconButton = styled.button`
-   padding: 1rem;
+   padding: ${padding.icons};
    font-size: 2.1rem;
    background: none;
-   color: ${colors.unactiveLink};
+   color: ${({ color }) => (color ? color : colors.unactiveLink)};
+   transition: 300ms;
    &:hover {
       color: ${colors.primary};
    }

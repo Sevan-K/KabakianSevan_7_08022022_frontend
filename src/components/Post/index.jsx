@@ -51,7 +51,6 @@ function Post({ post }) {
                </div>
                <div>
                   <button>Commentaires</button>
-                  {" "}
                   <button
                      onClick={() => {
                         alert(post.id);

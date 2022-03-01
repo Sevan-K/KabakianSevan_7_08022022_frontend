@@ -55,18 +55,18 @@ function UserProfileForm({ setEditingUserProfile, defaultProfileImage }) {
       // building user to send for the update
       const modifiedUser = { ...user, bio: bio };
       console.log("=== modifiedUser ===>", modifiedUser);
-      let dataToSend;
+      let userToSend;
       if (!!file) {
          // building the formdata to send
-         dataToSend = new FormData();
-         dataToSend.append("user", JSON.stringify(modifiedUser));
-         dataToSend.append("image", file);
+         userToSend = new FormData();
+         userToSend.append("user", JSON.stringify(modifiedUser));
+         userToSend.append("image", file);
       } else {
-         dataToSend = modifiedUser;
+         userToSend = modifiedUser;
       }
 
       // launch action to update user profile data
-      dispatch(updateUser(dataToSend, user.id));
+      dispatch(updateUser(userToSend, user.id));
       // end profile edition
       setEditingUserProfile(false);
    };
@@ -94,7 +94,7 @@ function UserProfileForm({ setEditingUserProfile, defaultProfileImage }) {
                id="profile_image"
                name="profile_image"
                onChange={handleFileChange}
-               accept="image/png, image/jpeg,image/jpg"
+               accept="image/png, image/jpeg, image/jpg"
             />
          </article>
          <article>
