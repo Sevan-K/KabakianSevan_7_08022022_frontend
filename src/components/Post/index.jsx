@@ -12,12 +12,12 @@ import { useSelector } from "react-redux";
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
-function Post({ id, content, imageUrl, userId, updatedAt, likes }) {
+function Post({ post }) {
    // getting users data from the store
    const users = useSelector((state) => state.usersReducer);
 
    // getting the user who wrote the post
-   const [author] = users.filter((user) => user.id === userId);
+   const [author] = users.filter((user) => user.id === post.userId);
 
    const [isloading, setIsLoading] = useState(true);
 
@@ -39,27 +39,28 @@ function Post({ id, content, imageUrl, userId, updatedAt, likes }) {
                      <img src={author.imageUrl} alt="Profil de l'utilisateur" />
                   </p>
                   <p>Post de : {author.pseudo}</p>
-                  <p>date : {updatedAt}</p>
+                  <p>date : {post.updatedAt}</p>
                </header>
                <div>
-                  <p>Message : {content}</p>
-                  {imageUrl && (
+                  <p>Message : {post.content}</p>
+                  {post.imageUrl && (
                      <p>
-                        <img src={imageUrl} alt="post" />
+                        <img src={post.imageUrl} alt="post" />
                      </p>
                   )}
                </div>
-               <footer>
-                  <p>Commentaires</p>
+               <div>
+                  <button>Commentaires</button>
+                  {" "}
                   <button
                      onClick={() => {
-                        alert(id);
+                        alert(post.id);
                      }}
                   >
                      Likez
                   </button>
-                  <p>{likes || 0}</p>
-               </footer>
+                  <p>{post.likes || 0}</p>
+               </div>
             </>
          )}
       </li>

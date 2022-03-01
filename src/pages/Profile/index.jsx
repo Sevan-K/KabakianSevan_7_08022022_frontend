@@ -20,7 +20,7 @@ function Profile() {
    return (
       <div>
          <h1>Page pour les profils</h1>
-         {!!userId ? <UserProfile /> : <Auth signUp={false} />}
+         {!!userId ? <UserProfile /> : <Auth signUp={true} />}
       </div>
    );
 }

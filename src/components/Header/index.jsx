@@ -25,6 +25,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 // import { faUser as faUserRegular,  } from "@fortawesome/free-regular-svg-icons";
 
+import defaultImage from "../../assets/icon.svg"
+
 /* ------------------------------------------- */
 /*          Styled components section          */
 /* ------------------------------------------- */
@@ -63,6 +65,7 @@ const ProfilLink = styled(Link)`
    border-radius: 3rem;
    color: ${colors.unactiveLink};
    font-weight: bold;
+   // line-height:
    &:hover {
       box-shadow: 0.25rem 0.25rem 0.5rem ${colors.unactiveLink};
    }
@@ -71,7 +74,7 @@ const ProfilLink = styled(Link)`
 // styled component for the <p> where the image is
 const ImageWrapper = styled.p`
    align-self: center;
-   width: 20%;
+   width: 5vw;
    max-width: 10rem;
 `;
 
@@ -130,7 +133,7 @@ function Header() {
                   <ProfilLink to="/profile" onClick={() => setOnHome(false)}>
                      <ImageWrapper>
                         <img
-                           src={user.imageUrl}
+                           src={user.imageUrl || defaultImage}
                            alt="Profil de l'utilisateur"
                         />
                      </ImageWrapper>

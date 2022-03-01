@@ -15,22 +15,6 @@ import { useState } from "react";
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
-
-const testPostSList = [
-   {
-      id: 1,
-      content: "Post 1",
-      userId: 1,
-   },
-   {
-      id: 2,
-      content: "Post 2",
-      userId: 1,
-   },
-];
-
-// useEffect to get all the post
-
 function Thread() {
    // local state to know if posts are loaded (for infinite scroll)
    const [loadPosts, setLoadPosts] = useState(true);
@@ -51,18 +35,7 @@ function Thread() {
 
    // the posts list is mapped to return a post component of each post
    const PostsComponents =
-      postsList.length !== 0 &&
-      postsList.map(({ id, content, imageUrl, userId, updatedAt, likes }) => (
-         <Post
-            key={id}
-            content={content}
-            userId={userId}
-            id={id}
-            likes={likes}
-            updatedAt={updatedAt}
-            imageUrl={imageUrl}
-         />
-      ));
+      postsList.length !== 0 && postsList.map((post) => <Post post={post} key={post.id}/>);
 
    // component to return
    return (
