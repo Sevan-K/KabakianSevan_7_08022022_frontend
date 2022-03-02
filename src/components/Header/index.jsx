@@ -25,7 +25,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 // import { faUser as faUserRegular,  } from "@fortawesome/free-regular-svg-icons";
 
-import defaultImage from "../../assets/icon.svg";
+import defaultImage from "../../assets/profile.png";
+
 
 /* ------------------------------------------- */
 /*          Styled components section          */

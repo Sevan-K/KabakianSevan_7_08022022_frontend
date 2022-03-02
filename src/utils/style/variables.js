@@ -11,4 +11,8 @@ export const colors = {
 // setting mainsize
 export const mainSize = "80%";
 
+// padding sizes
 export const padding = { icons: "1rem" };
+
+// defaultProfilImage
+// export const defaultProfileImage = "../../assets/profile.png";

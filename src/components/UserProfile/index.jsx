@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 // default profile picture
-import defaultProfileImage from "../../assets/icon.svg";
+import defaultProfileImage from "../../assets/profile.png";
 import dateFormat from "../../utils/functions/dateFormat";
 import { colors, mainSize } from "../../utils/style/variables";
 import UserProfileData from "./UserProfileData";

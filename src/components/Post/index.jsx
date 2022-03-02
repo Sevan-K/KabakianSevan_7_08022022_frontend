@@ -3,7 +3,7 @@
 /* --------------------------------- */
 import { useEffect } from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
    faSpinner,
@@ -15,6 +15,8 @@ import { IconButton, UserImageWrapper } from "../../utils/style/Atoms";
 import dateFormat from "../../utils/functions/dateFormat";
 import styled from "styled-components";
 import { colors } from "../../utils/style/variables";
+import defaultProfileImage from "../../assets/profile.png";
+import { deletePost, getAllPosts } from "../../actions/post.actions";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -85,6 +87,8 @@ function Post({ post }) {
    const [isloading, setIsLoading] = useState(true);
    // local state to display comments
    const [showComments, setShowComments] = useState(false);
+   // get acces to redux actions using useDispatch hook
+   const dispatch = useDispatch();
 
    // useEffect to stop loading once users data are available
    useEffect(() => {
@@ -92,6 +96,18 @@ function Post({ post }) {
          setIsLoading(false);
       }
    }, [users]);
+
+   // function to remove a post
+   const handleDeletePost = async () => {
+      if (
+         window.confirm("Êtes vous certain.e de vouloir supprimer ce post ?")
+      ) {
+         // use post action to delete the post
+         dispatch(deletePost(post.id));
+         // reload all the post to update the store
+         dispatch(getAllPosts());
+      }
+   };
 
    // component to return
    return (
@@ -102,14 +118,17 @@ function Post({ post }) {
             <>
                <PostHeader>
                   <UserImageWrapper>
-                     <img src={author.imageUrl} alt="Profil de l'utilisateur" />
+                     <img
+                        src={author.imageUrl || defaultProfileImage}
+                        alt="Profil de l'utilisateur"
+                     />
                   </UserImageWrapper>
                   <PseudoText>{author.pseudo}</PseudoText>
                   <DateText>Publié {dateFormat(post.updatedAt)}</DateText>
                   <IconButton>
                      <FontAwesomeIcon icon={faPenToSquare} />
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={handleDeletePost}>
                      <FontAwesomeIcon icon={faTrashCan} />
                   </IconButton>
                </PostHeader>

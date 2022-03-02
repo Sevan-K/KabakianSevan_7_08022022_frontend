@@ -10,10 +10,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { addPost, getAllPosts } from "../../actions/post.actions";
 import styled from "styled-components";
 import { colors, padding } from "../../utils/style/variables";
+import defaultProfileImage from "../../assets/profile.png";
 import { IconButton, UserImageWrapper } from "../../utils/style/Atoms";
 
 /* ------------------------------------------- */
@@ -189,7 +189,7 @@ function NewPostForm() {
                   )}
 
                   <UserImageWrapper>
-                     <img src={user.imageUrl} alt="" />
+                     <img src={user.imageUrl || defaultProfileImage} alt="" />
                   </UserImageWrapper>
                   <StyledTextArea
                      name="newPostContent"
