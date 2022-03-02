@@ -14,7 +14,7 @@ import axios from "axios";
 import { getAllPosts } from "../../actions/post.actions";
 import styled from "styled-components";
 import { colors, padding } from "../../utils/style/variables";
-import { IconButton } from "../../utils/style/Atoms";
+import { IconButton, UserImageWrapper } from "../../utils/style/Atoms";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -51,17 +51,6 @@ const FormHeader = styled.header`
    }
 `;
 
-// styled component for user image wrapper
-const UserImageWrapper = styled.p`
-   width: 10vw;
-   max-width: 7rem;
-   height: 10vw;
-   max-height: 7rem;
-   border-radius: 5vw;
-   overflow: hidden;
-   margin: 0 ${padding.icons};
-`;
-
 // styled component for textarea
 const StyledTextArea = styled.textarea`
    flex: 1 1 50%;
@@ -83,7 +72,7 @@ const IconLabel = styled.label`
 `;
 
 // styled component for post preview (to be replaced by a post component when styled)
-const PostPrview = styled.div`
+const PostPreview = styled.div`
    width: 100%;
    margin-top: 2rem;
    border: 0.1rem solid ${colors.primary};
@@ -231,14 +220,14 @@ function NewPostForm() {
                   />
                </StyledFrom>
                {(content || file) && (
-                  <PostPrview>
+                  <PostPreview>
                      {content && <p>{content}</p>}
                      {file && (
                         <p>
                            <img src={filePreview} alt="Post" />
                         </p>
                      )}
-                  </PostPrview>
+                  </PostPreview>
                )}
             </>
          )}

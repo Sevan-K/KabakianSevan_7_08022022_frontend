@@ -1,6 +1,7 @@
 // setting color used
 export const colors = {
-   primary: "#e74c3c",
+   primary: "#FD2D01",
+   // primary: "#e74c3c",
    // primary: "#c0392b",
    unactiveLink: "#747d8c",
    darkUnactiveLink: "#2f3542",

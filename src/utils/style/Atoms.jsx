@@ -23,3 +23,14 @@ export const IconButton = styled.button`
       color: ${colors.primary};
    }
 `;
+
+// styled component for round user  image wrapper
+export const UserImageWrapper = styled.p`
+   width: 10vw;
+   max-width: 7rem;
+   height: 10vw;
+   max-height: 7rem;
+   border-radius: 5vw;
+   overflow: hidden;
+   margin-right: ${padding.icons};
+`;

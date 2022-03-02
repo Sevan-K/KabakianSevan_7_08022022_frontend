@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 // default profile picture
 import defaultProfileImage from "../../assets/icon.svg";
+import dateFormat from "../../utils/functions/dateFormat";
 import { colors, mainSize } from "../../utils/style/variables";
 import UserProfileData from "./UserProfileData";
 import UserProfileForm from "./UserProfileForm";
@@ -19,7 +20,7 @@ const MainUserProfileData = styled.main`
    margin: auto;
    padding: 3rem;
    background-color: ${colors.backgroundLight};
-   border-radius:3rem;
+   border-radius: 3rem;
 `;
 
 /* --------------------------------------------- */
@@ -45,10 +46,7 @@ function UserProfile() {
             />
          )}
          {user.createdAt && (
-            <p>
-               Membre de Groupomania depuis le {user.createdAt.split("T")[0]} à{" "}
-               {user.createdAt.split("T")[1].split(".")[0]}
-            </p>
+            <p>Membre de Groupomania depuis {dateFormat(user.createdAt)}</p>
          )}
       </MainUserProfileData>
    );
