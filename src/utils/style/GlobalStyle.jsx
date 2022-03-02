@@ -17,6 +17,7 @@ const StyledGlobalStyle = createGlobalStyle`
         box-sizing: inherit;
         scroll-behavior: smooth;
         font-family: 'Trebuchet MS', Helvetica, sans-serif;
+        // position:relative;
     }
     html {
         font-size: 62.5%;
@@ -42,7 +43,12 @@ const StyledGlobalStyle = createGlobalStyle`
         width: 100%;
         object-fit: cover;
         object-position: center;;
-    }`;
+    }
+    // for the fixed header
+    #root {
+        margin-top: 13rem;
+     }
+    `;
 
 // the styled global styled is used in a component to be added to the app
 function GlobalStyle() {

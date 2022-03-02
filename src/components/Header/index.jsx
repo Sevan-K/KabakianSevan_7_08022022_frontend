@@ -25,18 +25,24 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 // import { faUser as faUserRegular,  } from "@fortawesome/free-regular-svg-icons";
 
-import defaultImage from "../../assets/icon.svg"
+import defaultImage from "../../assets/icon.svg";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
 /* ------------------------------------------- */
 // styled component for the header
 const StyledHeader = styled.header`
-   // border-bottom: 0.2rem solid black;
    padding: 1rem;
    margin-bottom: 1rem;
    display: flex;
    flex-direction: column;
+   // style for the fixed header
+   position: fixed;
+   right: 0;
+   left: 0;
+   top: 0;
+   z-index: 1;
+   background-color: white;
 `;
 
 // styled component for the upper raw

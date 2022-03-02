@@ -11,7 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { getAllPosts } from "../../actions/post.actions";
+import { addPost, getAllPosts } from "../../actions/post.actions";
 import styled from "styled-components";
 import { colors, padding } from "../../utils/style/variables";
 import { IconButton, UserImageWrapper } from "../../utils/style/Atoms";
@@ -145,14 +145,8 @@ function NewPostForm() {
       } else {
          postToSend = newPost;
       }
-      console.log("=== postToSend ===>", postToSend);
-      // code to add in an post action (not in reducer)
-      await axios({
-         method: "post",
-         url: `${process.env.REACT_APP_API_URL}posts`,
-         withCredentials: true,
-         data: postToSend,
-      });
+      // add the post to the DB
+      await dispatch(addPost(postToSend));
 
       // reload all the post to update the store
       dispatch(getAllPosts());

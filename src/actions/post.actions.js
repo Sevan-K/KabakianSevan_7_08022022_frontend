@@ -4,9 +4,9 @@
 
 import axios from "axios";
 
-/* ----------------------------------------- */
+/* ---------------------------------------------- */
 /*          GET_ALL_POSTS action section          */
-/* ----------------------------------------- */
+/* ---------------------------------------------- */
 
 // creating and axporting an action type
 export const GET_ALL_POSTS = "GET_ALL_POSTS";
@@ -27,5 +27,24 @@ export const getAllPosts = () => {
       } catch (err) {
          return console.log(err);
       }
+   };
+};
+
+/* ---------------------------------------------- */
+/*          ADD_POSTS action section          */
+/* ---------------------------------------------- */
+// creating and axporting an action type
+export const ADD_POST = "ADD_POST";
+
+// creating an action
+export const addPost = (data) => {
+   return async () => {
+      // request to the posts routes using post method
+      await axios({
+         method: "post",
+         url: `${process.env.REACT_APP_API_URL}posts`,
+         withCredentials: true,
+         data: data,
+      });
    };
 };

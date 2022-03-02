@@ -95,7 +95,7 @@ function Post({ post }) {
 
    // component to return
    return (
-      <PostLiContainer className="dev">
+      <PostLiContainer>
          {isloading ? (
             <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
          ) : (
