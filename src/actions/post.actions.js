@@ -54,10 +54,10 @@ export const addPost = (data) => {
 };
 
 /* --------------------------------------------- */
-/*          DELETE_POSTS action section          */
+/*          DELETE_POST action section          */
 /* --------------------------------------------- */
 // creating and axporting an action type
-export const DELETE_POSTS = "DELETE_POSTS";
+export const DELETE_POST = "DELETE_POST";
 
 // creating an action
 export const deletePost = (postId) => {
@@ -68,7 +68,30 @@ export const deletePost = (postId) => {
             url: `${process.env.REACT_APP_API_URL}posts/${postId}`,
             withCredentials: true,
          });
-         return dispatch({ type: DELETE_POSTS, payload: postId });
+         return dispatch({ type: DELETE_POST, payload: postId });
+      } catch (err) {
+         return console.log(err);
+      }
+   };
+};
+
+/* --------------------------------------------- */
+/*          UPDATE_POSTS action section          */
+/* --------------------------------------------- */
+// creating and axporting an action type
+export const UPDATE_POST = "UPDATE_POST";
+
+// creating an action
+export const updatePost = (postId, content) => {
+   return async (dispatch) => {
+      try {
+         await axios({
+            method: "put",
+            url: `${process.env.REACT_APP_API_URL}posts/${postId}`,
+            withCredentials: true,
+            data: { content: content },
+         });
+         return dispatch({ type: UPDATE_POST, payload: { postId, content } });
       } catch (err) {
          return console.log(err);
       }

@@ -10,13 +10,21 @@ import {
    faPenToSquare,
    faTrashCan,
    faCommentDots,
+   faPaperPlane,
+   faCircleArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { IconButton, UserImageWrapper } from "../../utils/style/Atoms";
 import dateFormat from "../../utils/functions/dateFormat";
 import styled from "styled-components";
 import { colors } from "../../utils/style/variables";
 import defaultProfileImage from "../../assets/profile.png";
-import { deletePost, getAllPosts } from "../../actions/post.actions";
+import {
+   deletePost,
+   getAllPosts,
+   updatePost,
+} from "../../actions/post.actions";
+import { useUserId } from "../../utils/hooks";
+import axios from "axios";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -79,6 +87,8 @@ const PostContent = styled.p`
 /*          Components creation section          */
 /* --------------------------------------------- */
 function Post({ post }) {
+   // getting id of logged in user
+   const { userId } = useUserId();
    // getting users data from the store
    const users = useSelector((state) => state.usersReducer);
    // getting the user who wrote the post
@@ -87,6 +97,9 @@ function Post({ post }) {
    const [isloading, setIsLoading] = useState(true);
    // local state to display comments
    const [showComments, setShowComments] = useState(false);
+   // local stage to store updated content
+   const [updatedContent, setUpdatedContent] = useState("");
+
    // get acces to redux actions using useDispatch hook
    const dispatch = useDispatch();
 
@@ -98,15 +111,27 @@ function Post({ post }) {
    }, [users]);
 
    // function to remove a post
-   const handleDeletePost = async () => {
+   const handleDeletePost = () => {
       if (
          window.confirm("Êtes vous certain.e de vouloir supprimer ce post ?")
       ) {
          // use post action to delete the post
          dispatch(deletePost(post.id));
-         // reload all the post to update the store
-         dispatch(getAllPosts());
       }
+   };
+
+   // function to edit a post
+   const handleEditPost = async (event) => {
+      // set the loading state as true
+      setIsLoading(true);
+      // prevent page reload
+      event.preventDefault();
+      // call post action to update the targeted post
+      dispatch(updatePost(post.id, updatedContent));
+      // end editing
+      setUpdatedContent("");
+      // end loading
+      setIsLoading(false);
    };
 
    // component to return
@@ -116,6 +141,7 @@ function Post({ post }) {
             <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
          ) : (
             <>
+               {/* -------------- Post Header -------------- */}
                <PostHeader>
                   <UserImageWrapper>
                      <img
@@ -125,21 +151,55 @@ function Post({ post }) {
                   </UserImageWrapper>
                   <PseudoText>{author.pseudo}</PseudoText>
                   <DateText>Publié {dateFormat(post.updatedAt)}</DateText>
-                  <IconButton>
-                     <FontAwesomeIcon icon={faPenToSquare} />
-                  </IconButton>
-                  <IconButton onClick={handleDeletePost}>
-                     <FontAwesomeIcon icon={faTrashCan} />
-                  </IconButton>
+                  {userId === post.userId && (
+                     <>
+                        <IconButton
+                           onClick={() => setUpdatedContent(post.content)}
+                        >
+                           <FontAwesomeIcon icon={faPenToSquare} />
+                        </IconButton>
+                        <IconButton onClick={handleDeletePost}>
+                           <FontAwesomeIcon icon={faTrashCan} />
+                        </IconButton>
+                     </>
+                  )}
                </PostHeader>
+               {/* -------------- Post content and image -------------- */}
                <div>
-                  <PostContent>{post.content}</PostContent>
+                  {updatedContent ? (
+                     // -------------- form --------------
+                     <form action="" id="editPostForm">
+                        <IconButton
+                           onClick={(event) => {
+                              event.preventDefault();
+                              setUpdatedContent("");
+                           }}
+                        >
+                           <FontAwesomeIcon icon={faCircleArrowLeft} />
+                        </IconButton>
+                        <textarea
+                           name=""
+                           id=""
+                           value={updatedContent}
+                           onChange={(event) =>
+                              setUpdatedContent(event.target.value)
+                           }
+                        ></textarea>
+                        <IconButton type="submit" onClick={handleEditPost}>
+                           <FontAwesomeIcon icon={faPaperPlane} />
+                        </IconButton>
+                     </form>
+                  ) : (
+                     // -------------- content --------------
+                     <PostContent>{post.content}</PostContent>
+                  )}
                   {post.imageUrl && (
                      <p>
                         <img src={post.imageUrl} alt="post" />
                      </p>
                   )}
                </div>
+               {/* -------------- Post bottom part -------------- */}
                <div>
                   <IconButton onClick={() => setShowComments(!showComments)}>
                      <FontAwesomeIcon icon={faCommentDots} />
@@ -153,6 +213,7 @@ function Post({ post }) {
                   </button>
                   <p>{post.likes || 0}</p> */}
                </div>
+               {/* -------------- Post comments -------------- */}
                {showComments && (
                   <ul>
                      <li>Commentaire 1</li>

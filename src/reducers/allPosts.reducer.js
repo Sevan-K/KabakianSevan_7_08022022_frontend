@@ -1,7 +1,11 @@
 /* --------------------------------- */
 /*          Imports Section          */
 /* --------------------------------- */
-import { DELETE_POSTS, GET_ALL_POSTS } from "../actions/post.actions";
+import {
+   DELETE_POST,
+   GET_ALL_POSTS,
+   UPDATE_POST,
+} from "../actions/post.actions";
 
 /* -------------------------------------------- */
 /*          Reducer definition section          */
@@ -15,8 +19,14 @@ export default function allPostsReducer(state = initialState, action) {
    switch (action.type) {
       case GET_ALL_POSTS:
          return action.payload;
-      case DELETE_POSTS:
+      case DELETE_POST:
          return state.filter((post) => post.id !== action.payload);
+      case UPDATE_POST:
+         return state.map((post) =>
+            post.id === action.payload.postId
+               ? { ...post, content: action.payload.content }
+               : post
+         );
       default:
          return state;
    }
