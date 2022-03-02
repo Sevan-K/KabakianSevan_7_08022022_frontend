@@ -25,6 +25,7 @@ import {
 } from "../../actions/post.actions";
 import { useUserId } from "../../utils/hooks";
 import axios from "axios";
+import Comment from "../Comment";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -86,6 +87,14 @@ const PostContent = styled.p`
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
+
+const testCommentsList = [
+   { id: 1, content: "Commentaire 1", userId: 1, postId: 9 },
+   { id: 2, content: "Commentaire 2", userId: 9, postId: 9 },
+   { id: 3, content: "Commentaire 3", userId: 1, postId: 3 },
+   { id: 4, content: "Commentaire 4", userId: 9, postId: 3 },
+];
+
 function Post({ post }) {
    // getting id of logged in user
    const { userId } = useUserId();
@@ -216,10 +225,17 @@ function Post({ post }) {
                {/* -------------- Post comments -------------- */}
                {showComments && (
                   <ul>
-                     <li>Commentaire 1</li>
-                     <li>Commentaire 2</li>
+                     {testCommentsList.map((comment) => {
+                        if (comment.postId === post.id) {
+                           return (
+                              <Comment key={comment.id} comment={comment} />
+                           );
+                        } else {
+                           return null;
+                        }
+                     })}
                   </ul>
-               )}{" "}
+               )}
             </>
          )}
       </PostLiContainer>
