@@ -18,13 +18,8 @@ import dateFormat from "../../utils/functions/dateFormat";
 import styled from "styled-components";
 import { colors } from "../../utils/style/variables";
 import defaultProfileImage from "../../assets/profile.png";
-import {
-   deletePost,
-   getAllPosts,
-   updatePost,
-} from "../../actions/post.actions";
+import { deletePost, updatePost } from "../../actions/post.actions";
 import { useUserId } from "../../utils/hooks";
-import axios from "axios";
 import Comment from "../Comment";
 
 /* ------------------------------------------- */
@@ -100,6 +95,8 @@ function Post({ post }) {
    const { userId } = useUserId();
    // getting users data from the store
    const users = useSelector((state) => state.usersReducer);
+   //  getting comments data from the store
+   const comments = useSelector((state) => state.commentsReducer);
    // getting the user who wrote the post
    const [author] = users.filter((user) => user.id === post.userId);
    // local state to know if post card is loading
@@ -225,7 +222,7 @@ function Post({ post }) {
                {/* -------------- Post comments -------------- */}
                {showComments && (
                   <ul>
-                     {testCommentsList.map((comment) => {
+                     {comments.map((comment) => {
                         if (comment.postId === post.id) {
                            return (
                               <Comment key={comment.id} comment={comment} />

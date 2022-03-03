@@ -7,7 +7,6 @@ import Post from "../Post";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../../actions/post.actions";
 import { useState } from "react";
-import axios from "axios";
 import { getAllComments } from "../../actions/comments.action";
 
 /* ------------------------------------------- */
