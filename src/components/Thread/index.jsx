@@ -7,6 +7,8 @@ import Post from "../Post";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../../actions/post.actions";
 import { useState } from "react";
+import axios from "axios";
+import { getAllComments } from "../../actions/comments.action";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -22,16 +24,20 @@ function Thread() {
    // getting acces to redux actions by using useDispatch hook
    const dispatch = useDispatch();
 
-   // building posts list from the store
-   const postsList = useSelector((state) => state.allPostsReducer);
-
    // useEffect to get all the post when thread component is rendered (needed for infinite scroll)
    useEffect(() => {
       if (loadPosts) {
+         // loading all the posts into the store
          dispatch(getAllPosts());
+         // loading all the comments into the store
+         dispatch(getAllComments());
+         // set load as false not to load again
          setLoadPosts(false);
       }
    }, [loadPosts, dispatch]);
+
+   // building posts list from the store
+   const postsList = useSelector((state) => state.allPostsReducer);
 
    // the posts list is mapped to return a post component of each post
    const PostsComponents =

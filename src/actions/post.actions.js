@@ -89,7 +89,7 @@ export const updatePost = (postId, content) => {
             method: "put",
             url: `${process.env.REACT_APP_API_URL}posts/${postId}`,
             withCredentials: true,
-            data: { content: content },
+            data: { content },
          });
          return dispatch({ type: UPDATE_POST, payload: { postId, content } });
       } catch (err) {
