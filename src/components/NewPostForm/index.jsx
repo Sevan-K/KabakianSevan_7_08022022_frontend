@@ -24,11 +24,17 @@ const NewPostFormWrapper = styled.div`
    padding: 2rem;
    width: 90%;
    margin: auto;
-   border-radius: 3rem;
+   border-radius: 2rem;
+   border-bottom-left-radius: 0;
+   // border-top-right-radius: 0;
    display: flex;
    flex-direction: column;
    align-items: center;
    background-color: ${colors.backgroundLight};
+   transition: 200ms;
+   &:focus-within {
+      box-shadow: 0.25rem 0.25rem 0.5rem ${colors.unactiveLink};
+   }
 `;
 
 // styled component fo the form
@@ -54,7 +60,7 @@ const FormHeader = styled.header`
 // styled component for textarea
 const StyledTextArea = styled.textarea`
    flex: 1 1 50%;
-   border-radius: 2rem;
+   border-radius: 1rem;
    border: none;
    padding: 0.5rem 1rem;
 `;

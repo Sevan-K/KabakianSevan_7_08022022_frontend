@@ -13,7 +13,12 @@ import {
    faPaperPlane,
    faCircleArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import { IconButton, UserImageWrapper } from "../../utils/style/Atoms";
+import {
+   DateText,
+   IconButton,
+   PseudoText,
+   UserImageWrapper,
+} from "../../utils/style/Atoms";
 import dateFormat from "../../utils/functions/dateFormat";
 import styled from "styled-components";
 import { colors } from "../../utils/style/variables";
@@ -48,6 +53,9 @@ const PostHeader = styled.header`
    & > p:first-of-type {
       grid-area: img;
    }
+   & p:nth-child(2) {
+      grid-area: pseudo;
+   }
    & > button {
       &:first-of-type {
          grid-area: edit;
@@ -56,21 +64,6 @@ const PostHeader = styled.header`
          grid-area: delete;
       }
    }
-`;
-
-// styled component for pseudo
-const PseudoText = styled.p`
-   font-weight: bold;
-   color: ${colors.darkUnactiveLink};
-   grid-area: pseudo;
-`;
-
-// styled component for date
-const DateText = styled.p`
-   grid-area: date;
-   color: gray;
-   font-style: italic;
-   font-size: 1.2rem;
 `;
 
 // styled component for post content
@@ -82,14 +75,6 @@ const PostContent = styled.p`
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
-
-const testCommentsList = [
-   { id: 1, content: "Commentaire 1", userId: 1, postId: 9 },
-   { id: 2, content: "Commentaire 2", userId: 9, postId: 9 },
-   { id: 3, content: "Commentaire 3", userId: 1, postId: 3 },
-   { id: 4, content: "Commentaire 4", userId: 9, postId: 3 },
-];
-
 function Post({ post }) {
    // getting id of logged in user
    const { userId } = useUserId();
@@ -221,17 +206,20 @@ function Post({ post }) {
                </div>
                {/* -------------- Post comments -------------- */}
                {showComments && (
-                  <ul>
-                     {comments.map((comment) => {
-                        if (comment.postId === post.id) {
-                           return (
-                              <Comment key={comment.id} comment={comment} />
-                           );
-                        } else {
-                           return null;
-                        }
-                     })}
-                  </ul>
+                  <>
+                     <ul>
+                        {comments.map((comment) => {
+                           if (comment.postId === post.id) {
+                              return (
+                                 <Comment key={comment.id} comment={comment} />
+                              );
+                           } else {
+                              return null;
+                           }
+                        })}
+                     </ul>
+                     <p>ajout d'un nouveau commentaire</p>
+                  </>
                )}
             </>
          )}
