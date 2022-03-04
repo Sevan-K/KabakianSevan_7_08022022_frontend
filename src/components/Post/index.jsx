@@ -73,6 +73,20 @@ const PostContent = styled.p`
    font-size: 1.3rem;
 `;
 
+// styled component for the form to edit comment content
+const EditContentForm = styled.form`
+   display: flex;
+   align-items: center;
+`;
+
+// styled component for the textarea of the form to edit comment content
+const StyledTextArea = styled.textarea`
+   flex: 1;
+   border: none;
+   background: transparent;
+   font-size: 1.3rem;
+`;
+
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
@@ -91,7 +105,8 @@ function Post({ post }) {
    const [showComments, setShowComments] = useState(false);
    // local stage to store updated content
    const [updatedContent, setUpdatedContent] = useState("");
-
+   // local state to set a unique temporary id for the textarea the comment being updated
+   const [tempId, updateTempId] = useState("");
    // get acces to redux actions using useDispatch hook
    const dispatch = useDispatch();
 
@@ -101,6 +116,19 @@ function Post({ post }) {
          setIsLoading(false);
       }
    }, [users]);
+
+   // useEffect to set focus on form's textarea of the comment beeing editted
+   useEffect(() => {
+      if (!!tempId) {
+         document.getElementById(tempId).focus();
+         // console.log("=== tempId ===>", tempId);
+      }
+   }, [tempId]);
+
+   const handleStotEditPost = () => {
+      setUpdatedContent("");
+      updateTempId("");
+   };
 
    // function to remove a post
    const handleDeletePost = () => {
@@ -146,7 +174,12 @@ function Post({ post }) {
                   {userId === post.userId && (
                      <>
                         <IconButton
-                           onClick={() => setUpdatedContent(post.content)}
+                           onClick={() => {
+                              setUpdatedContent(post.content);
+                              updateTempId(
+                                 `edit-comment-content-${Date.now()}`
+                              );
+                           }}
                         >
                            <FontAwesomeIcon icon={faPenToSquare} />
                         </IconButton>
@@ -160,27 +193,28 @@ function Post({ post }) {
                <div>
                   {updatedContent ? (
                      // -------------- form --------------
-                     <form action="" id="edit-post-form">
+                     <EditContentForm action="">
                         <IconButton
                            onClick={(event) => {
                               event.preventDefault();
-                              setUpdatedContent("");
+                              handleStotEditPost();
                            }}
                         >
                            <FontAwesomeIcon icon={faCircleArrowLeft} />
                         </IconButton>
-                        <textarea
+                        <StyledTextArea
                            name=""
-                           id=""
+                           id={tempId}
                            value={updatedContent}
+                           onBlur={handleStotEditPost}
                            onChange={(event) =>
                               setUpdatedContent(event.target.value)
                            }
-                        ></textarea>
+                        ></StyledTextArea>
                         <IconButton type="submit" onClick={handleEditPost}>
                            <FontAwesomeIcon icon={faPaperPlane} />
                         </IconButton>
-                     </form>
+                     </EditContentForm>
                   ) : (
                      // -------------- content --------------
                      <PostContent>{post.content}</PostContent>

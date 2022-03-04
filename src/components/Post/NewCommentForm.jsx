@@ -1,10 +1,7 @@
 /* --------------------------------- */
 /*          Imports Section          */
 /* --------------------------------- */
-import {
-   faCircleXmark,
-   faPaperPlane,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -71,7 +68,7 @@ function NewCommentForm({ postId }) {
    };
 
    return (
-      <StyledForm action="" id="new-comment-form">
+      <StyledForm action="">
          {newCommentContent && (
             <IconButton
                color={colors.darkUnactiveLink}

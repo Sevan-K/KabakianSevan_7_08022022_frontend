@@ -56,10 +56,25 @@ const CommentContainer = styled.li`
 // styled component for comment PseudoContentWrapper
 const PseudoContentWrapper = styled.div`
    grid-area: comment;
-   background-color: ${colors.backgroundLight};
+   background-color: ${({ isAuthorConnected }) =>
+      isAuthorConnected ? colors.ownCommentBg : colors.backgroundLight};
    padding: ${padding.comment};
    border-radius: 1rem;
    border-top-left-radius: 0;
+`;
+
+// styled component for the form to edit comment content
+const EditContentForm = styled.form`
+   display: flex;
+   align-items: center;
+`;
+
+// styled component for the textarea of the form to edit comment content
+const StyledTextArea = styled.textarea`
+   flex: 1;
+   border: none;
+   background: transparent;
+   font-size: 1.3rem;
 `;
 
 // styled component for comment content
@@ -83,6 +98,16 @@ function Comment({ comment }) {
    const dispatch = useDispatch();
    // local state to know if post card is loading
    const [isLoading, setIsLoading] = useState(false);
+   // local state to set a unique temporary id for the textarea the comment being updated
+   const [tempCommentId, updateTempCommentId] = useState("");
+
+   // useEffect to set focus on form's textarea of the comment beeing editted
+   useEffect(() => {
+      if (!!tempCommentId) {
+         document.getElementById(tempCommentId).focus();
+         // console.log("=== tempCommentId ===>", tempCommentId);
+      }
+   }, [tempCommentId]);
 
    // function to remove a post
    const handleDeleteComment = () => {
@@ -96,8 +121,25 @@ function Comment({ comment }) {
       }
    };
 
-   // function to edit a comment
-   const handleEditComment = (event) => {
+   // function to start editting a comment
+   const handleStartEditComment = () => {
+      if (!tempCommentId) {
+         // set textarea value to comment content
+         setUpdatedContent(comment.content);
+         // define a unique and temporary id
+         updateTempCommentId(`edit-comment-content-${Date.now()}`);
+      } else {
+         handleStotEditComment();
+      }
+   };
+
+   const handleStotEditComment = () => {
+      setUpdatedContent("");
+      updateTempCommentId("");
+   };
+
+   // function to submit edit a comment form
+   const handleEditCommentSubmit = (event) => {
       event.preventDefault();
       // the content is loading
       setIsLoading(true);
@@ -120,21 +162,24 @@ function Comment({ comment }) {
             />
          </SmallUserImageWrapper>
          {/* -------------- Comment content and author's pseudo -------------- */}
-         <PseudoContentWrapper>
+         <PseudoContentWrapper isAuthorConnected={userId === comment.userId}>
             <PseudoText>{author.pseudo}</PseudoText>
             {updatedContent ? (
                /* -------------- Form to edit comment -------------- */
-               <form className="dev"> 
-                  <textarea
+               <EditContentForm>
+                  <StyledTextArea
+                     id={tempCommentId}
                      name=""
-                     id=""
+                     onBlur={() => {
+                        if (!updatedContent) handleStotEditComment();
+                     }}
                      value={updatedContent}
                      onChange={(event) => setUpdatedContent(event.target.value)}
-                  ></textarea>
-                  <IconButton type="submit" onClick={handleEditComment}>
+                  ></StyledTextArea>
+                  <IconButton type="submit" onClick={handleEditCommentSubmit}>
                      <FontAwesomeIcon icon={faPaperPlane} />
                   </IconButton>
-               </form>
+               </EditContentForm>
             ) : isLoading ? (
                /* -------------- Loading spiner -------------- */
                <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
@@ -148,17 +193,13 @@ function Comment({ comment }) {
          {/* -------------- Comment edit and delete button -------------- */}
          {userId === comment.userId && (
             <>
-               {updatedContent ? (
-                  <IconButton onClick={() => setUpdatedContent("")}>
+               <IconButton onClick={handleStartEditComment}>
+                  {updatedContent ? (
                      <FontAwesomeIcon icon={faCircleXmark} />
-                  </IconButton>
-               ) : (
-                  <IconButton
-                     onClick={() => setUpdatedContent(comment.content)}
-                  >
+                  ) : (
                      <FontAwesomeIcon icon={faPenToSquare} />
-                  </IconButton>
-               )}
+                  )}
+               </IconButton>
                <IconButton onClick={handleDeleteComment}>
                   <FontAwesomeIcon icon={faTrashCan} />
                </IconButton>
