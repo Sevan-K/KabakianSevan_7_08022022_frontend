@@ -75,3 +75,30 @@ export const deleteComment = (commentId) => {
       }
    };
 };
+
+/* ------------------------------------------------- */
+/*          UPDATE_COMMENT action section          */
+/* ------------------------------------------------- */
+
+// creating and axporting an action type
+export const UPDATE_COMMENT = "UPDATE_COMMENT";
+
+// creating an action
+export const updateComment = (commentId, content) => {
+   return async (dispatch) => {
+      try {
+         await axios({
+            method: "put",
+            url: `${process.env.REACT_APP_API_URL}comments/${commentId}`,
+            withCredentials: true,
+            data: { content },
+         });
+         return dispatch({
+            type: UPDATE_COMMENT,
+            payload: { commentId, content },
+         });
+      } catch (err) {
+         return console.log(err);
+      }
+   };
+};

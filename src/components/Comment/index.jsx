@@ -4,14 +4,17 @@
 
 import {
    faCircleArrowLeft,
+   faCircleXmark,
    faPaperPlane,
    faPenToSquare,
+   faSpinner,
    faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { deleteComment, updateComment } from "../../actions/comments.action";
 import defaultProfileImage from "../../assets/profile.png";
 import dateFormat from "../../utils/functions/dateFormat";
 import { useUserId } from "../../utils/hooks";
@@ -76,12 +79,35 @@ function Comment({ comment }) {
    const { userId } = useUserId();
    // local stage to store updated content
    const [updatedContent, setUpdatedContent] = useState("");
+   // get acces to redux actions using useDispatch hook
+   const dispatch = useDispatch();
+   // local state to know if post card is loading
+   const [isLoading, setIsLoading] = useState(false);
 
    // function to remove a post
-   const handleDeleteComment = () => {};
+   const handleDeleteComment = () => {
+      if (
+         window.confirm(
+            "Êtes vous certain.e de vouloir supprimer ce commentaire ?"
+         )
+      ) {
+         // use post action to delete the post
+         dispatch(deleteComment(comment.id));
+      }
+   };
 
    // function to edit a comment
-   const handleEditComment = () => {};
+   const handleEditComment = (event) => {
+      event.preventDefault();
+      // the content is loading
+      setIsLoading(true);
+      // modify comment on DB and on the store
+      dispatch(updateComment(comment.id, updatedContent));
+      // comment is no more beeing editted
+      setUpdatedContent("");
+      // the content is loaded
+      setIsLoading(false);
+   };
 
    // component to return
    return (
@@ -98,15 +124,7 @@ function Comment({ comment }) {
             <PseudoText>{author.pseudo}</PseudoText>
             {updatedContent ? (
                /* -------------- Form to edit comment -------------- */
-               <form>
-                  <IconButton
-                     onClick={(event) => {
-                        event.preventDefault();
-                        setUpdatedContent("");
-                     }}
-                  >
-                     <FontAwesomeIcon icon={faCircleArrowLeft} />
-                  </IconButton>
+               <form className="dev"> 
                   <textarea
                      name=""
                      id=""
@@ -117,7 +135,11 @@ function Comment({ comment }) {
                      <FontAwesomeIcon icon={faPaperPlane} />
                   </IconButton>
                </form>
+            ) : isLoading ? (
+               /* -------------- Loading spiner -------------- */
+               <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
             ) : (
+               /* -------------- Comment content -------------- */
                <PostContent>{comment.content}</PostContent>
             )}
          </PseudoContentWrapper>
@@ -126,9 +148,17 @@ function Comment({ comment }) {
          {/* -------------- Comment edit and delete button -------------- */}
          {userId === comment.userId && (
             <>
-               <IconButton onClick={() => setUpdatedContent(comment.content)}>
-                  <FontAwesomeIcon icon={faPenToSquare} />
-               </IconButton>
+               {updatedContent ? (
+                  <IconButton onClick={() => setUpdatedContent("")}>
+                     <FontAwesomeIcon icon={faCircleXmark} />
+                  </IconButton>
+               ) : (
+                  <IconButton
+                     onClick={() => setUpdatedContent(comment.content)}
+                  >
+                     <FontAwesomeIcon icon={faPenToSquare} />
+                  </IconButton>
+               )}
                <IconButton onClick={handleDeleteComment}>
                   <FontAwesomeIcon icon={faTrashCan} />
                </IconButton>

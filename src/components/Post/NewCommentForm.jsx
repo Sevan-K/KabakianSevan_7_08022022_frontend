@@ -2,13 +2,13 @@
 /*          Imports Section          */
 /* --------------------------------- */
 import {
-   faCircleArrowLeft,
    faCircleXmark,
    faPaperPlane,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
 import { addComment, getAllComments } from "../../actions/comments.action";
 import { useUserId } from "../../utils/hooks";
 import { IconButton } from "../../utils/style/Atoms";
@@ -17,6 +17,31 @@ import { colors } from "../../utils/style/variables";
 /* ------------------------------------------- */
 /*          Styled components section          */
 /* ------------------------------------------- */
+// styled component for the new comment form
+const StyledForm = styled.form`
+   background-color: ${colors.newCommentBg};
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   padding: 0.7rem;
+   border-radius: 3rem;
+   &:focus-within {
+      box-shadow: 0.1rem 0.1rem 0.25rem ${colors.unactiveLink};
+   }
+   & button {
+      width: 15%;
+   }
+`;
+
+// styled component for the new comment textare
+const StyledTextArea = styled.textarea`
+   width: 70%;
+   border: none;
+   background-color: transparent;
+   font-size: 1.3rem;
+   resize: vertical;
+   min-height: 1.5rem;
+`;
 
 /* --------------------------------------------- */
 /*          Components creation section          */
@@ -46,7 +71,7 @@ function NewCommentForm({ postId }) {
    };
 
    return (
-      <form action="" id="new-comment-form" className="dev">
+      <StyledForm action="" id="new-comment-form">
          {newCommentContent && (
             <IconButton
                color={colors.darkUnactiveLink}
@@ -58,13 +83,13 @@ function NewCommentForm({ postId }) {
                <FontAwesomeIcon icon={faCircleXmark} />
             </IconButton>
          )}
-         <textarea
+         <StyledTextArea
             name=""
             id=""
             placeholder="Votre réaction..."
             value={newCommentContent}
             onChange={(event) => setNewCommentContent(event.target.value)}
-         ></textarea>
+         ></StyledTextArea>
 
          <IconButton
             color={colors.darkUnactiveLink}
@@ -73,7 +98,7 @@ function NewCommentForm({ postId }) {
          >
             <FontAwesomeIcon icon={faPaperPlane} />
          </IconButton>
-      </form>
+      </StyledForm>
    );
 }
 

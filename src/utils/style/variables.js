@@ -6,6 +6,7 @@ export const colors = {
    unactiveLink: "#747d8c",
    darkUnactiveLink: "#2f3542",
    backgroundLight: "#ffe6e6",
+   newCommentBg: "#f1efef",
 };
 
 // setting mainsize
