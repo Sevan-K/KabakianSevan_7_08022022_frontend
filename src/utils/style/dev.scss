@@ -1,6 +1,22 @@
 .dev {
    // background-color: lighten($color: red, $amount: 45);
-
+   background-color: #f1efef;
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   padding: 0.7rem;
+   border-radius: 3rem;
+   & textarea {
+      width: 70%;
+      border: none;
+      background-color: transparent;
+      font-size: 1.3rem;
+      resize: vertical;
+      min-height: 1.5rem;
+   }
+   & button {
+      width: 15%;
+   }
 }
 //   &::after {
 //      content: "\f015";

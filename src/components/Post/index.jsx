@@ -26,6 +26,7 @@ import defaultProfileImage from "../../assets/profile.png";
 import { deletePost, updatePost } from "../../actions/post.actions";
 import { useUserId } from "../../utils/hooks";
 import Comment from "../Comment";
+import NewCommentForm from "./NewCommentForm";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -159,7 +160,7 @@ function Post({ post }) {
                <div>
                   {updatedContent ? (
                      // -------------- form --------------
-                     <form action="" id="editPostForm">
+                     <form action="" id="edit-post-form">
                         <IconButton
                            onClick={(event) => {
                               event.preventDefault();
@@ -218,7 +219,7 @@ function Post({ post }) {
                            }
                         })}
                      </ul>
-                     <p>ajout d'un nouveau commentaire</p>
+                     <NewCommentForm postId={post.id} />
                   </>
                )}
             </>

@@ -168,7 +168,11 @@ function NewPostForm() {
             <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
          ) : (
             <>
-               <StyledFrom action="" onSubmit={handleNewPostSubmit}>
+               <StyledFrom
+                  action=""
+                  onSubmit={handleNewPostSubmit}
+                  id="new-post-form"
+               >
                   {(content || file) && (
                      <FormHeader>
                         <IconButton

@@ -76,7 +76,7 @@ function UserProfileForm({ setEditingUserProfile, defaultProfileImage }) {
       <form
          // method="post"
          action=""
-         id="profile_update_form"
+         id="profile-update-form"
          onSubmit={handleUpdateProfile}
       >
          <h2>Profil de {user.pseudo}</h2>

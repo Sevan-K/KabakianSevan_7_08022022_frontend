@@ -25,7 +25,53 @@ export const getAllComments = () => {
             payload: response.data.comments,
          });
       } catch (err) {
-         console.log(err);
+         return console.log(err);
+      }
+   };
+};
+
+/* ------------------------------------------------- */
+/*          ADD_COMMENT action section          */
+/* ------------------------------------------------- */
+
+// creating and axporting an action type
+export const ADD_COMMENT = "ADD_COMMENT";
+
+// creating an action
+export const addComment = (commentData) => {
+   return async () => {
+      try {
+         await axios({
+            method: "post",
+            url: `${process.env.REACT_APP_API_URL}comments`,
+            withCredentials: true,
+            data: commentData,
+         });
+      } catch (err) {
+         return console.log(err);
+      }
+   };
+};
+
+/* ------------------------------------------------- */
+/*          DELETE_COMMENT action section          */
+/* ------------------------------------------------- */
+
+// creating and axporting an action type
+export const DELETE_COMMENT = "DELETE_COMMENT";
+
+// creating an action
+export const deleteComment = (commentId) => {
+   return async (dispatch) => {
+      try {
+         await axios({
+            method: "delete",
+            url: `${process.env.REACT_APP_API_URL}comments/${commentId}`,
+            withCredentials: true,
+         });
+         return dispatch({ type: DELETE_COMMENT, payload: commentId });
+      } catch (err) {
+         return console.log(err);
       }
    };
 };
