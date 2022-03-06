@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 // importing components
 import LogInForm from "./LogInForm";
 import SignUpForm from "./SignUpForm";
-import { mainSize } from "../../utils/style/variables";
+import { colors, mainSize } from "../../utils/style/variables";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -19,13 +19,36 @@ const MainAuth = styled.main`
    width: ${mainSize};
    margin: auto;
    padding: 2rem;
-   border: 1px solid black;
+   border-radius: 1rem;
+   text-align: center;
+   // background-color: ${colors.backgroundLight};
+   // border: 0.1rem solid ${colors.primary};
+   background-color: ${colors.newCommentBg};
+   & div {
+      margin: 2rem 0;
+   }
 `;
 
 // styled component fo the button
 const StyledButton = styled.button`
-   padding: 1rem;
-   background-color: ${({ $isSelected }) => $isSelected && "red"};
+   padding: 1rem 2rem;
+   color: ${({ $isSelected }) =>
+      $isSelected ? "#FFF" : colors.darkUnactiveLink};
+   background-color: ${({ $isSelected }) =>
+      $isSelected ? colors.primary : "#FFF"};
+   z-index: ${({ $isSelected }) => ($isSelected ? 1 : 2)};
+   font-weight: bold;
+   font-size: 1.5rem;
+   transition: 500ms;
+   box-shadow: 0.1rem 0.1rem 0.5rem ${colors.unactiveLink};
+   &:first-of-type {
+      border-bottom-left-radius: 1rem;
+      border-top-left-radius: 1rem;
+   }
+   &:last-of-type {
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+   }
 `;
 
 /* --------------------------------------------- */
@@ -44,13 +67,13 @@ function Auth({ signUp }) {
    // logIn form if signUpModal is false or signUpFormSubmit is true
    return (
       <MainAuth>
-         <p>Auth</p>
+         <h2>Auth</h2>
          <div>
             <StyledButton
                onClick={() => setSignUpModal(false)}
                $isSelected={!signUpModal || signUpFormSubmit}
             >
-               Login
+               Connexion
             </StyledButton>
             <StyledButton
                onClick={() => {
@@ -59,7 +82,7 @@ function Auth({ signUp }) {
                }}
                $isSelected={signUpModal && !signUpFormSubmit}
             >
-               SignUp
+               Inscription
             </StyledButton>
          </div>
          {signUpFormSubmit && (

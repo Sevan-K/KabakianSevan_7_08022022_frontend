@@ -4,10 +4,17 @@
 
 import axios from "axios";
 import { useState } from "react";
+import {
+   AuthForm,
+   AuthLabel,
+   AuthSumbitInput,
+   ErrorMessage,
+} from "../../utils/style/Atoms";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
 /* ------------------------------------------- */
+// all styled component are imported from atoms
 
 /* --------------------------------------------- */
 /*          Components creation section          */
@@ -27,7 +34,7 @@ function SignUpForm({ setSignUpFormSubmit }) {
    // const [ctrlPasswordError, setCtrlPasswordError] = useState("");
 
    // function to update form status
-   const checkForm = () => {
+   const checkSignUpForm = () => {
       // regex for password
       const passwordRegex =
          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
@@ -73,7 +80,7 @@ function SignUpForm({ setSignUpFormSubmit }) {
       // console.log("=== data ===>", { pseudo, email, password });
       try {
          // cheching if the form is valid or not
-         if (!checkForm()) {
+         if (!checkSignUpForm()) {
          } else {
             // call to the API using axios
             const response = await axios({
@@ -103,9 +110,9 @@ function SignUpForm({ setSignUpFormSubmit }) {
 
    // component to return
    return (
-      <form action="" id="signup-form" onSubmit={handleSignUp}>
-         <p>SignUpForm</p>
-         <label htmlFor="pseudo">Pseudo</label>
+      <AuthForm action="" id="signup-form" onSubmit={handleSignUp}>
+         <h3>Formulaire d'inscription</h3>
+         <AuthLabel htmlFor="pseudo">Pseudo</AuthLabel>
          <input
             type="text"
             name="pseudo"
@@ -114,19 +121,18 @@ function SignUpForm({ setSignUpFormSubmit }) {
             value={pseudo}
             onChange={(event) => setPseudo(event.target.value)}
          />
-         {pseudoError && <p>{pseudoError}</p>}
-         <label htmlFor="email">Email</label>
+         {pseudoError && <ErrorMessage>{pseudoError}</ErrorMessage>}
+         <AuthLabel htmlFor="email">Email</AuthLabel>
          <input
             type="email"
             name="email"
             id="email"
-            placeholder="email"
             aria-label="email adress"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
          />
-         {emailError && <p>{emailError}</p>}
-         <label htmlFor="password">Mot de passe</label>
+         {emailError && <ErrorMessage>{emailError}</ErrorMessage>}
+         <AuthLabel htmlFor="password">Mot de passe</AuthLabel>
          <input
             type="password"
             name="password"
@@ -135,9 +141,9 @@ function SignUpForm({ setSignUpFormSubmit }) {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
          />
-         {passwordError && <p>{passwordError}</p>}
-         <input type="submit" value={"Test"} disabled={false} />
-      </form>
+         {passwordError && <ErrorMessage>{passwordError}</ErrorMessage>}
+         <AuthSumbitInput type="submit" value="S'inscrire" disabled={false} />
+      </AuthForm>
    );
 }
 
