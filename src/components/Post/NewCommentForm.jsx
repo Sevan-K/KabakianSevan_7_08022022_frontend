@@ -68,7 +68,7 @@ function NewCommentForm({ postId }) {
    };
 
    return (
-      <StyledForm action="">
+      <StyledForm action="" onSubmit={handleNewCommentSubmit}>
          {newCommentContent && (
             <IconButton
                color={colors.darkUnactiveLink}
@@ -88,11 +88,7 @@ function NewCommentForm({ postId }) {
             onChange={(event) => setNewCommentContent(event.target.value)}
          ></StyledTextArea>
 
-         <IconButton
-            color={colors.darkUnactiveLink}
-            type="submit"
-            onClick={handleNewCommentSubmit}
-         >
+         <IconButton color={colors.darkUnactiveLink} type="submit">
             <FontAwesomeIcon icon={faPaperPlane} />
          </IconButton>
       </StyledForm>

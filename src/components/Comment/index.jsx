@@ -166,17 +166,17 @@ function Comment({ comment }) {
             <PseudoText>{author.pseudo}</PseudoText>
             {updatedContent ? (
                /* -------------- Form to edit comment -------------- */
-               <EditContentForm>
+               <EditContentForm onSubmit={handleEditCommentSubmit}>
                   <StyledTextArea
                      id={tempCommentId}
                      name=""
-                     onBlur={() => {
-                        if (!updatedContent) handleStotEditComment();
-                     }}
+                     // onBlur={() => {
+                     //    if (!updatedContent) handleStotEditComment();
+                     // }}
                      value={updatedContent}
                      onChange={(event) => setUpdatedContent(event.target.value)}
                   ></StyledTextArea>
-                  <IconButton type="submit" onClick={handleEditCommentSubmit}>
+                  <IconButton type="submit">
                      <FontAwesomeIcon icon={faPaperPlane} />
                   </IconButton>
                </EditContentForm>

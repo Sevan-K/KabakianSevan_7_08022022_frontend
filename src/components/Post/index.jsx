@@ -141,7 +141,7 @@ function Post({ post }) {
    };
 
    // function to edit a post
-   const handleEditPost = async (event) => {
+   const handleEditPost = (event) => {
       // set the loading state as true
       setIsLoading(true);
       // prevent page reload
@@ -193,7 +193,7 @@ function Post({ post }) {
                <div>
                   {updatedContent ? (
                      // -------------- form --------------
-                     <EditContentForm action="">
+                     <EditContentForm action="" onSubmit={handleEditPost}>
                         <IconButton
                            onClick={(event) => {
                               event.preventDefault();
@@ -206,12 +206,11 @@ function Post({ post }) {
                            name=""
                            id={tempId}
                            value={updatedContent}
-                           onBlur={handleStotEditPost}
                            onChange={(event) =>
                               setUpdatedContent(event.target.value)
                            }
                         ></StyledTextArea>
-                        <IconButton type="submit" onClick={handleEditPost}>
+                        <IconButton type="submit">
                            <FontAwesomeIcon icon={faPaperPlane} />
                         </IconButton>
                      </EditContentForm>

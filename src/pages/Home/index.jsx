@@ -29,7 +29,7 @@ function Home() {
                <Thread />
             </>
          ) : (
-            <Auth />
+            <Auth signUp={true} />
          )}
       </main>
    );
