@@ -7,9 +7,44 @@ import { colors, padding } from "./variables";
 /* ----------------------------------------------- */
 /*          Section des styles à exporter          */
 /* ----------------------------------------------- */
+
+/* -------------------- UserProfile -------------------- */
 // styled component for image wrapper on profile components (data and form)
 export const ProfileImageWrapper = styled.p`
-   width: 10%;
+   border-radius: 50%;
+   overflow: hidden;
+   width: 17rem;
+   height: 17rem;
+   border: 0.2rem solid ${colors.darkUnactiveLink};
+   // box-shadow: 0.25rem 0.25rem 0.5rem darkgrey;
+`;
+
+// styled component for articles on userprofile components
+export const UserProfileArticles = styled.article`
+   // background-color: white;
+   // padding: 2rem;
+   // margin: 1.5rem 0;
+   // border-radius: 1rem;
+   // box-shadow: 0.25rem 0.25rem 0.5rem darkgrey;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   & h3 {
+      margin: 1rem 0;
+   }
+`;
+
+// styled component for div wrapper on userprofile components
+export const UserProfileWrapper = styled.div`
+   background-color: white;
+   padding: 2rem;
+   border-radius: 1rem;
+   box-shadow: 0.25rem 0.25rem 0.5rem ${colors.unactiveLink};
+   margin: 1.5rem 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 `;
 
 // styled component for the log in link
@@ -55,7 +90,7 @@ export const PseudoText = styled.p`
 // styled component for date in post an comment cards
 export const DateText = styled.p`
    grid-area: date;
-   color: gray;
+   color: ${colors.unactiveLink};
    font-style: italic;
    font-size: 1.2rem;
 `;
@@ -81,10 +116,11 @@ export const AuthSumbitInput = styled.input`
    border-radius: 1rem;
    padding: 1rem 2rem;
    margin: 2rem 0;
+   font-weight: bold;
    transition: all 300ms;
    &:hover {
       box-shadow: 0.25rem 0.25rem 0.5rem ${colors.unactiveLink};
-      background-color: red;
+      background-color: ${colors.primary};
       color: white;
    }
 `;

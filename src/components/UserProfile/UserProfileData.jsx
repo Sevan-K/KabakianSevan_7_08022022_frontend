@@ -2,37 +2,49 @@
 /*          Imports Section          */
 /* --------------------------------- */
 import { useSelector } from "react-redux";
+import styled from "styled-components";
 
-import { ProfileImageWrapper } from "../../utils/style/Atoms";
+import {
+   ProfileImageWrapper,
+   UserProfileArticles,
+   UserProfileWrapper,
+} from "../../utils/style/Atoms";
+import { colors } from "../../utils/style/variables";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
 /* ------------------------------------------- */
+const StyledText = styled.p`
+   font-size: 1.3rem;
+   color: ${colors.darkUnactiveLink};
+`;
 
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
-function UserProfileData({ setEditingUserProfile, defaultProfileImage }) {
+function UserProfileData({ defaultProfileImage }) {
    // getting the user data from userReducer
    const user = useSelector((state) => state.userReducer);
 
    // component to return
    return (
-      <div>
-         <article>
-            <h2>Photo de profil</h2>
+      <UserProfileWrapper>
+         <UserProfileArticles>
+            <h3>Photo de profil</h3>
             <ProfileImageWrapper>
                <img
                   src={user.imageUrl || defaultProfileImage}
                   alt="Profil de l'utilisateur"
                />
             </ProfileImageWrapper>
-         </article>
-         <article>
-            <h2>A propos de {user.pseudo}</h2>
-            <p>{user.bio || "Pas de description pour le moment..."}</p>
-         </article>
-      </div>
+         </UserProfileArticles>
+         <UserProfileArticles>
+            <h3>A propos de {user.pseudo}</h3>
+            <StyledText>
+               {user.bio || "Pas de description pour le moment..."}
+            </StyledText>
+         </UserProfileArticles>
+      </UserProfileWrapper>
    );
 }
 

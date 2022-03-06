@@ -2,6 +2,7 @@
 /*          Imports Section          */
 /* --------------------------------- */
 import {
+   faCircleXmark,
    faPenToSquare,
    faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
@@ -27,7 +28,7 @@ const MainUserProfileData = styled.main`
    margin: auto;
    padding: 3rem;
    background-color: ${colors.backgroundLight};
-   border-radius: 3rem;
+   border-radius: 1.5rem;
 `;
 
 const ProfileDataHeader = styled.header`
@@ -39,6 +40,12 @@ const ProfileDataHeader = styled.header`
    }
 `;
 
+// styled component for date in post an comment cards
+const DateText = styled.p`
+   color: ${colors.darkUnactiveLink};
+   font-style: italic;
+   font-size: 1.3rem;
+`;
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
@@ -53,40 +60,53 @@ function UserProfile() {
 
    // function to handle delete profile
    const handleDeleteProfile = () => {
-      // using delete user action
-      dispatch(deleteUser(user.id)).then(
-         () =>
-            // go back to
-            (window.location = "/")
-      );
+      // asking confirmation
+      if (
+         window.confirm(
+            "Etes vous certain.e de vouloir supprimer votre profil ?"
+         )
+      ) {
+         // using delete user action
+         dispatch(deleteUser(user.id)).then(
+            () =>
+               // go back to
+               (window.location = "/")
+         );
+      }
    };
 
    // components to return
    return (
-      <MainUserProfileData className="dev">
+      <MainUserProfileData>
          <ProfileDataHeader>
             <h2>Profil de {user.pseudo}</h2>
-            <IconButton onClick={() => setEditingUserProfile(true)}>
-               <FontAwesomeIcon icon={faPenToSquare} />
-            </IconButton>
-            <IconButton onClick={handleDeleteProfile}>
-               <FontAwesomeIcon icon={faTrashCan} />
-            </IconButton>
+            {editingUserProfile ? (
+               <IconButton onClick={() => setEditingUserProfile(false)}>
+                  <FontAwesomeIcon icon={faCircleXmark} />{" "}
+               </IconButton>
+            ) : (
+               <>
+                  <IconButton onClick={() => setEditingUserProfile(true)}>
+                     <FontAwesomeIcon icon={faPenToSquare} />
+                  </IconButton>
+                  <IconButton onClick={handleDeleteProfile}>
+                     <FontAwesomeIcon icon={faTrashCan} />
+                  </IconButton>
+               </>
+            )}
          </ProfileDataHeader>
-
+         {user.createdAt && (
+            <DateText>
+               Membre de Groupomania depuis {dateFormat(user.createdAt)}
+            </DateText>
+         )}
          {editingUserProfile ? (
             <UserProfileForm
                setEditingUserProfile={setEditingUserProfile}
                defaultProfileImage={defaultProfileImage}
             />
          ) : (
-            <UserProfileData
-               setEditingUserProfile={setEditingUserProfile}
-               defaultProfileImage={defaultProfileImage}
-            />
-         )}
-         {user.createdAt && (
-            <p>Membre de Groupomania depuis {dateFormat(user.createdAt)}</p>
+            <UserProfileData defaultProfileImage={defaultProfileImage} />
          )}
       </MainUserProfileData>
    );

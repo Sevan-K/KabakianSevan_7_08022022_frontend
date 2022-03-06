@@ -1,15 +1,52 @@
 /* --------------------------------- */
 /*          Imports Section          */
 /* --------------------------------- */
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { updateUser } from "../../actions/user.actions";
-import { ProfileImageWrapper } from "../../utils/style/Atoms";
+import {
+   AuthSumbitInput,
+   ProfileImageWrapper,
+   UserProfileArticles,
+   UserProfileWrapper,
+} from "../../utils/style/Atoms";
+import { colors, padding } from "../../utils/style/variables";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
 /* ------------------------------------------- */
+// styled component : label to change picture
+const ChangeUserPicLabel = styled.label`
+   background-color: ${colors.darkUnactiveLink};
+   position: relative;
+   bottom: 3.5rem;
+   left: 6rem;
+   color: white;
+   width: 2.75rem;
+   height: 2.75rem;
+   border-radius: 2.75rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   transition: 300ms;
+   &:hover {
+      background-color: ${colors.primary};
+      // & ~ p {
+      //    border: 0.1rem solid red;
+      // }
+   }
+`;
+
+// styled component : text area to change description
+const StyledTextArea = styled.textarea`
+   font-size: 1.3rem;
+   width: 100%;
+   max-width: 40rem;
+   color: ${colors.darkUnactiveLink};
+`;
 
 /* --------------------------------------------- */
 /*          Components creation section          */
@@ -73,46 +110,51 @@ function UserProfileForm({ setEditingUserProfile, defaultProfileImage }) {
 
    // component to return
    return (
-      <form
-         // method="post"
-         action=""
-         id="profile-update-form"
-         onSubmit={handleUpdateProfile}
-      >
-         <h2>Profil de {user.pseudo}</h2>
-
-         <article>
-            <button onClick={() => setEditingUserProfile(false)}>
-               Retour au profil
-            </button>
-            <h2>Photo de profil</h2>
-            <ProfileImageWrapper>
-               <img src={profileImageUrl} alt="Profil de l'utilisateur" />
-            </ProfileImageWrapper>
-            <input
-               type="file"
-               id="profile_image"
-               name="profile_image"
-               onChange={handleFileChange}
-               accept="image/png, image/jpeg, image/jpg"
+      <UserProfileWrapper>
+         <form
+            // method="post"
+            action=""
+            id="profile-update-form"
+            onSubmit={handleUpdateProfile}
+         >
+            <UserProfileArticles>
+               <h3>Photo de profil</h3>
+               <ProfileImageWrapper>
+                  <img src={profileImageUrl} alt="Profil de l'utilisateur" />
+               </ProfileImageWrapper>
+               <ChangeUserPicLabel
+                  htmlFor="profile_image"
+                  aria-label="Modification de la description"
+               >
+                  <FontAwesomeIcon icon={faCamera} />{" "}
+               </ChangeUserPicLabel>
+               <input
+                  type="file"
+                  id="profile_image"
+                  name="profile_image"
+                  onChange={handleFileChange}
+                  accept="image/png, image/jpeg, image/jpg"
+                  style={{ display: "none" }}
+               />
+            </UserProfileArticles>
+            <UserProfileArticles>
+               <h3>A propos de {user.pseudo}</h3>
+               <StyledTextArea
+                  name="profile_bio"
+                  id="profile_bio"
+                  value={bio}
+                  onChange={handleBioChange}
+                  aria-label="Modification de la description"
+               ></StyledTextArea>
+            </UserProfileArticles>
+            <AuthSumbitInput
+               type="submit"
+               value="Validez les modifications"
+               id="profile_submit"
+               name="profile_submit"
             />
-         </article>
-         <article>
-            <h2>A propos de {user.pseudo}</h2>
-            <textarea
-               name="profile_bio"
-               id="profile_bio"
-               value={bio}
-               onChange={handleBioChange}
-            ></textarea>
-         </article>
-         <input
-            type="submit"
-            value="Validez les modifications"
-            id="profile_submit"
-            name="profile_submit"
-         />
-      </form>
+         </form>
+      </UserProfileWrapper>
    );
 }
 
