@@ -198,7 +198,7 @@ function Comment({ comment }) {
          {/* -------------- Comment publication date -------------- */}
          <DateText>{dateFormat(comment.createdAt)}</DateText>
          {/* -------------- Comment edit and delete button -------------- */}
-         {(userId === comment.userId || user.admin === 1) && (
+         {(userId === comment.userId || user.admin === true) && (
             <>
                <IconButton onClick={handleStartEditComment}>
                   {updatedContent ? (

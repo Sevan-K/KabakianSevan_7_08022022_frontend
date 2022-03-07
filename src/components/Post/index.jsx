@@ -178,7 +178,7 @@ function Post({ post }) {
                   </UserImageWrapper>
                   <PseudoText>{author.pseudo}</PseudoText>
                   <DateText>Publié {dateFormat(post.updatedAt)}</DateText>
-                  {(userId === post.userId || user.admin === 1) && (
+                  {(userId === post.userId || user.admin === true) && (
                      <>
                         <IconButton
                            onClick={() => {

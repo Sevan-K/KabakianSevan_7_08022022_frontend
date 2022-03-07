@@ -120,7 +120,7 @@ function UserProfile() {
             <MainUserProfileData>
                <ProfileDataHeader>
                   <h2>Profil de {userToDisplay.pseudo}</h2>
-                  {(userToDisplay.id === userId || user.admin === 1) &&
+                  {(userToDisplay.id === userId || user.admin === true) &&
                      (editingUserProfile ? (
                         <IconButton
                            onClick={() => setEditingUserProfile(false)}

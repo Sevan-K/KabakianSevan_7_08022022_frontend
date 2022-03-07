@@ -28,15 +28,13 @@ function Home() {
 
    // useEffect to stop loading once users data are available
    useEffect(() => {
-      if (!!userId) {
-         setIsLoading(false);
-      }
+      setIsLoading(false);
    }, [userId]);
 
    return (
       <div>
          {isloading ? (
-            <FontAwesomeIcon icon={faSpinner} className="fa-spinner" />
+            <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
          ) : (
             <>
                <h1>Page d'accueil</h1>

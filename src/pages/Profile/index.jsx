@@ -24,16 +24,14 @@ function Profile() {
 
    // useEffect to stop loading once users data are available
    useEffect(() => {
-      if (!!userId) {
-         setIsLoading(false);
-      }
+      setIsLoading(false);
    }, [userId]);
 
    // component to return
    return (
       <div>
          {isloading ? (
-            <FontAwesomeIcon icon={faSpinner} className="fa-spinner" />
+            <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
          ) : (
             <>
                <h1>Page profils</h1>
