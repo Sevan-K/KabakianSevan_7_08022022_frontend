@@ -9,11 +9,14 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { deleteUser } from "../../actions/user.actions";
+import { deleteOneOfUsers } from "../../actions/users.actions";
 // default profile picture
 import defaultProfileImage from "../../assets/profile.png";
 import dateFormat from "../../utils/functions/dateFormat";
+import { useUserId } from "../../utils/hooks";
 import { IconButton } from "../../utils/style/Atoms";
 import { colors, mainSize } from "../../utils/style/variables";
 import UserProfileData from "./UserProfileData";
@@ -52,26 +55,47 @@ const DateText = styled.p`
 function UserProfile() {
    // useState to switch between UserProfileData and UserProfileForm components
    const [editingUserProfile, setEditingUserProfile] = useState(false);
+
+   // getting userId from its hook
+   const { userId } = useUserId();
+
+   // get the pseudo from url
+   const { pseudo } = useParams();
+
+   // getting the user data from userReducer
+   const users = useSelector((state) => state.usersReducer);
+
    // getting the user data from userReducer
    const user = useSelector((state) => state.userReducer);
+
+   // the user to display is either the connected one or the one which pseudo is in url
+   const userToDisplay = pseudo
+      ? users.filter((user) => user.pseudo === pseudo)[0]
+      : user;
+   // console.log("=== userToDisplay ===>", userToDisplay);
 
    // getting acces to redux actions
    const dispatch = useDispatch();
 
    // function to handle delete profile
-   const handleDeleteProfile = () => {
+   const handleDeleteProfile = async () => {
       // asking confirmation
       if (
          window.confirm(
             "Etes vous certain.e de vouloir supprimer votre profil ?"
          )
       ) {
-         // using delete user action
-         dispatch(deleteUser(user.id)).then(
-            () =>
-               // go back to
-               (window.location = "/")
-         );
+         // if there is a pseudo and that the user is not the connected one
+         if (userToDisplay.id !== userId && !!pseudo) {
+            // using delete users action
+            await dispatch(deleteOneOfUsers(userToDisplay.id));
+         } else {
+            // using delete user action
+            await dispatch(deleteUser(userToDisplay.id));
+         }
+
+         // go back to
+         window.location = "/";
       }
    };
 
@@ -79,39 +103,44 @@ function UserProfile() {
    return (
       <MainUserProfileData>
          <ProfileDataHeader>
-            <h2>Profil de {user.pseudo}</h2>
-            {editingUserProfile ? (
-               <IconButton onClick={() => setEditingUserProfile(false)}>
-                  <FontAwesomeIcon icon={faCircleXmark} />{" "}
-               </IconButton>
-            ) : (
-               <>
-                  <IconButton onClick={() => setEditingUserProfile(true)}>
-                     <FontAwesomeIcon icon={faPenToSquare} />
+            <h2>Profil de {userToDisplay.pseudo}</h2>
+            {(userToDisplay.id === userId || user.admin === 1) &&
+               (editingUserProfile ? (
+                  <IconButton onClick={() => setEditingUserProfile(false)}>
+                     <FontAwesomeIcon icon={faCircleXmark} />{" "}
                   </IconButton>
-                  <IconButton onClick={handleDeleteProfile}>
-                     <FontAwesomeIcon icon={faTrashCan} />
-                  </IconButton>
-               </>
-            )}
+               ) : (
+                  <>
+                     <IconButton onClick={() => setEditingUserProfile(true)}>
+                        <FontAwesomeIcon icon={faPenToSquare} />
+                     </IconButton>
+                     <IconButton onClick={handleDeleteProfile}>
+                        <FontAwesomeIcon icon={faTrashCan} />
+                     </IconButton>
+                  </>
+               ))}
          </ProfileDataHeader>
-         {user.createdAt && (
+         {userToDisplay.createdAt && (
             <DateText>
-               Membre de Groupomania depuis {dateFormat(user.createdAt)}
+               Membre de Groupomania depuis{" "}
+               {dateFormat(userToDisplay.createdAt)}
             </DateText>
          )}
          {editingUserProfile ? (
             <UserProfileForm
                setEditingUserProfile={setEditingUserProfile}
                defaultProfileImage={defaultProfileImage}
+               user={userToDisplay}
+               pseudo={pseudo}
             />
          ) : (
-            <UserProfileData defaultProfileImage={defaultProfileImage} />
+            <UserProfileData
+               defaultProfileImage={defaultProfileImage}
+               user={userToDisplay}
+            />
          )}
       </MainUserProfileData>
    );
 }
-<article>
-   <h2>Photo de profil</h2>
-</article>;
+
 export default UserProfile;

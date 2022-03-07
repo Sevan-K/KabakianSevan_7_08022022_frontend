@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { updateUser } from "../../actions/user.actions";
+import { updateOneOfUsers } from "../../actions/users.actions";
+import { useUserId } from "../../utils/hooks";
 import {
    AuthSumbitInput,
    ProfileImageWrapper,
@@ -51,9 +53,15 @@ const StyledTextArea = styled.textarea`
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
-function UserProfileForm({ setEditingUserProfile, defaultProfileImage }) {
-   // getting the user data from userReducer
-   const user = useSelector((state) => state.userReducer);
+function UserProfileForm({
+   userToDisplay,
+   pseudo,
+   setEditingUserProfile,
+   defaultProfileImage,
+}) {
+   // getting userId from its hook
+   const { userId } = useUserId();
+
    // constant to call a redux action
    const dispatch = useDispatch();
 
@@ -61,12 +69,12 @@ function UserProfileForm({ setEditingUserProfile, defaultProfileImage }) {
    const [file, updateFile] = useState(null);
    // local state to update bio value
    const [bio, updateBio] = useState(
-      user.bio || "Dites quelque chose de vous ici !"
+      userToDisplay.bio || "Dites quelque chose de vous ici !"
    );
 
    // local state for image url
    const [profileImageUrl, updateProfileImageUrl] = useState(
-      user.imageUrl || defaultProfileImage
+      userToDisplay.imageUrl || defaultProfileImage
    );
 
    // function to handle change on image profile file input
@@ -90,20 +98,28 @@ function UserProfileForm({ setEditingUserProfile, defaultProfileImage }) {
       // preventing page reload
       event.preventDefault();
       // building user to send for the update
-      const modifiedUser = { ...user, bio: bio };
+      const modifiedUser = { ...userToDisplay, bio: bio };
       console.log("=== modifiedUser ===>", modifiedUser);
       let userToSend;
+      // if there is a file to send
       if (!!file) {
          // building the formdata to send
          userToSend = new FormData();
          userToSend.append("user", JSON.stringify(modifiedUser));
          userToSend.append("image", file);
       } else {
+         // only send the object
          userToSend = modifiedUser;
       }
+      // if there is a pseudo and that the user is not the connected one
+      if (!!pseudo && userToDisplay.id !== userId) {
+         // launch action to update user (of users) profile data
+         dispatch(updateOneOfUsers(userToSend, userToDisplay.id));
+      } else {
+         // launch action to update user profile data
+         dispatch(updateUser(userToSend, userToDisplay.id));
+      }
 
-      // launch action to update user profile data
-      dispatch(updateUser(userToSend, user.id));
       // end profile edition
       setEditingUserProfile(false);
    };
@@ -138,7 +154,7 @@ function UserProfileForm({ setEditingUserProfile, defaultProfileImage }) {
                />
             </UserProfileArticles>
             <UserProfileArticles>
-               <h3>A propos de {user.pseudo}</h3>
+               <h3>A propos de {userToDisplay.pseudo}</h3>
                <StyledTextArea
                   name="profile_bio"
                   id="profile_bio"

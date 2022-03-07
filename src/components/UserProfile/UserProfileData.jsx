@@ -22,9 +22,7 @@ const StyledText = styled.p`
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
-function UserProfileData({ defaultProfileImage }) {
-   // getting the user data from userReducer
-   const user = useSelector((state) => state.userReducer);
+function UserProfileData({ userToDisplay, defaultProfileImage }) {
 
    // component to return
    return (
@@ -33,15 +31,15 @@ function UserProfileData({ defaultProfileImage }) {
             <h3>Photo de profil</h3>
             <ProfileImageWrapper>
                <img
-                  src={user.imageUrl || defaultProfileImage}
+                  src={userToDisplay.imageUrl || defaultProfileImage}
                   alt="Profil de l'utilisateur"
                />
             </ProfileImageWrapper>
          </UserProfileArticles>
          <UserProfileArticles>
-            <h3>A propos de {user.pseudo}</h3>
+            <h3>A propos de {userToDisplay.pseudo}</h3>
             <StyledText>
-               {user.bio || "Pas de description pour le moment..."}
+               {userToDisplay.bio || "Pas de description pour le moment..."}
             </StyledText>
          </UserProfileArticles>
       </UserProfileWrapper>

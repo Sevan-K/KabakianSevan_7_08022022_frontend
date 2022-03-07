@@ -59,7 +59,8 @@ ReactDOM.render(
                <Header />
                <Routes>
                   <Route exact path="/" element={<Home />} />
-                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/profile/" element={<Profile />} />
+                  <Route path="/profile/:pseudo" element={<Profile />} />
                   <Route path="*" element={<Error />} />
                </Routes>
             </UserIdProvider>
