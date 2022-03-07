@@ -5,14 +5,15 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useOnHome, useUserId } from "../../utils/hooks";
+import { useMediaQuerry, useOnHome, useUserId } from "../../utils/hooks";
 import { useState } from "react";
 
 // components
 import Logout from "./LogOut";
 
 // assets
-import headerLogo from "../../assets/icon-left-font.svg";
+import headerLogoBigScreen from "../../assets/icon-left-font.svg";
+import headerLogoSmallScreen from "../../assets/icon.svg";
 
 // style variables
 import { colors } from "../../utils/style/variables";
@@ -112,6 +113,10 @@ const NavLink = styled(Link)`
    flex: 1;
    text-align: center;
    padding: 0.5rem;
+   transition: 300ms ease-out;
+   &:hover {
+      color: ${colors.primary};
+   }
 `;
 
 /* --------------------------------------------- */
@@ -128,12 +133,18 @@ function Header() {
    // const [onHome, updateOnHome] = useState(true);
    const { onHome, updateOnHome } = useOnHome();
 
+   const matches = useMediaQuerry("(max-width: 400px)");
+   console.log("=== matches ===>", matches);
+
    // component to return
    return (
       <StyledHeader>
          <UpperRaw>
             <LogoWrapper>
-               <img src={headerLogo} alt="Logo groupomania" />
+               <img
+                  src={matches ? headerLogoSmallScreen : headerLogoBigScreen}
+                  alt="Logo groupomania"
+               />
             </LogoWrapper>
             {userId ? (
                <>

@@ -42,6 +42,9 @@ const ProfileDataHeader = styled.header`
    justify-content: end;
    & > h2 {
       margin-right: auto;
+      color: ${colors.darkUnactiveLink};
+      font-size:2rem;
+
    }
 `;
 

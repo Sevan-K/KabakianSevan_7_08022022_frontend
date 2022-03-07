@@ -9,6 +9,7 @@ import { useUserId } from "../../utils/hooks/index";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { PageTitle } from "../../utils/style/Atoms";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -37,8 +38,8 @@ function Home() {
             <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
          ) : (
             <>
-               <h1>Page d'accueil</h1>
-               {userId ? (
+               <PageTitle className="dev">Fil d'actualité</PageTitle>
+               {!!userId ? (
                   <main>
                      <NewPostForm />
                      <Thread />

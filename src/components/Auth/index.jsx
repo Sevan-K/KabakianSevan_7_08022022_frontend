@@ -51,6 +51,14 @@ const StyledButton = styled.button`
    }
 `;
 
+// styled component fo the succesfull sign up message
+const SignUpMessage = styled.p`
+   border-top: 0.1rem solid ${colors.unactiveLink};
+   border-bottom: 0.1rem solid ${colors.unactiveLink};
+   padding: 1rem 0;
+   color: ${colors.darkUnactiveLink};
+`;
+
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
@@ -67,7 +75,7 @@ function Auth({ signUp }) {
    // logIn form if signUpModal is false or signUpFormSubmit is true
    return (
       <MainAuth>
-         <h2>Auth</h2>
+         <h2>Authentification</h2>
          <div>
             <StyledButton
                onClick={() => setSignUpModal(false)}
@@ -86,7 +94,9 @@ function Auth({ signUp }) {
             </StyledButton>
          </div>
          {signUpFormSubmit && (
-            <p>Votre compte a été crée avec succès, connectez vous !</p>
+            <SignUpMessage>
+               Votre compte a été crée avec succès 👏 , connectez vous !
+            </SignUpMessage>
          )}
          {signUpModal && !signUpFormSubmit ? (
             <SignUpForm setSignUpFormSubmit={setSignUpFormSubmit} />

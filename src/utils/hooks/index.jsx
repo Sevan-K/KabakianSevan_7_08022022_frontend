@@ -2,7 +2,7 @@
 /*          Imports section          */
 /* --------------------------------- */
 
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { OnHomeContext, UserIdContext } from "../context";
 
 // /* ------------------------------------------- */
@@ -27,4 +27,25 @@ export function useUserId() {
 export function useOnHome() {
    const { onHome, updateOnHome } = useContext(OnHomeContext);
    return { onHome, updateOnHome };
+}
+
+/* -------------------------------------------- */
+/*          Hook to get onHome context          */
+/* -------------------------------------------- */
+export function useMediaQuerry(querry) {
+   // format de querry "(min-width:600px)"
+
+   // local state to know if querry match the media
+   const [matches, setMatches] = useState(window.matchMedia(querry).matches);
+
+   // useeffect to listen to every change of the querry argument
+   useEffect(() => {
+      // get the media value
+      window
+         .matchMedia(querry)
+         .addEventListener("change", (event) => setMatches(event.matches));
+   }, [querry]);
+
+   // return matches
+   return matches;
 }

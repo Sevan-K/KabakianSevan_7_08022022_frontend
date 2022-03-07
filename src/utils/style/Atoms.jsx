@@ -10,6 +10,15 @@ import { colors, padding } from "./variables";
 /* ----------------------------------------------- */
 
 /* -------------------- UserProfile -------------------- */
+// styled component for page h1
+export const PageTitle = styled.h1`
+   color: ${colors.unactiveLink};
+   margin-bottom: 1rem;
+   padding: ${padding.icons};
+   text-align: center;
+   font-size: 2.5rem;
+`;
+
 // styled component for image wrapper on profile components (data and form)
 export const ProfileImageWrapper = styled.p`
    border-radius: 50%;
@@ -105,6 +114,7 @@ export const AuthForm = styled.form`
    border-radius: 1.5rem;
    padding: 2rem;
    box-shadow: 0.1rem 0.1rem 0.5rem lightgray;
+   margin-top: 2rem;
    & h3 {
       margin: 1rem 0;
    }

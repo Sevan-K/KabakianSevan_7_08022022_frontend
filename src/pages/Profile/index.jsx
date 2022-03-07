@@ -9,6 +9,7 @@ import styled from "styled-components";
 import Auth from "../../components/Auth";
 import UserProfile from "../../components/UserProfile";
 import { useUserId } from "../../utils/hooks";
+import { PageTitle } from "../../utils/style/Atoms";
 import { mainSize } from "../../utils/style/variables";
 
 /* --------------------------------------------- */
@@ -34,7 +35,7 @@ function Profile() {
             <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
          ) : (
             <>
-               <h1>Page profils</h1>
+               <PageTitle>Informations du profil</PageTitle>
                {!!userId ? <UserProfile /> : <Auth />}
             </>
          )}
