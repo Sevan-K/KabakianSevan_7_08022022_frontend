@@ -93,6 +93,8 @@ const StyledTextArea = styled.textarea`
 function Post({ post }) {
    // getting id of logged in user
    const { userId } = useUserId();
+   // getting user from the store
+   const user = useSelector((state) => state.userReducer);
    // getting users data from the store
    const users = useSelector((state) => state.usersReducer);
    //  getting comments data from the store
@@ -176,7 +178,7 @@ function Post({ post }) {
                   </UserImageWrapper>
                   <PseudoText>{author.pseudo}</PseudoText>
                   <DateText>Publié {dateFormat(post.updatedAt)}</DateText>
-                  {userId === post.userId && (
+                  {(userId === post.userId || user.admin === 1) && (
                      <>
                         <IconButton
                            onClick={() => {

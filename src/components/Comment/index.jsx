@@ -88,6 +88,8 @@ const PostContent = styled.p`
 function Comment({ comment }) {
    // getting users data from the store
    const users = useSelector((state) => state.usersReducer);
+   // getting user from the store
+   const user = useSelector((state) => state.userReducer);
    // getting the user who wrote the post
    const [author] = users.filter((user) => user.id === comment.userId);
    // get userId from the user connected
@@ -196,7 +198,7 @@ function Comment({ comment }) {
          {/* -------------- Comment publication date -------------- */}
          <DateText>{dateFormat(comment.createdAt)}</DateText>
          {/* -------------- Comment edit and delete button -------------- */}
-         {userId === comment.userId && (
+         {(userId === comment.userId || user.admin === 1) && (
             <>
                <IconButton onClick={handleStartEditComment}>
                   {updatedContent ? (

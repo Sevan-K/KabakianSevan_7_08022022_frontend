@@ -5,10 +5,11 @@ import Error from "../../pages/Error";
 import {
    faCircleXmark,
    faPenToSquare,
+   faSpinner,
    faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -78,6 +79,16 @@ function UserProfile() {
    // getting acces to redux actions
    const dispatch = useDispatch();
 
+   // local state to know if post card is loading
+   const [isloading, setIsLoading] = useState(true);
+
+   // useEffect to stop loading once users data are available
+   useEffect(() => {
+      if (users.length !== 0) {
+         setIsLoading(false);
+      }
+   }, [users]);
+
    // function to handle delete profile
    const handleDeleteProfile = async () => {
       // asking confirmation
@@ -103,7 +114,9 @@ function UserProfile() {
    // components to return
    return (
       <>
-         {!!userToDisplay ? (
+         {isloading ? (
+            <FontAwesomeIcon icon={faSpinner} className="fa-spinner" />
+         ) : !!userToDisplay ? (
             <MainUserProfileData>
                <ProfileDataHeader>
                   <h2>Profil de {userToDisplay.pseudo}</h2>
