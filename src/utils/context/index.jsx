@@ -39,16 +39,39 @@ export function UserIdProvider({ children }) {
    }, []);
 
    // useEffect to call get user action whenever userId changes
-   useEffect(() => {// if userId exist
+   useEffect(() => {
+      // if userId exist
       if (!!userId) {
          // console.log("=== userId ===>", userId);
          // call the action get user
          dispatch(getUser(userId));
-      }}, [userId, dispatch]);
+      }
+   }, [userId, dispatch]);
 
    return (
       <UserIdContext.Provider value={{ userId }}>
          {children}
       </UserIdContext.Provider>
+   );
+}
+
+/* ---------------------------------------- */
+/*          onHome context section          */
+/* ---------------------------------------- */
+
+// onHome context creation
+export const OnHomeContext = createContext();
+
+// onHome provider component creation
+export function OnHomeProvider({ children }) {
+   const [onHome, setOnHome] = useState(true);
+   function updateOnHome(value) {
+      setOnHome(value);
+   }
+
+   return (
+      <OnHomeContext.Provider value={{ onHome, updateOnHome }}>
+         {children}
+      </OnHomeContext.Provider>
    );
 }

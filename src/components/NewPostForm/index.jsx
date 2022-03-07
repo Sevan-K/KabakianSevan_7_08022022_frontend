@@ -15,6 +15,7 @@ import styled from "styled-components";
 import { colors, padding } from "../../utils/style/variables";
 import defaultProfileImage from "../../assets/profile.png";
 import { IconButton, UserImageWrapper } from "../../utils/style/Atoms";
+import { useOnHome } from "../../utils/hooks";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -105,6 +106,9 @@ function NewPostForm() {
    const [file, setFile] = useState(null);
    // local state for uploaded image preview
    const [filePreview, setFilePreview] = useState("");
+
+   // getting onHome context using its hook
+   const { updateOnHome } = useOnHome();
 
    // get acces to redux actions using useDispatch hook
    const dispatch = useDispatch();
@@ -198,7 +202,9 @@ function NewPostForm() {
                      </FormHeader>
                   )}
 
-                  <UserImageWrapper>
+                  <UserImageWrapper
+                     to={"/profile"}
+                     onClick={() => updateOnHome(false)}                  >
                      <img src={user.imageUrl || defaultProfileImage} alt="" />
                   </UserImageWrapper>
                   <StyledTextArea

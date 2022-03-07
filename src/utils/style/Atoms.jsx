@@ -1,6 +1,7 @@
 /* -------------------------------------- */
 /*          Secrtion des imports          */
 /* -------------------------------------- */
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { colors, padding } from "./variables";
 
@@ -60,7 +61,7 @@ export const IconButton = styled.button`
 `;
 
 // styled component for round user  image wrapper
-export const UserImageWrapper = styled.p`
+export const UserImageWrapper = styled(Link)`
    width: 10vw;
    max-width: 7rem;
    height: 10vw;
@@ -71,7 +72,7 @@ export const UserImageWrapper = styled.p`
 `;
 
 // styled component for round user  image wrapper
-export const SmallUserImageWrapper = styled.p`
+export const SmallUserImageWrapper = styled(Link)`
    width: 8vw;
    max-width: 7rem;
    height: 8vw;

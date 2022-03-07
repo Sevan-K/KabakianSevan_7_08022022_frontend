@@ -17,7 +17,7 @@ import styled from "styled-components";
 import { deleteComment, updateComment } from "../../actions/comments.action";
 import defaultProfileImage from "../../assets/profile.png";
 import dateFormat from "../../utils/functions/dateFormat";
-import { useUserId } from "../../utils/hooks";
+import { useOnHome, useUserId } from "../../utils/hooks";
 import {
    DateText,
    IconButton,
@@ -37,7 +37,7 @@ const CommentContainer = styled.li`
       "img comment edit delete"
       "img date edit delete";
    margin-bottom: 0.7rem;
-   & p:first-of-type {
+   & a {
       grid-area: img;
    }
    & p:nth-child(2) {
@@ -100,6 +100,8 @@ function Comment({ comment }) {
    const [isLoading, setIsLoading] = useState(false);
    // local state to set a unique temporary id for the textarea the comment being updated
    const [tempCommentId, updateTempCommentId] = useState("");
+   // getting onHome context using its hook
+   const { updateOnHome } = useOnHome();
 
    // useEffect to set focus on form's textarea of the comment beeing editted
    useEffect(() => {
@@ -155,7 +157,10 @@ function Comment({ comment }) {
    return (
       <CommentContainer>
          {/* -------------- Comment author's profile image -------------- */}
-         <SmallUserImageWrapper>
+         <SmallUserImageWrapper
+            to={"/profile/" + author.pseudo}
+            onClick={() => updateOnHome(false)}
+         >
             <img
                src={author.imageUrl || defaultProfileImage}
                alt="Profil de l'auteur du post"

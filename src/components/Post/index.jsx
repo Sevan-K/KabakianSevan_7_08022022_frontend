@@ -24,7 +24,7 @@ import styled from "styled-components";
 import { colors } from "../../utils/style/variables";
 import defaultProfileImage from "../../assets/profile.png";
 import { deletePost, updatePost } from "../../actions/post.actions";
-import { useUserId } from "../../utils/hooks";
+import { useOnHome, useUserId } from "../../utils/hooks";
 import Comment from "../Comment";
 import NewCommentForm from "./NewCommentForm";
 
@@ -51,7 +51,7 @@ const PostHeader = styled.header`
    grid-template-areas:
       "img pseudo edit delete"
       "img date edit delete";
-   & > p:first-of-type {
+   & > a {
       grid-area: img;
    }
    & p:nth-child(2) {
@@ -109,6 +109,8 @@ function Post({ post }) {
    const [tempId, updateTempId] = useState("");
    // get acces to redux actions using useDispatch hook
    const dispatch = useDispatch();
+   // getting onHome context using its hook
+   const { updateOnHome } = useOnHome();
 
    // useEffect to stop loading once users data are available
    useEffect(() => {
@@ -163,7 +165,10 @@ function Post({ post }) {
             <>
                {/* -------------- Post Header -------------- */}
                <PostHeader>
-                  <UserImageWrapper>
+                  <UserImageWrapper
+                     to={"/profile/" + author.pseudo}
+                     onClick={() => updateOnHome(false)}
+                  >
                      <img
                         src={author.imageUrl || defaultProfileImage}
                         alt="Profil de l'utilisateur"

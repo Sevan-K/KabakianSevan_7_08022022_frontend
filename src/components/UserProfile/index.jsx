@@ -1,6 +1,7 @@
 /* --------------------------------- */
 /*          Imports Section          */
 /* --------------------------------- */
+import Error from "../../pages/Error";
 import {
    faCircleXmark,
    faPenToSquare,
@@ -101,45 +102,55 @@ function UserProfile() {
 
    // components to return
    return (
-      <MainUserProfileData>
-         <ProfileDataHeader>
-            <h2>Profil de {userToDisplay.pseudo}</h2>
-            {(userToDisplay.id === userId || user.admin === 1) &&
-               (editingUserProfile ? (
-                  <IconButton onClick={() => setEditingUserProfile(false)}>
-                     <FontAwesomeIcon icon={faCircleXmark} />{" "}
-                  </IconButton>
+      <>
+         {!!userToDisplay ? (
+            <MainUserProfileData>
+               <ProfileDataHeader>
+                  <h2>Profil de {userToDisplay.pseudo}</h2>
+                  {(userToDisplay.id === userId || user.admin === 1) &&
+                     (editingUserProfile ? (
+                        <IconButton
+                           onClick={() => setEditingUserProfile(false)}
+                        >
+                           <FontAwesomeIcon icon={faCircleXmark} />{" "}
+                        </IconButton>
+                     ) : (
+                        <>
+                           <IconButton
+                              onClick={() => setEditingUserProfile(true)}
+                           >
+                              <FontAwesomeIcon icon={faPenToSquare} />
+                           </IconButton>
+                           <IconButton onClick={handleDeleteProfile}>
+                              <FontAwesomeIcon icon={faTrashCan} />
+                           </IconButton>
+                        </>
+                     ))}
+               </ProfileDataHeader>
+               {userToDisplay.createdAt && (
+                  <DateText>
+                     Membre de Groupomania depuis{" "}
+                     {dateFormat(userToDisplay.createdAt)}
+                  </DateText>
+               )}
+               {editingUserProfile ? (
+                  <UserProfileForm
+                     setEditingUserProfile={setEditingUserProfile}
+                     defaultProfileImage={defaultProfileImage}
+                     userToDisplay={userToDisplay}
+                     pseudo={pseudo}
+                  />
                ) : (
-                  <>
-                     <IconButton onClick={() => setEditingUserProfile(true)}>
-                        <FontAwesomeIcon icon={faPenToSquare} />
-                     </IconButton>
-                     <IconButton onClick={handleDeleteProfile}>
-                        <FontAwesomeIcon icon={faTrashCan} />
-                     </IconButton>
-                  </>
-               ))}
-         </ProfileDataHeader>
-         {userToDisplay.createdAt && (
-            <DateText>
-               Membre de Groupomania depuis{" "}
-               {dateFormat(userToDisplay.createdAt)}
-            </DateText>
-         )}
-         {editingUserProfile ? (
-            <UserProfileForm
-               setEditingUserProfile={setEditingUserProfile}
-               defaultProfileImage={defaultProfileImage}
-               user={userToDisplay}
-               pseudo={pseudo}
-            />
+                  <UserProfileData
+                     defaultProfileImage={defaultProfileImage}
+                     userToDisplay={userToDisplay}
+                  />
+               )}
+            </MainUserProfileData>
          ) : (
-            <UserProfileData
-               defaultProfileImage={defaultProfileImage}
-               user={userToDisplay}
-            />
+            <Error />
          )}
-      </MainUserProfileData>
+      </>
    );
 }
 

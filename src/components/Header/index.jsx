@@ -5,7 +5,7 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useUserId } from "../../utils/hooks";
+import { useOnHome, useUserId } from "../../utils/hooks";
 import { useState } from "react";
 
 // components
@@ -26,7 +26,6 @@ import {
 // import { faUser as faUserRegular,  } from "@fortawesome/free-regular-svg-icons";
 
 import defaultImage from "../../assets/profile.png";
-
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -126,7 +125,8 @@ function Header() {
    const user = useSelector((state) => state.userReducer);
 
    // local state to know if we are on home page or not
-   const [onHome, setOnHome] = useState(true);
+   // const [onHome, updateOnHome] = useState(true);
+   const { onHome, updateOnHome } = useOnHome();
 
    // component to return
    return (
@@ -137,7 +137,7 @@ function Header() {
             </LogoWrapper>
             {userId ? (
                <>
-                  <ProfilLink to="/profile" onClick={() => setOnHome(false)}>
+                  <ProfilLink to="/profile" onClick={() => updateOnHome(false)}>
                      <ImageWrapper>
                         <img
                            src={user.imageUrl || defaultImage}
@@ -149,7 +149,7 @@ function Header() {
                   <Logout />
                </>
             ) : (
-               <LogInLink to="/profile" onClick={() => setOnHome(false)}>
+               <LogInLink to="/profile" onClick={() => updateOnHome(false)}>
                   <FontAwesomeIcon icon={faRightToBracket} />
                </LogInLink>
             )}
@@ -158,7 +158,7 @@ function Header() {
             <NavLink
                to="/"
                onClick={() => {
-                  setOnHome(true);
+                  updateOnHome(true);
                }}
                $isConcerned={onHome}
             >
@@ -167,7 +167,7 @@ function Header() {
             <NavLink
                to="/profile"
                onClick={() => {
-                  setOnHome(false);
+                  updateOnHome(false);
                }}
                $isConcerned={!onHome}
             >

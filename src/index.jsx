@@ -17,7 +17,7 @@ import Header from "./components/Header";
 import GlobalStyle from "./utils/style/GlobalStyle";
 
 // authentification context provider import
-import { UserIdProvider } from "./utils/context";
+import { OnHomeProvider, UserIdProvider } from "./utils/context";
 
 // redux imports
 import { Provider } from "react-redux";
@@ -55,14 +55,16 @@ ReactDOM.render(
       <Router>
          <Provider store={store}>
             <UserIdProvider>
-               <GlobalStyle />
-               <Header />
-               <Routes>
-                  <Route exact path="/" element={<Home />} />
-                  <Route path="/profile/" element={<Profile />} />
-                  <Route path="/profile/:pseudo" element={<Profile />} />
-                  <Route path="*" element={<Error />} />
-               </Routes>
+               <OnHomeProvider>
+                  <GlobalStyle />
+                  <Header />
+                  <Routes>
+                     <Route exact path="/" element={<Home />} />
+                     <Route path="/profile/" element={<Profile />} />
+                     <Route path="/profile/:pseudo" element={<Profile />} />
+                     <Route path="*" element={<Error />} />
+                  </Routes>
+               </OnHomeProvider>
             </UserIdProvider>
          </Provider>
       </Router>

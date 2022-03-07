@@ -3,7 +3,7 @@
 /* --------------------------------- */
 
 import { useContext } from "react";
-import { UserIdContext } from "../context";
+import { OnHomeContext, UserIdContext } from "../context";
 
 // /* ------------------------------------------- */
 // /*          Hook to get token context          */
@@ -13,10 +13,18 @@ import { UserIdContext } from "../context";
 //    return { auth, storeAuth };
 // }
 
-/* ------------------------------------------- */
+/* -------------------------------------------- */
 /*          Hook to get userId context          */
-/* ------------------------------------------- */
+/* -------------------------------------------- */
 export function useUserId() {
    const { userId } = useContext(UserIdContext);
    return { userId };
+}
+
+/* -------------------------------------------- */
+/*          Hook to get onHome context          */
+/* -------------------------------------------- */
+export function useOnHome() {
+   const { onHome, updateOnHome } = useContext(OnHomeContext);
+   return { onHome, updateOnHome };
 }
