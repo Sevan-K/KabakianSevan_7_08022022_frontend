@@ -36,7 +36,7 @@ import NewCommentForm from "./NewCommentForm";
 const PostLiContainer = styled.li`
    // border: 0.2rem solid ${colors.backgroundLight};
    box-shadow: 0.1rem 0.1rem 0.5rem ${colors.unactiveLink};
-   width: 90%;
+   width: 100%;
    overflow: hidden;
    margin: 1.5rem auto;
    // padding: 1rem 0;

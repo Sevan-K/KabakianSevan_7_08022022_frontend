@@ -1,7 +1,7 @@
 // setting color used
 export const colors = {
    primary: "#FD2D01",
-   error:"#c0392b",
+   error: "#c0392b",
    unactiveLink: "#747d8c",
    darkUnactiveLink: "#2f3542",
    backgroundLight: "#ffe6e6",
@@ -10,7 +10,7 @@ export const colors = {
 };
 
 // setting mainsize
-export const mainSize = "80%";
+export const mainSize = { smallscreen: "95%", regular: "80%" };
 
 // padding sizes
 export const padding = { icons: "1rem", comment: "0.7rem" };

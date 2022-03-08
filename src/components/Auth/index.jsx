@@ -10,13 +10,15 @@ import PropTypes from "prop-types";
 import LogInForm from "./LogInForm";
 import SignUpForm from "./SignUpForm";
 import { colors, mainSize } from "../../utils/style/variables";
+import { useMediaQuerry } from "../../utils/hooks";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
 /* ------------------------------------------- */
 // styled component for the main element
 const MainAuth = styled.main`
-   width: ${mainSize};
+   width: ${({ matchesSmall }) =>
+      matchesSmall ? mainSize.smallscreen : mainSize.regular};
    max-width: 50rem;
    margin: auto;
    padding: 2rem;
@@ -25,6 +27,7 @@ const MainAuth = styled.main`
    // background-color: ${colors.backgroundLight};
    // border: 0.1rem solid ${colors.primary};
    background-color: ${colors.newCommentBg};
+   box-shadow: 0.2rem 0.2rem 0.4rem ${colors.unactiveLink};
    & div {
       margin: 2rem 0;
    }
@@ -71,11 +74,14 @@ function Auth({ signUp }) {
    // local state to know if the signUpForm has been submited with success
    const [signUpFormSubmit, setSignUpFormSubmit] = useState(false);
 
+   // constant for small screens mediaquerry
+   const matchesSmall = useMediaQuerry("(max-width: 450px)");
+
    // component to return
    // signUp form if signUpModal is true
    // logIn form if signUpModal is false or signUpFormSubmit is true
    return (
-      <MainAuth>
+      <MainAuth matchesSmall={matchesSmall}>
          <h2>Authentification</h2>
          <div>
             <StyledButton

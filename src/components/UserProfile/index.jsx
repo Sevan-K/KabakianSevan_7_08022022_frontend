@@ -18,7 +18,7 @@ import { deleteOneOfUsers } from "../../actions/users.actions";
 // default profile picture
 import defaultProfileImage from "../../assets/profile.png";
 import dateFormat from "../../utils/functions/dateFormat";
-import { useUserId } from "../../utils/hooks";
+import { useMediaQuerry, useUserId } from "../../utils/hooks";
 import { IconButton } from "../../utils/style/Atoms";
 import { colors, mainSize } from "../../utils/style/variables";
 import UserProfileData from "./UserProfileData";
@@ -29,7 +29,8 @@ import UserProfileForm from "./UserProfileForm";
 /* ------------------------------------------- */
 // styled component for the main element
 const MainUserProfileData = styled.main`
-   width: ${mainSize};
+   width: ${({ matchesSmall }) =>
+      matchesSmall ? mainSize.smallscreen : mainSize.regular};
    max-width: 50rem;
    margin: auto;
    padding: 3rem;
@@ -44,8 +45,7 @@ const ProfileDataHeader = styled.header`
    & > h2 {
       margin-right: auto;
       color: ${colors.darkUnactiveLink};
-      font-size:2rem;
-
+      font-size: 2rem;
    }
 `;
 
@@ -86,6 +86,9 @@ function UserProfile() {
    // local state to know if post card is loading
    const [isloading, setIsLoading] = useState(true);
 
+   // constant for small screens mediaquerry
+   const matchesSmall = useMediaQuerry("(max-width: 450px)");
+
    // useEffect to stop loading once users data are available
    useEffect(() => {
       if (users.length !== 0) {
@@ -121,7 +124,7 @@ function UserProfile() {
          {isloading ? (
             <FontAwesomeIcon icon={faSpinner} className="fa-spinner" />
          ) : !!userToDisplay ? (
-            <MainUserProfileData>
+            <MainUserProfileData matchesSmall={matchesSmall}>
                <ProfileDataHeader>
                   <h2>Profil de {userToDisplay.pseudo}</h2>
                   {(userToDisplay.id === userId || user.admin === true) &&

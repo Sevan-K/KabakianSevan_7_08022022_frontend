@@ -5,12 +5,13 @@
 import NewPostForm from "../../components/NewPostForm";
 import Auth from "../../components/Auth";
 import Thread from "../../components/Thread";
-import { useUserId } from "../../utils/hooks/index";
+import { useMediaQuerry, useUserId } from "../../utils/hooks/index";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { PageTitle } from "../../utils/style/Atoms";
 import styled from "styled-components";
+import { mainSize } from "../../utils/style/variables";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -19,6 +20,8 @@ import styled from "styled-components";
 const HomeMain = styled.main`
    max-width: 60rem;
    margin: auto;
+   width: ${({ matchesSmall }) =>
+      matchesSmall ? mainSize.smallscreen : mainSize.regular};
 `;
 
 /* --------------------------------------------- */
@@ -33,6 +36,9 @@ function Home() {
    // local state to know if post card is loading
    const [isloading, setIsLoading] = useState(true);
 
+   // constant for small screens mediaquerry
+   const matchesSmall = useMediaQuerry("(max-width: 450px)");
+
    // useEffect to stop loading once users data are available
    useEffect(() => {
       setIsLoading(false);
@@ -46,7 +52,7 @@ function Home() {
             <>
                <PageTitle className="dev">Fil d'actualité</PageTitle>
                {!!userId ? (
-                  <HomeMain>
+                  <HomeMain matchesSmall={matchesSmall}>
                      <NewPostForm />
                      <Thread />
                   </HomeMain>

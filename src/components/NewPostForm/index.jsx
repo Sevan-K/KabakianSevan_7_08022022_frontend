@@ -23,7 +23,7 @@ import { useOnHome } from "../../utils/hooks";
 // styled component for the form wrapper
 const NewPostFormWrapper = styled.div`
    padding: 2rem;
-   width: 90%;
+   width: 100%;
    margin: 0 auto 3rem;
    border-radius: 2rem;
    border-bottom-left-radius: 0;
