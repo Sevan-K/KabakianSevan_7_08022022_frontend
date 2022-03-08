@@ -1,17 +1,9 @@
-/* -------------------------------------- */
-/*          Secrtion des imports          */
-/* -------------------------------------- */
+/* --------------------------------- */
+/*          Imports Section          */
+/* --------------------------------- */
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-// pages import
-import Home from "./pages/Home";
-import Profile from "./pages/Profile";
-import Error from "./pages/Error";
-
-// components import
-import Header from "./components/Header";
+import { BrowserRouter as Router } from "react-router-dom";
 
 // global style import
 import GlobalStyle from "./utils/style/GlobalStyle";
@@ -33,6 +25,7 @@ import { getAllUsers } from "./actions/users.actions";
 
 // ====== !!!!!!!!!!!!!!!! ====== for dev ====== !!!!!!!!!!!!!!!!!!! ======
 import "./utils/style/dev.css";
+import App from "./app";
 
 /* ---------------------------------------- */
 /*          Store creation section          */
@@ -57,13 +50,7 @@ ReactDOM.render(
             <UserIdProvider>
                <OnHomeProvider>
                   <GlobalStyle />
-                  <Header />
-                  <Routes>
-                     <Route exact path="/" element={<Home />} />
-                     <Route path="/profile/" element={<Profile />} />
-                     <Route path="/profile/:pseudo" element={<Profile />} />
-                     <Route path="*" element={<Error />} />
-                  </Routes>
+                  <App />
                </OnHomeProvider>
             </UserIdProvider>
          </Provider>
