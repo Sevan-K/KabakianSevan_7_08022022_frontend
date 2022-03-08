@@ -16,7 +16,7 @@ import headerLogoBigScreen from "../../assets/icon-left-font.svg";
 import headerLogoSmallScreen from "../../assets/icon.svg";
 
 // style variables
-import { colors } from "../../utils/style/variables";
+import { colors, padding } from "../../utils/style/variables";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -33,9 +33,8 @@ import defaultImage from "../../assets/profile.png";
 /* ------------------------------------------- */
 // styled component for the header
 const StyledHeader = styled.header`
-   // padding: 1rem;
-   // margin-bottom: 1rem;
-   margin: 1rem;
+   padding: ${({ matchesSmall }) =>
+      matchesSmall ? "1rem 1rem 0 1rem" : "2rem 2rem 0 2rem"};
    display: flex;
    flex-flow: row wrap;
    // flex-direction: column;
@@ -88,14 +87,20 @@ const ProfilLink = styled(Link)`
    order: 3;
    &:hover {
       box-shadow: 0.25rem 0.25rem 0.5rem ${colors.unactiveLink};
+      background-color: ${colors.backgroundLight};
    }
 `;
 
 // styled component for the <p> where the image is
 const ImageWrapper = styled.p`
    align-self: center;
-   width: 5vw;
-   max-width: 5rem;
+   width: 8vw;
+   max-width: 3.5rem;
+   height: 8vw;
+   max-height: 3.5rem;
+   border-radius: 5vw;
+   overflow: hidden;
+   margin-right: ${padding.icons};
 `;
 
 // styled component for the log in link
@@ -121,7 +126,8 @@ const NavBar = styled.nav`
    border-bottom: ${({ matchesBig }) =>
       matchesBig ? "non" : "0.1rem solid #a4b0be"};
    order: ${({ matchesBig }) => (matchesBig ? "2" : "5")};
-   ${({ matchesBig }) => matchesBig && "line-height: 6rem"};
+   // ${({ matchesBig }) => matchesBig && "line-height: 6rem"};
+   line-height: ${({ matchesBig }) => (matchesBig ? "6rem" : "3rem")};
 `;
 
 // styled component for the nav in link
@@ -163,7 +169,7 @@ function Header() {
 
    // component to return
    return (
-      <StyledHeader matchesBig={matchesBig}>
+      <StyledHeader matchesBig={matchesBig} matchesSmall={matchesSmall} >
          {/* <UpperRaw> */}
          <LogoWrapper matchesSmall={matchesSmall}>
             <img

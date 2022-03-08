@@ -21,7 +21,7 @@ import {
 } from "../../utils/style/Atoms";
 import dateFormat from "../../utils/functions/dateFormat";
 import styled from "styled-components";
-import { colors } from "../../utils/style/variables";
+import { colors, padding } from "../../utils/style/variables";
 import defaultProfileImage from "../../assets/profile.png";
 import { deletePost, updatePost } from "../../actions/post.actions";
 import { useMediaQuerry, useOnHome, useUserId } from "../../utils/hooks";
@@ -34,10 +34,12 @@ import NewCommentForm from "./NewCommentForm";
 
 // styled component for post container
 const PostLiContainer = styled.li`
-   border: 0.1rem solid red;
+   // border: 0.2rem solid ${colors.backgroundLight};
+   box-shadow: 0.1rem 0.1rem 0.5rem ${colors.unactiveLink};
    width: 90%;
+   overflow: hidden;
    margin: 1.5rem auto;
-   padding: 1rem;
+   // padding: 1rem 0;
    border-radius: 1rem;
    & button {
       font-size: 1.5rem;
@@ -46,6 +48,8 @@ const PostLiContainer = styled.li`
 
 // styled component for post header
 const PostHeader = styled.header`
+   background-color: ${colors.backgroundLight};
+   padding: ${padding.icons};
    display: grid;
    grid-template-columns: ${({ matchesMedium }) =>
       matchesMedium
@@ -72,7 +76,7 @@ const PostHeader = styled.header`
 
 // styled component for post content
 const PostContent = styled.p`
-   padding: 1rem 0;
+   padding: ${padding.icons};
    font-size: 1.3rem;
 `;
 
@@ -88,6 +92,21 @@ const StyledTextArea = styled.textarea`
    border: none;
    background: transparent;
    font-size: 1.3rem;
+`;
+
+// styled component for the middletoolbar
+const MiddleToolBar = styled.div`
+   margin: 0 ${padding.icons};
+   ${({ areCommentsShown }) =>
+      areCommentsShown &&
+      `
+      border-bottom: 0.1rem solid ${colors.unactiveLink} ;
+      `}
+`;
+
+// styled component for the comment wrapper
+const CommentsWrapper = styled.div`
+   padding: 2rem 1rem;
 `;
 
 /* --------------------------------------------- */
@@ -182,10 +201,13 @@ function Post({ post }) {
                      />
                   </UserImageWrapper>
                   <PseudoText>{author.pseudo}</PseudoText>
-                  <DateText>Publié {dateFormat(post.updatedAt)}</DateText>
+                  <DateText color={colors.darkUnactiveLink}>
+                     Publié {dateFormat(post.updatedAt)}
+                  </DateText>
                   {(userId === post.userId || user.admin === true) && (
                      <>
                         <IconButton
+                           color={colors.darkUnactiveLink}
                            onClick={() => {
                               setUpdatedContent(post.content);
                               updateTempId(
@@ -195,7 +217,10 @@ function Post({ post }) {
                         >
                            <FontAwesomeIcon icon={faPenToSquare} />
                         </IconButton>
-                        <IconButton onClick={handleDeletePost}>
+                        <IconButton
+                           onClick={handleDeletePost}
+                           color={colors.darkUnactiveLink}
+                        >
                            <FontAwesomeIcon icon={faTrashCan} />
                         </IconButton>
                      </>
@@ -237,7 +262,7 @@ function Post({ post }) {
                   )}
                </div>
                {/* -------------- Post bottom part -------------- */}
-               <div>
+               <MiddleToolBar areCommentsShown={showComments}>
                   <IconButton onClick={() => setShowComments(!showComments)}>
                      <FontAwesomeIcon icon={faCommentDots} />
                   </IconButton>
@@ -249,10 +274,10 @@ function Post({ post }) {
                      Likez
                   </button>
                   <p>{post.likes || 0}</p> */}
-               </div>
+               </MiddleToolBar>
                {/* -------------- Post comments -------------- */}
                {showComments && (
-                  <>
+                  <CommentsWrapper>
                      <ul>
                         {comments.map((comment) => {
                            if (comment.postId === post.id) {
@@ -265,7 +290,7 @@ function Post({ post }) {
                         })}
                      </ul>
                      <NewCommentForm postId={post.id} />
-                  </>
+                  </CommentsWrapper>
                )}
             </>
          )}

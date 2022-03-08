@@ -100,7 +100,7 @@ export const PseudoText = styled.p`
 // styled component for date in post an comment cards
 export const DateText = styled.p`
    grid-area: date;
-   color: ${colors.unactiveLink};
+   color: ${({ color }) => (color ? color : colors.unactiveLink)};
    font-style: italic;
    font-size: 1.2rem;
 `;
@@ -122,16 +122,19 @@ export const AuthForm = styled.form`
 
 // styled component fo the submit input on authentication forms
 export const AuthSumbitInput = styled.input`
-   background-color: ${colors.backgroundLight};
+   // background-color: ${colors.backgroundLight};
+   background-color: ${colors.primary};
+   color: white;
    border: none;
    border-radius: 1rem;
    padding: 1rem 2rem;
    margin: 2rem 0;
    font-weight: bold;
-   transition: all 300ms;
-   max-width:90%;
+   transition: all 200ms linear;
+   max-width: 90%;
+   box-shadow: 0.1rem 0.1rem 0.2rem ${colors.unactiveLink};
    &:hover {
-      box-shadow: 0.25rem 0.25rem 0.5rem ${colors.unactiveLink};
+      box-shadow: 0.3rem 0.3rem 0.6rem ${colors.unactiveLink};
       background-color: ${colors.primary};
       color: white;
    }
