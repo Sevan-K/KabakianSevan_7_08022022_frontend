@@ -17,6 +17,7 @@ import { colors, mainSize } from "../../utils/style/variables";
 // styled component for the main element
 const MainAuth = styled.main`
    width: ${mainSize};
+   max-width: 50rem;
    margin: auto;
    padding: 2rem;
    border-radius: 1rem;

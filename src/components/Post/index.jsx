@@ -24,7 +24,7 @@ import styled from "styled-components";
 import { colors } from "../../utils/style/variables";
 import defaultProfileImage from "../../assets/profile.png";
 import { deletePost, updatePost } from "../../actions/post.actions";
-import { useOnHome, useUserId } from "../../utils/hooks";
+import { useMediaQuerry, useOnHome, useUserId } from "../../utils/hooks";
 import Comment from "../Comment";
 import NewCommentForm from "./NewCommentForm";
 
@@ -47,7 +47,10 @@ const PostLiContainer = styled.li`
 // styled component for post header
 const PostHeader = styled.header`
    display: grid;
-   grid-template-columns: calc(10vw + 1rem) 1fr repeat(2, 8%);
+   grid-template-columns: ${({ matchesMedium }) =>
+      matchesMedium
+         ? "calc(10vw + 1rem) 1fr repeat(2, 8%)"
+         : "7rem 1fr repeat(2, 3.7rem)"};
    grid-template-areas:
       "img pseudo edit delete"
       "img date edit delete";
@@ -113,6 +116,8 @@ function Post({ post }) {
    const dispatch = useDispatch();
    // getting onHome context using its hook
    const { updateOnHome } = useOnHome();
+   // constant for medium screens mediaquerry
+   const matchesMedium = useMediaQuerry("(max-width: 590px)");
 
    // useEffect to stop loading once users data are available
    useEffect(() => {
@@ -166,7 +171,7 @@ function Post({ post }) {
          ) : (
             <>
                {/* -------------- Post Header -------------- */}
-               <PostHeader>
+               <PostHeader matchesMedium={matchesMedium}>
                   <UserImageWrapper
                      to={"/profile/" + author.pseudo}
                      onClick={() => updateOnHome(false)}

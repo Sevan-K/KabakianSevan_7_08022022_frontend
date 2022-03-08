@@ -33,10 +33,12 @@ import defaultImage from "../../assets/profile.png";
 /* ------------------------------------------- */
 // styled component for the header
 const StyledHeader = styled.header`
-   padding: 1rem;
-   margin-bottom: 1rem;
+   // padding: 1rem;
+   // margin-bottom: 1rem;
+   margin: 1rem;
    display: flex;
-   flex-direction: column;
+   flex-flow: row wrap;
+   // flex-direction: column;
    // style for the fixed header
    position: fixed;
    right: 0;
@@ -44,6 +46,13 @@ const StyledHeader = styled.header`
    top: 0;
    z-index: 1;
    background-color: white;
+   justify-content: flex-end;
+   align-items: center;
+   border-bottom: ${({ matchesBig }) =>
+      matchesBig ? "0.1rem solid #a4b0be" : "none"};
+   & button {
+      order: 4;
+   }
 `;
 
 // styled component for the upper raw
@@ -58,8 +67,10 @@ const LogoWrapper = styled.p`
    margin-right: auto;
    align-self: center;
    width: 40%;
-   max-width: 50rem;
-   height: 7rem;
+   max-width: 25rem;
+   height: ${({ matchesSmall }) => (matchesSmall ? "5rem" : "7rem")};
+   ${({ matchesSmall }) => matchesSmall && "width: 5rem"};
+   order: 1;
 `;
 
 // styled component for the profile in link
@@ -72,7 +83,9 @@ const ProfilLink = styled(Link)`
    border-radius: 3rem;
    color: ${colors.unactiveLink};
    font-weight: bold;
+   font-size: clamp(1.2rem, 1rem + 1vw, 1.5rem);
    // line-height:
+   order: 3;
    &:hover {
       box-shadow: 0.25rem 0.25rem 0.5rem ${colors.unactiveLink};
    }
@@ -82,7 +95,7 @@ const ProfilLink = styled(Link)`
 const ImageWrapper = styled.p`
    align-self: center;
    width: 5vw;
-   max-width: 10rem;
+   max-width: 5rem;
 `;
 
 // styled component for the log in link
@@ -91,6 +104,7 @@ const LogInLink = styled(Link)`
    font-size: 2.1rem;
    background: none;
    color: ${colors.unactiveLink};
+   order: 3;
    &:hover {
       color: ${colors.primary};
    }
@@ -98,9 +112,16 @@ const LogInLink = styled(Link)`
 
 // styled component for navigator
 const NavBar = styled.nav`
+   // flex: 1 1 ${({ matchesBig }) => (matchesBig ? "40%" : "100%")};
+   width: ${({ matchesBig }) => (matchesBig ? "40%" : "100%")};
+   margin: 0 auto;
    display: flex;
    justify-content: space-evenly;
-   border-bottom: 0.1rem solid #a4b0be;
+   align-items: center;
+   border-bottom: ${({ matchesBig }) =>
+      matchesBig ? "non" : "0.1rem solid #a4b0be"};
+   order: ${({ matchesBig }) => (matchesBig ? "2" : "5")};
+   ${({ matchesBig }) => matchesBig && "line-height: 6rem"};
 `;
 
 // styled component for the nav in link
@@ -133,39 +154,43 @@ function Header() {
    // const [onHome, updateOnHome] = useState(true);
    const { onHome, updateOnHome } = useOnHome();
 
-   const matches = useMediaQuerry("(max-width: 400px)");
-   console.log("=== matches ===>", matches);
+   // constant for small screens mediaquerry
+   const matchesSmall = useMediaQuerry("(max-width: 450px)");
+   // console.log("=== matches ===>", matchesSmall);
+
+   // constant for small screens mediaquerry
+   const matchesBig = useMediaQuerry("(min-width: 1000px)");
 
    // component to return
    return (
-      <StyledHeader>
-         <UpperRaw>
-            <LogoWrapper>
-               <img
-                  src={matches ? headerLogoSmallScreen : headerLogoBigScreen}
-                  alt="Logo groupomania"
-               />
-            </LogoWrapper>
-            {userId ? (
-               <>
-                  <ProfilLink to="/profile" onClick={() => updateOnHome(false)}>
-                     <ImageWrapper>
-                        <img
-                           src={user.imageUrl || defaultImage}
-                           alt="Profil de l'utilisateur"
-                        />
-                     </ImageWrapper>
-                     <p>Bienvenue {user.pseudo}</p>
-                  </ProfilLink>
-                  <Logout />
-               </>
-            ) : (
-               <LogInLink to="/profile" onClick={() => updateOnHome(false)}>
-                  <FontAwesomeIcon icon={faRightToBracket} />
-               </LogInLink>
-            )}
-         </UpperRaw>
-         <NavBar>
+      <StyledHeader matchesBig={matchesBig}>
+         {/* <UpperRaw> */}
+         <LogoWrapper matchesSmall={matchesSmall}>
+            <img
+               src={matchesSmall ? headerLogoSmallScreen : headerLogoBigScreen}
+               alt="Logo groupomania"
+            />
+         </LogoWrapper>
+         {userId ? (
+            <>
+               <ProfilLink to="/profile" onClick={() => updateOnHome(false)}>
+                  <ImageWrapper>
+                     <img
+                        src={user.imageUrl || defaultImage}
+                        alt="Profil de l'utilisateur"
+                     />
+                  </ImageWrapper>
+                  <p>Bienvenue {user.pseudo}</p>
+               </ProfilLink>
+               <Logout />
+            </>
+         ) : (
+            <LogInLink to="/profile" onClick={() => updateOnHome(false)}>
+               <FontAwesomeIcon icon={faRightToBracket} />
+            </LogInLink>
+         )}
+         {/* </UpperRaw> */}
+         <NavBar matchesBig={matchesBig}>
             <NavLink
                to="/"
                onClick={() => {

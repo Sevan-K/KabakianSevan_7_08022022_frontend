@@ -30,6 +30,7 @@ import UserProfileForm from "./UserProfileForm";
 // styled component for the main element
 const MainUserProfileData = styled.main`
    width: ${mainSize};
+   max-width: 50rem;
    margin: auto;
    padding: 3rem;
    background-color: ${colors.backgroundLight};

@@ -10,10 +10,16 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { PageTitle } from "../../utils/style/Atoms";
+import styled from "styled-components";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
 /* ------------------------------------------- */
+// styled component for home page main component
+const HomeMain = styled.main`
+   max-width: 60rem;
+   margin: auto;
+`;
 
 /* --------------------------------------------- */
 /*          Components creation section          */
@@ -40,10 +46,10 @@ function Home() {
             <>
                <PageTitle className="dev">Fil d'actualité</PageTitle>
                {!!userId ? (
-                  <main>
+                  <HomeMain>
                      <NewPostForm />
                      <Thread />
-                  </main>
+                  </HomeMain>
                ) : (
                   <Auth signUp={true} />
                )}

@@ -72,9 +72,9 @@ export const IconButton = styled.button`
 // styled component for round user  image wrapper
 export const UserImageWrapper = styled(Link)`
    width: 10vw;
-   max-width: 7rem;
+   max-width: 6rem;
    height: 10vw;
-   max-height: 7rem;
+   max-height: 6rem;
    border-radius: 5vw;
    overflow: hidden;
    margin-right: ${padding.icons};
@@ -83,9 +83,9 @@ export const UserImageWrapper = styled(Link)`
 // styled component for round user  image wrapper
 export const SmallUserImageWrapper = styled(Link)`
    width: 8vw;
-   max-width: 7rem;
+   max-width: 4rem;
    height: 8vw;
-   max-height: 7rem;
+   max-height: 4rem;
    border-radius: 5vw;
    overflow: hidden;
    margin-right: ${padding.icons};
@@ -129,6 +129,7 @@ export const AuthSumbitInput = styled.input`
    margin: 2rem 0;
    font-weight: bold;
    transition: all 300ms;
+   max-width:90%;
    &:hover {
       box-shadow: 0.25rem 0.25rem 0.5rem ${colors.unactiveLink};
       background-color: ${colors.primary};

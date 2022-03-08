@@ -17,7 +17,7 @@ import styled from "styled-components";
 import { deleteComment, updateComment } from "../../actions/comments.action";
 import defaultProfileImage from "../../assets/profile.png";
 import dateFormat from "../../utils/functions/dateFormat";
-import { useOnHome, useUserId } from "../../utils/hooks";
+import { useMediaQuerry, useOnHome, useUserId } from "../../utils/hooks";
 import {
    DateText,
    IconButton,
@@ -32,7 +32,10 @@ import { colors, padding } from "../../utils/style/variables";
 // styled component for comment container
 const CommentContainer = styled.li`
    display: grid;
-   grid-template-columns: calc(8vw + 1rem) 1fr repeat(2, 8%);
+   grid-template-columns: ${({ matchesMedium }) =>
+      matchesMedium
+         ? "calc(10vw + 1rem) 1fr repeat(2, 8%)"
+         : "calc(6rem) 1fr repeat(2, 3.7rem)"};
    grid-template-areas:
       "img comment edit delete"
       "img date edit delete";
@@ -105,6 +108,9 @@ function Comment({ comment }) {
    // getting onHome context using its hook
    const { updateOnHome } = useOnHome();
 
+   // constant for medium screens mediaquerry
+   const matchesMedium = useMediaQuerry("(max-width: 500px)");
+
    // useEffect to set focus on form's textarea of the comment beeing editted
    useEffect(() => {
       if (!!tempCommentId) {
@@ -157,7 +163,7 @@ function Comment({ comment }) {
 
    // component to return
    return (
-      <CommentContainer>
+      <CommentContainer matchesMedium={matchesMedium}>
          {/* -------------- Comment author's profile image -------------- */}
          <SmallUserImageWrapper
             to={"/profile/" + author.pseudo}

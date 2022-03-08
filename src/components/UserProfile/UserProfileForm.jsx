@@ -126,13 +126,13 @@ function UserProfileForm({
 
    // component to return
    return (
-      <UserProfileWrapper>
-         <form
-            // method="post"
-            action=""
-            id="profile-update-form"
-            onSubmit={handleUpdateProfile}
-         >
+      <form
+         // method="post"
+         action=""
+         id="profile-update-form"
+         onSubmit={handleUpdateProfile}
+      >
+         <UserProfileWrapper>
             <UserProfileArticles>
                <h3>Photo de profil</h3>
                <ProfileImageWrapper>
@@ -169,8 +169,8 @@ function UserProfileForm({
                id="profile_submit"
                name="profile_submit"
             />
-         </form>
-      </UserProfileWrapper>
+         </UserProfileWrapper>{" "}
+      </form>
    );
 }
 
