@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { addComment, getAllComments } from "../../actions/comments.action";
 import { useUserId } from "../../utils/hooks";
-import { IconButton } from "../../utils/style/Atoms";
+import { ErrorMessage, IconButton } from "../../utils/style/Atoms";
 import { colors } from "../../utils/style/variables";
 
 /* ------------------------------------------- */
@@ -18,6 +18,7 @@ import { colors } from "../../utils/style/variables";
 const StyledForm = styled.form`
    background-color: ${colors.newCommentBg};
    display: flex;
+   flex-flow: row wrap;
    justify-content: flex-end;
    align-items: center;
    padding: 0.7rem;
@@ -27,6 +28,11 @@ const StyledForm = styled.form`
    }
    & button {
       width: 15%;
+   }
+   p {
+      width: 100%;
+      text-align: center;
+      margin-top: 1rem;
    }
 `;
 
@@ -53,18 +59,30 @@ function NewCommentForm({ postId }) {
    // get acces to redux actions using useDispatch hook
    const dispatch = useDispatch();
 
+   // local state to display error message
+   const [error, setError] = useState(false);
+
    // function to submit new comment
    const handleNewCommentSubmit = async (event) => {
       // prevent page reload
       event.preventDefault();
-      // building the comment to add to DB
-      const newComment = { content: newCommentContent, userId, postId };
-      // add comment to DB using comments action
-      await dispatch(addComment(newComment));
-      // reload all comments
-      dispatch(getAllComments());
-      // reset new comment content
-      setNewCommentContent("");
+
+      // regex for content
+      const regexForContent =
+         /^\b((?!-)(?!.*--)(?!')(?!.*'')[-A-ZÀ-ÿa-z0-9!,?. ':;\(\)]{2,2000}(?<!-)(?<!'))$/;
+
+      if (regexForContent.test(newCommentContent)) {
+         // building the comment to add to DB
+         const newComment = { content: newCommentContent, userId, postId };
+         // add comment to DB using comments action
+         await dispatch(addComment(newComment));
+         // reload all comments
+         dispatch(getAllComments());
+         // reset new comment content
+         setNewCommentContent("");
+      } else {
+         setError(true);
+      }
    };
 
    return (
@@ -75,6 +93,7 @@ function NewCommentForm({ postId }) {
                onClick={(event) => {
                   event.preventDefault();
                   setNewCommentContent("");
+                  setError(false);
                }}
             >
                <FontAwesomeIcon icon={faCircleXmark} />
@@ -91,6 +110,11 @@ function NewCommentForm({ postId }) {
          <IconButton color={colors.darkUnactiveLink} type="submit">
             <FontAwesomeIcon icon={faPaperPlane} />
          </IconButton>
+         {error && (
+            <ErrorMessage>
+               Entrez un contenu valide 😐 Pas de caractères spéciaux...
+            </ErrorMessage>
+         )}
       </StyledForm>
    );
 }

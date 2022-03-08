@@ -41,6 +41,7 @@ export const ADD_COMMENT = "ADD_COMMENT";
 export const addComment = (commentData) => {
    return async () => {
       try {
+         console.log("=== commentData ===>", commentData);
          await axios({
             method: "post",
             url: `${process.env.REACT_APP_API_URL}comments`,
@@ -48,7 +49,7 @@ export const addComment = (commentData) => {
             data: commentData,
          });
       } catch (err) {
-         return console.log(err);
+         return console.log("Erreur lors de l'ajout d'un commentaire :", err);
       }
    };
 };

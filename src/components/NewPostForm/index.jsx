@@ -14,7 +14,11 @@ import { addPost, getAllPosts } from "../../actions/post.actions";
 import styled from "styled-components";
 import { colors, padding } from "../../utils/style/variables";
 import defaultProfileImage from "../../assets/profile.png";
-import { IconButton, UserImageWrapper } from "../../utils/style/Atoms";
+import {
+   ErrorMessage,
+   IconButton,
+   UserImageWrapper,
+} from "../../utils/style/Atoms";
 import { useOnHome } from "../../utils/hooks";
 
 /* ------------------------------------------- */
@@ -45,6 +49,11 @@ const StyledFrom = styled.form`
    width: 100%;
    display: flex;
    flex-flow: row wrap;
+   & p {
+      width: 100%;
+      text-align: center;
+      margin-top: 1rem;
+   }
 `;
 
 // styled component for form header
@@ -115,6 +124,9 @@ function NewPostForm() {
    // getting onHome context using its hook
    const { updateOnHome } = useOnHome();
 
+   // local state to display error message
+   const [error, setError] = useState(false);
+
    // get acces to redux actions using useDispatch hook
    const dispatch = useDispatch();
 
@@ -140,35 +152,45 @@ function NewPostForm() {
       setFile(null);
       updateContent("");
       setFilePreview("");
+      setError(false);
    };
 
    // function to handle submit
    const handleNewPostSubmit = async (event) => {
       event.preventDefault();
-      //   console.log("=== file ===>", file);
-      //   console.log("=== content ===>", content);
-      const newPost = {
-         content,
-         userId: user.id,
-      };
-      // building postToSend object
-      let postToSend;
-      if (!!file) {
-         postToSend = new FormData();
-         postToSend.append("post", JSON.stringify(newPost));
-         postToSend.append("image", file);
+
+      // regex for content
+      const regexForContent =
+         /^\b((?!-)(?!.*--)(?!')(?!.*'')[-A-ZÀ-ÿa-z0-9!,?. ':;\(\)]{2,2000}(?<!-)(?<!'))$/;
+
+      if (regexForContent.test(content)) {
+         //   console.log("=== file ===>", file);
+         //   console.log("=== content ===>", content);
+         const newPost = {
+            content,
+            userId: user.id,
+         };
+         // building postToSend object
+         let postToSend;
+         if (!!file) {
+            postToSend = new FormData();
+            postToSend.append("post", JSON.stringify(newPost));
+            postToSend.append("image", file);
+         } else {
+            postToSend = newPost;
+         }
+         // add the post to the DB
+         await dispatch(addPost(postToSend));
+
+         // reload all the post to update the store
+         dispatch(getAllPosts());
+
+         // console.log("=== post ===>", response.data);
+         // reset new post form
+         resetNewPostForm();
       } else {
-         postToSend = newPost;
+         setError(true);
       }
-      // add the post to the DB
-      await dispatch(addPost(postToSend));
-
-      // reload all the post to update the store
-      dispatch(getAllPosts());
-
-      // console.log("=== post ===>", response.data);
-      // reset new post form
-      resetNewPostForm();
    };
 
    return (
@@ -234,6 +256,12 @@ function NewPostForm() {
                      style={{ display: "none" }}
                      accept="image/png, image/jpeg, image/jpg"
                   />
+                  {error && (
+                     <ErrorMessage>
+                        Entrez un contenu valide 😐 Pas de caractères
+                        spéciaux...
+                     </ErrorMessage>
+                  )}
                </StyledFrom>
                {(content || file) && (
                   <PostPreview>

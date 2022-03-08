@@ -11,6 +11,7 @@ import { updateOneOfUsers } from "../../actions/users.actions";
 import { useUserId } from "../../utils/hooks";
 import {
    AuthSumbitInput,
+   ErrorMessage,
    ProfileImageWrapper,
    UserProfileArticles,
    UserProfileWrapper,
@@ -77,6 +78,9 @@ function UserProfileForm({
       userToDisplay.imageUrl || defaultProfileImage
    );
 
+   // local state to display error message
+   const [error, setError] = useState(false);
+
    // function to handle change on image profile file input
    const handleFileChange = (event) => {
       // get file from the input
@@ -97,31 +101,40 @@ function UserProfileForm({
    const handleUpdateProfile = (event) => {
       // preventing page reload
       event.preventDefault();
-      // building user to send for the update
-      const modifiedUser = { ...userToDisplay, bio: bio };
-      console.log("=== modifiedUser ===>", modifiedUser);
-      let userToSend;
-      // if there is a file to send
-      if (!!file) {
-         // building the formdata to send
-         userToSend = new FormData();
-         userToSend.append("user", JSON.stringify(modifiedUser));
-         userToSend.append("image", file);
-      } else {
-         // only send the object
-         userToSend = modifiedUser;
-      }
-      // if there is a pseudo and that the user is not the connected one
-      if (!!pseudo && userToDisplay.id !== userId) {
-         // launch action to update user (of users) profile data
-         dispatch(updateOneOfUsers(userToSend, userToDisplay.id));
-      } else {
-         // launch action to update user profile data
-         dispatch(updateUser(userToSend, userToDisplay.id));
-      }
 
-      // end profile edition
-      setEditingUserProfile(false);
+      // regex for content
+      const regexForContent =
+         /^\b((?!-)(?!.*--)(?!')(?!.*'')[-A-ZÀ-ÿa-z0-9!,?. ':;\(\)]{2,2000}(?<!-)(?<!'))$/;
+
+      if (regexForContent.test(bio)) {
+         // building user to send for the update
+         const modifiedUser = { ...userToDisplay, bio: bio };
+         console.log("=== modifiedUser ===>", modifiedUser);
+         let userToSend;
+         // if there is a file to send
+         if (!!file) {
+            // building the formdata to send
+            userToSend = new FormData();
+            userToSend.append("user", JSON.stringify(modifiedUser));
+            userToSend.append("image", file);
+         } else {
+            // only send the object
+            userToSend = modifiedUser;
+         }
+         // if there is a pseudo and that the user is not the connected one
+         if (!!pseudo && userToDisplay.id !== userId) {
+            // launch action to update user (of users) profile data
+            dispatch(updateOneOfUsers(userToSend, userToDisplay.id));
+         } else {
+            // launch action to update user profile data
+            dispatch(updateUser(userToSend, userToDisplay.id));
+         }
+
+         // end profile edition
+         setEditingUserProfile(false);
+      } else {
+         setError(true);
+      }
    };
 
    // component to return
@@ -162,6 +175,11 @@ function UserProfileForm({
                   onChange={handleBioChange}
                   aria-label="Modification de la description"
                ></StyledTextArea>
+               {error && (
+                  <ErrorMessage>
+                     Entrez un contenu valide 😐 Pas de caractères spéciaux...
+                  </ErrorMessage>
+               )}
             </UserProfileArticles>
             <AuthSumbitInput
                type="submit"
