@@ -96,12 +96,20 @@ const StyledTextArea = styled.textarea`
 
 // styled component for the middletoolbar
 const MiddleToolBar = styled.div`
+   display: flex;
+   flex-direction: row;
+   align-items: center;
    margin: 0 ${padding.icons};
    ${({ areCommentsShown }) =>
       areCommentsShown &&
       `
       border-bottom: 0.1rem solid ${colors.unactiveLink} ;
       `}
+   & p {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: ${colors.darkUnactiveLink};
+   }
 `;
 
 // styled component for the comment wrapper
@@ -137,6 +145,8 @@ function Post({ post }) {
    const { updateOnHome } = useOnHome();
    // constant for medium screens mediaquerry
    const matchesMedium = useMediaQuerry("(max-width: 590px)");
+   // local state to count the number of comment
+   const [commentsNumber, updateCommentsNumber] = useState(0);
 
    // useEffect to stop loading once users data are available
    useEffect(() => {
@@ -153,6 +163,16 @@ function Post({ post }) {
       }
    }, [tempId]);
 
+   // useEffect to udpate the number of comments
+   useEffect(() => {
+      const commentsNumber = comments.reduce(
+         (acc, comment) => (comment.postId === post.id ? acc + 1 : acc),
+         0
+      );
+      updateCommentsNumber(commentsNumber);
+   }, [comments, post]);
+
+   // function to end the edition of a post
    const handleStotEditPost = () => {
       setUpdatedContent("");
       updateTempId("");
@@ -261,11 +281,12 @@ function Post({ post }) {
                      </p>
                   )}
                </div>
-               {/* -------------- Post bottom part -------------- */}
+               {/* -------------- Post MiddleToolBar -------------- */}
                <MiddleToolBar areCommentsShown={showComments}>
                   <IconButton onClick={() => setShowComments(!showComments)}>
                      <FontAwesomeIcon icon={faCommentDots} />
                   </IconButton>
+                  {commentsNumber !== 0 && <p>{commentsNumber}</p>}
                   {/* <button
                      onClick={() => {
                         alert(post.id);
