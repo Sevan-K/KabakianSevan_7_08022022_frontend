@@ -11,7 +11,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { deleteUser } from "../../actions/user.actions";
 import { deleteOneOfUsers } from "../../actions/users.actions";
@@ -89,6 +89,8 @@ function UserProfile() {
    // constant for small screens mediaquerry
    const matchesSmall = useMediaQuerry("(max-width: 450px)");
 
+   const navigate = useNavigate();
+
    // useEffect to stop loading once users data are available
    useEffect(() => {
       if (users.length !== 0) {
@@ -108,13 +110,14 @@ function UserProfile() {
          if (userToDisplay.id !== userId && !!pseudo) {
             // using delete users action
             await dispatch(deleteOneOfUsers(userToDisplay.id));
+            // go back to home
+            return navigate("/");
          } else {
             // using delete user action
             await dispatch(deleteUser(userToDisplay.id));
+            // reload app
+            window.location = "/";
          }
-
-         // go back to
-         window.location = "/";
       }
    };
 

@@ -7,6 +7,7 @@ import {
    GET_ALL_COMMENTS,
    UPDATE_COMMENT,
 } from "../actions/comments.action";
+import { DELETE_ONE_OF_USERS } from "../actions/users.actions";
 
 /* -------------------------------------------- */
 /*          Reducer definition section          */
@@ -29,6 +30,10 @@ export default function commentsReducer(state = initialState, action) {
             comment.id === action.payload.commentId
                ? { ...comment, content: action.payload.content }
                : comment
+         );
+      case DELETE_ONE_OF_USERS:
+         return state.filter(
+            (comment) => comment.userId !== action.payload.userId
          );
       default:
          return state;

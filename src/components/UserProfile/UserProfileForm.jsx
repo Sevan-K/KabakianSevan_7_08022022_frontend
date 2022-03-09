@@ -104,7 +104,7 @@ function UserProfileForm({
 
       // regex for content
       const regexForContent =
-         /^\b((?!-)(?!.*--)(?!')(?!.*'')[-A-ZÀ-ÿa-z0-9!,?. ':;\(\)]{2,2000}(?<!-)(?<!'))$/;
+         /^((?!-)(?!.*--)(?!')(?!.*'')[-A-ZÀ-ÿa-z0-9!,?. ':;\(\)\^]{2,2000}(?<!-)(?<!'))$/;
 
       if (regexForContent.test(bio)) {
          // building user to send for the update

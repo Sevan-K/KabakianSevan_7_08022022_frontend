@@ -23,10 +23,14 @@ import {
    faHome as faHomeSolid,
    faUser as faUserSolid,
    faRightToBracket,
+   faUnlockKeyhole,
+   faLocation,
+   faLockOpen,
 } from "@fortawesome/free-solid-svg-icons";
 // import { faUser as faUserRegular,  } from "@fortawesome/free-regular-svg-icons";
 
 import defaultImage from "../../assets/profile.png";
+import { IconButton } from "../../utils/style/Atoms";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -52,13 +56,6 @@ const StyledHeader = styled.header`
    & button {
       order: 4;
    }
-`;
-
-// styled component for the upper raw
-const UpperRaw = styled.div`
-   display: flex;
-   justify-content: flex-end;
-   align-items: center;
 `;
 
 // styled component for the <p> where the image is
@@ -88,6 +85,10 @@ const ProfilLink = styled(Link)`
    &:hover {
       box-shadow: 0.25rem 0.25rem 0.5rem ${colors.unactiveLink};
       background-color: ${colors.backgroundLight};
+   }
+   & p > span {
+      color: ${colors.primary};
+      margin-left: 1rem;
    }
 `;
 
@@ -169,7 +170,7 @@ function Header() {
 
    // component to return
    return (
-      <StyledHeader matchesBig={matchesBig} matchesSmall={matchesSmall} >
+      <StyledHeader matchesBig={matchesBig} matchesSmall={matchesSmall}>
          {/* <UpperRaw> */}
          <LogoWrapper matchesSmall={matchesSmall}>
             <img
@@ -186,7 +187,14 @@ function Header() {
                         alt="Profil de l'utilisateur"
                      />
                   </ImageWrapper>
-                  <p>Bienvenue {user.pseudo}</p>
+                  <p>
+                     Bienvenue {user.pseudo}
+                     {user.admin === true && (
+                        <span>
+                           <FontAwesomeIcon icon={faLockOpen} />
+                        </span>
+                     )}
+                  </p>
                </ProfilLink>
                <Logout />
             </>

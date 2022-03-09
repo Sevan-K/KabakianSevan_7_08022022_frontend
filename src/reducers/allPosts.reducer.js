@@ -6,6 +6,7 @@ import {
    GET_ALL_POSTS,
    UPDATE_POST,
 } from "../actions/post.actions";
+import { DELETE_ONE_OF_USERS } from "../actions/users.actions";
 
 /* -------------------------------------------- */
 /*          Reducer definition section          */
@@ -27,6 +28,8 @@ export default function allPostsReducer(state = initialState, action) {
                ? { ...post, content: action.payload.content }
                : post
          );
+      case DELETE_ONE_OF_USERS:
+         return state.filter((post) => post.userId !== action.payload.userId);
       default:
          return state;
    }
