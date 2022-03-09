@@ -196,15 +196,18 @@ function NewPostForm() {
    return (
       <NewPostFormWrapper>
          {isLoading ? (
+            /* -------------- Loader -------------- */
             <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
          ) : (
             <>
+               {/* -------------- New post form -------------- */}
                <StyledFrom
                   action=""
                   onSubmit={handleNewPostSubmit}
                   id="new-post-form"
                >
                   {(content || file) && (
+                     /* -------------- Form header (with cancel and sibmit button) -------------- */
                      <FormHeader>
                         <IconButton
                            color={colors.darkUnactiveLink}
@@ -228,7 +231,7 @@ function NewPostForm() {
                         />
                      </FormHeader>
                   )}
-
+                  {/* -------------- Visible part (to enter text and load image) -------------- */}
                   <UserImageWrapper
                      to={"/profile"}
                      onClick={() => updateOnHome(false)}
@@ -256,6 +259,7 @@ function NewPostForm() {
                      style={{ display: "none" }}
                      accept="image/png, image/jpeg, image/jpg"
                   />
+                  {/* -------------- Potential error message -------------- */}
                   {error && (
                      <ErrorMessage>
                         Entrez un contenu valide 😐 Pas de caractères
@@ -263,6 +267,7 @@ function NewPostForm() {
                      </ErrorMessage>
                   )}
                </StyledFrom>
+               {/* -------------- Post preview -------------- */}
                {(content || file) && (
                   <PostPreview>
                      {content && <p>{content}</p>}

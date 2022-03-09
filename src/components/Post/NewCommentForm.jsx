@@ -69,7 +69,7 @@ function NewCommentForm({ postId }) {
 
       // regex for content
       const regexForContent =
-      /^((?!-)(?!.*--)(?!')(?!.*'')[-A-ZÀ-ÿa-z0-9!,?. ':;()^]{2,2000}(?<!-)(?<!'))$/;
+         /^((?!-)(?!.*--)(?!')(?!.*'')[-A-ZÀ-ÿa-z0-9!,?. ':;()^]{2,2000}(?<!-)(?<!'))$/;
 
       if (regexForContent.test(newCommentContent)) {
          // building the comment to add to DB
@@ -85,8 +85,10 @@ function NewCommentForm({ postId }) {
       }
    };
 
+   // component to return
    return (
       <StyledForm action="" onSubmit={handleNewCommentSubmit}>
+         {/* -------------- Cancel button, if content is not null -------------- */}
          {newCommentContent && (
             <IconButton
                color={colors.darkUnactiveLink}
@@ -99,6 +101,7 @@ function NewCommentForm({ postId }) {
                <FontAwesomeIcon icon={faCircleXmark} />
             </IconButton>
          )}
+         {/* -------------- Visible part (textarea and sumbit button) -------------- */}
          <StyledTextArea
             name=""
             id=""
@@ -106,10 +109,10 @@ function NewCommentForm({ postId }) {
             value={newCommentContent}
             onChange={(event) => setNewCommentContent(event.target.value)}
          ></StyledTextArea>
-
          <IconButton color={colors.darkUnactiveLink} type="submit">
             <FontAwesomeIcon icon={faPaperPlane} />
          </IconButton>
+         {/* -------------- Potential error message -------------- */}
          {error && (
             <ErrorMessage>
                Entrez un contenu valide 😐 Pas de caractères spéciaux...
