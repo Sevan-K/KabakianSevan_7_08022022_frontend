@@ -3,7 +3,6 @@
 /* --------------------------------- */
 
 import {
-   faCircleArrowLeft,
    faCircleXmark,
    faPaperPlane,
    faPenToSquare,

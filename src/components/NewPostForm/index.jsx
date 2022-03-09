@@ -161,7 +161,7 @@ function NewPostForm() {
 
       // regex for content
       const regexForContent =
-         /^((?!-)(?!.*--)(?!')(?!.*'')[-A-ZÀ-ÿa-z0-9!,?. ':;\(\)\^]{2,2000}(?<!-)(?<!'))$/;
+         /^((?!-)(?!.*--)(?!')(?!.*'')[-A-ZÀ-ÿa-z0-9!,?. ':;()^]{2,2000}(?<!-)(?<!'))$/;
 
       if (regexForContent.test(content)) {
          //   console.log("=== file ===>", file);

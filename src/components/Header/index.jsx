@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useMediaQuerry, useOnHome, useUserId } from "../../utils/hooks";
-import { useState } from "react";
 
 // components
 import Logout from "./LogOut";
@@ -23,14 +22,11 @@ import {
    faHome as faHomeSolid,
    faUser as faUserSolid,
    faRightToBracket,
-   faUnlockKeyhole,
-   faLocation,
    faLockOpen,
 } from "@fortawesome/free-solid-svg-icons";
 // import { faUser as faUserRegular,  } from "@fortawesome/free-regular-svg-icons";
 
 import defaultImage from "../../assets/profile.png";
-import { IconButton } from "../../utils/style/Atoms";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -64,7 +60,7 @@ const LogoWrapper = styled.p`
    align-self: center;
    width: 40%;
    max-width: 25rem;
-   height: ${({ matchesSmall }) => (matchesSmall ? "5rem" : "7rem")};
+   height: ${({ matchesBig }) => (matchesBig ? "7rem" : "5rem")};
    ${({ matchesSmall }) => matchesSmall && "width: 5rem"};
    order: 1;
 `;
@@ -86,7 +82,7 @@ const ProfilLink = styled(Link)`
       box-shadow: 0.25rem 0.25rem 0.5rem ${colors.unactiveLink};
       background-color: ${colors.backgroundLight};
    }
-   & p > span {
+   & .icon {
       color: ${colors.primary};
       margin-left: 1rem;
    }
@@ -162,7 +158,7 @@ function Header() {
    const { onHome, updateOnHome } = useOnHome();
 
    // constant for small screens mediaquerry
-   const matchesSmall = useMediaQuerry("(max-width: 450px)");
+   const matchesSmall = useMediaQuerry("(max-width: 475px)");
    // console.log("=== matches ===>", matchesSmall);
 
    // constant for small screens mediaquerry
@@ -171,15 +167,17 @@ function Header() {
    // component to return
    return (
       <StyledHeader matchesBig={matchesBig} matchesSmall={matchesSmall}>
-         {/* <UpperRaw> */}
-         <LogoWrapper matchesSmall={matchesSmall}>
+         {/* -------------- Groupomania logo -------------- */}
+         <LogoWrapper matchesSmall={matchesSmall} matchesBig={matchesBig}>
             <img
                src={matchesSmall ? headerLogoSmallScreen : headerLogoBigScreen}
                alt="Logo groupomania"
             />
          </LogoWrapper>
          {userId ? (
+            /* -------------- Components if a user is connected -------------- */
             <>
+               {/* -------------- Link to user profile (with name and image) -------------- */}
                <ProfilLink to="/profile" onClick={() => updateOnHome(false)}>
                   <ImageWrapper>
                      <img
@@ -188,22 +186,24 @@ function Header() {
                      />
                   </ImageWrapper>
                   <p>
-                     Bienvenue {user.pseudo}
+                     {!matchesSmall && <span>Bienvenue</span>} {user.pseudo}
                      {user.admin === true && (
-                        <span>
+                        <span className="icon">
                            <FontAwesomeIcon icon={faLockOpen} />
                         </span>
                      )}
                   </p>
                </ProfilLink>
+               {/* -------------- Log out button -------------- */}
                <Logout />
             </>
          ) : (
+            /* -------------- Log in link if no user is connected -------------- */
             <LogInLink to="/profile" onClick={() => updateOnHome(false)}>
                <FontAwesomeIcon icon={faRightToBracket} />
             </LogInLink>
          )}
-         {/* </UpperRaw> */}
+         {/* -------------- Navigation bar -------------- */}
          <NavBar matchesBig={matchesBig}>
             <NavLink
                to="/"

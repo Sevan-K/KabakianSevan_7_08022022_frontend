@@ -1,7 +1,6 @@
 /* --------------------------------- */
 /*          Imports Section          */
 /* --------------------------------- */
-
 import NewPostForm from "../../components/NewPostForm";
 import Auth from "../../components/Auth";
 import Thread from "../../components/Thread";
@@ -46,17 +45,21 @@ function Home() {
 
    return (
       <div>
+         {/* -------------- Loader -------------- */}
          {isloading ? (
             <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
          ) : (
             <>
+               {/* -------------- Home page components -------------- */}
                <PageTitle className="dev">Fil d'actualité</PageTitle>
                {!!userId ? (
+                  /* -------------- New post and Thread components if logged in -------------- */
                   <HomeMain matchesSmall={matchesSmall}>
                      <NewPostForm />
                      <Thread />
                   </HomeMain>
                ) : (
+                  /* -------------- Authenticate component to sign up or log in -------------- */
                   <Auth signUp={true} />
                )}
             </>

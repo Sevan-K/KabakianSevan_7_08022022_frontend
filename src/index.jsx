@@ -46,10 +46,13 @@ store.dispatch(getAllUsers());
 ReactDOM.render(
    <React.StrictMode>
       <Router>
+         {/* -------------- Providers -------------- */}
          <Provider store={store}>
             <UserIdProvider>
                <OnHomeProvider>
+                  {/* -------------- Global style component -------------- */}
                   <GlobalStyle />
+                  {/* -------------- Main app -------------- */}
                   <App />
                </OnHomeProvider>
             </UserIdProvider>

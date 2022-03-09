@@ -1,13 +1,13 @@
-/* -------------------------------------- */
-/*          Secrtion des imports          */
-/* -------------------------------------- */
+/* --------------------------------- */
+/*          Imports Section          */
+/* --------------------------------- */
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { colors, padding } from "./variables";
 
-/* ----------------------------------------------- */
-/*          Section des styles à exporter          */
-/* ----------------------------------------------- */
+/* --------------------------------------------- */
+/*          Styled components to export          */
+/* --------------------------------------------- */
 
 /* -------------------- UserProfile -------------------- */
 // styled component for page h1

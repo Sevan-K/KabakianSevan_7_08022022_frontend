@@ -24,6 +24,7 @@ import logo from "./assets/icon-above-font.svg";
 function App() {
    return (
       <>
+         {/* -------------- Loader -------------- */}
          <Loader>
             <LoaderLogo>
                <img src={logo} alt="Logo de l'entreprise" />
@@ -31,7 +32,9 @@ function App() {
             <LoaderText>Le réseau social</LoaderText>
             <LoaderSpinner></LoaderSpinner>
          </Loader>
+         {/* -------------- Shared header -------------- */}
          <Header />
+         {/* -------------- Differents pages -------------- */}
          <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/profile/" element={<Profile />} />

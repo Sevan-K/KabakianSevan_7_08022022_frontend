@@ -42,7 +42,7 @@ function SignUpForm({ setSignUpFormSubmit }) {
       const pseudoRegex =
          /^\b((?!-)(?!.*--)(?!')(?!.*'')[-A-ZÀ-ÿa-z0-9. ']{2,30}(?<!-)(?<!'))$/;
       // regex for email
-      const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+      const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
       const isPseudoValid = pseudoRegex.test(pseudo);
       // if the pseudo does not match the regex

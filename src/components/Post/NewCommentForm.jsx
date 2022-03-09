@@ -69,7 +69,7 @@ function NewCommentForm({ postId }) {
 
       // regex for content
       const regexForContent =
-         /^((?!-)(?!.*--)(?!')(?!.*'')[-A-ZÀ-ÿa-z0-9!,?. ':;\(\)\^]{2,2000}(?<!-)(?<!'))$/;
+      /^((?!-)(?!.*--)(?!')(?!.*'')[-A-ZÀ-ÿa-z0-9!,?. ':;()^]{2,2000}(?<!-)(?<!'))$/;
 
       if (regexForContent.test(newCommentContent)) {
          // building the comment to add to DB

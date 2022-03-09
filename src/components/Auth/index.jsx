@@ -1,7 +1,6 @@
 /* -------------------------------------- */
 /*          Secrtion des imports          */
 /* -------------------------------------- */
-
 import { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
@@ -83,6 +82,7 @@ function Auth({ signUp }) {
    return (
       <MainAuth matchesSmall={matchesSmall}>
          <h2>Authentification</h2>
+         {/* -------------- Buttons to switch between signu up and log in forms -------------- */}
          <div>
             <StyledButton
                onClick={() => setSignUpModal(false)}
@@ -100,14 +100,19 @@ function Auth({ signUp }) {
                Inscription
             </StyledButton>
          </div>
+         {/* -------------- Successfully created account message -------------- */}
          {signUpFormSubmit && (
             <SignUpMessage>
                Votre compte a été crée avec succès 👏 , connectez vous !
             </SignUpMessage>
          )}
+         {/* -------------- Log in form component -------------- */}
          {signUpModal && !signUpFormSubmit ? (
+            /* -------------- Sign up form component -------------- */
+
             <SignUpForm setSignUpFormSubmit={setSignUpFormSubmit} />
          ) : (
+            /* -------------- Log in form component -------------- */
             <LogInForm />
          )}
       </MainAuth>

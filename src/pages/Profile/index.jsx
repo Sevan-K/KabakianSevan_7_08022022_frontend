@@ -5,12 +5,10 @@
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import Auth from "../../components/Auth";
 import UserProfile from "../../components/UserProfile";
 import { useUserId } from "../../utils/hooks";
 import { PageTitle } from "../../utils/style/Atoms";
-import { mainSize } from "../../utils/style/variables";
 
 /* --------------------------------------------- */
 /*          Components creation section          */
@@ -32,11 +30,19 @@ function Profile() {
    return (
       <div>
          {isloading ? (
+            /* -------------- Loader -------------- */
             <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
          ) : (
+            /* -------------- Profile components -------------- */
             <>
                <PageTitle>Informations du profil</PageTitle>
-               {!!userId ? <UserProfile /> : <Auth />}
+               {!!userId ? (
+                  /* -------------- UserProfile component if logged in -------------- */
+                  <UserProfile />
+               ) : (
+                  /* -------------- Authenticate component to sign up or log in -------------- */
+                  <Auth />
+               )}
             </>
          )}
       </div>
