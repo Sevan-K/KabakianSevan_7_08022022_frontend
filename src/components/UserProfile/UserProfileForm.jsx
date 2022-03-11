@@ -3,7 +3,7 @@
 /* --------------------------------- */
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { updateUser } from "../../actions/user.actions";
@@ -69,9 +69,7 @@ function UserProfileForm({
    // local state to keep track of the file
    const [file, updateFile] = useState(null);
    // local state to update bio value
-   const [bio, updateBio] = useState(
-      userToDisplay.bio || "Dites quelque chose de vous ici !"
-   );
+   const [bio, updateBio] = useState(userToDisplay.bio);
 
    // local state for image url
    const [profileImageUrl, updateProfileImageUrl] = useState(
@@ -104,7 +102,7 @@ function UserProfileForm({
 
       // regex for content
       const regexForContent =
-      /^((?!-)(?!.*--)(?!')(?!.*'')[-A-ZÀ-ÿa-z0-9!,?. ':;()^]{2,2000}(?<!-)(?<!'))$/;
+         /^((?!-)(?!.*--)(?!')(?!.*'')[-A-ZÀ-ÿa-z0-9!,?. ':;()^]{2,2000}(?<!-)(?<!'))$/;
 
       if (regexForContent.test(bio)) {
          // building user to send for the update
@@ -171,6 +169,7 @@ function UserProfileForm({
                <StyledTextArea
                   name="profile_bio"
                   id="profile_bio"
+                  placeholder="Dites quelque chose de vous ici !"
                   value={bio}
                   onChange={handleBioChange}
                   aria-label="Modification de la description"
