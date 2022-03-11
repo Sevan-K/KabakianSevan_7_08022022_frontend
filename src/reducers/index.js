@@ -6,6 +6,7 @@ import userReducer from "./user.reducer";
 import allPostsReducer from "./allPosts.reducer";
 import usersReducer from "./users.reducer";
 import commentsReducer from "./comments.reducer";
+import postLikesReducer from "./postLikes.reducer";
 
 // exporting the combine reducers
 export default combineReducers({
@@ -13,4 +14,5 @@ export default combineReducers({
    allPostsReducer,
    usersReducer,
    commentsReducer,
+   postLikesReducer,
 });

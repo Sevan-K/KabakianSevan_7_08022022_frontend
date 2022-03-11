@@ -12,7 +12,10 @@ import {
    faCommentDots,
    faPaperPlane,
    faCircleArrowLeft,
+   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+
 import {
    DateText,
    IconButton,
@@ -109,6 +112,10 @@ const MiddleToolBar = styled.div`
       font-size: 1.2rem;
       font-weight: bold;
       color: ${colors.darkUnactiveLink};
+      margin-right: 1rem;
+   }
+   & button:last-of-type {
+      margin-left: auto;
    }
 `;
 
@@ -131,6 +138,8 @@ function Post({ post }) {
    const comments = useSelector((state) => state.commentsReducer);
    // getting the user who wrote the post
    const [author] = users.filter((user) => user.id === post.userId);
+   // getting all likes from the state
+   const postLikes = useSelector((state) => state.postLikesReducer);
    // local state to know if post card is loading
    const [isloading, setIsLoading] = useState(true);
    // local state to display comments
@@ -147,6 +156,8 @@ function Post({ post }) {
    const matchesMedium = useMediaQuerry("(max-width: 590px)");
    // local state to count the number of comment
    const [commentsNumber, updateCommentsNumber] = useState(0);
+   // local state to count the number of likes
+   const [likesNumber, updateLikesNumber] = useState(0);
 
    // useEffect to stop loading once users data are available
    useEffect(() => {
@@ -171,6 +182,16 @@ function Post({ post }) {
       );
       updateCommentsNumber(commentsNumber);
    }, [comments, post]);
+
+   // useEffect toupdate the number of likes
+   useEffect(() => {
+      const likesNumber = postLikes.reduce(
+         (acc, postUserObject) =>
+            postUserObject.postId === post.id ? acc + 1 : acc,
+         0
+      );
+      updateLikesNumber(likesNumber);
+   }, [post, postLikes]);
 
    // function to end the edition of a post
    const handleStotEditPost = () => {
@@ -287,28 +308,32 @@ function Post({ post }) {
                      <FontAwesomeIcon icon={faCommentDots} />
                   </IconButton>
                   {commentsNumber !== 0 && <p>{commentsNumber}</p>}
-                  {/* <button
-                     onClick={() => {
-                        alert(post.id);
-                     }}
-                  >
-                     Likez
-                  </button>
-                  <p>{post.likes || 0}</p> */}
+                  <IconButton>
+                     {likesNumber === 0 ? (
+                        <FontAwesomeIcon icon={faHeartRegular} />
+                     ) : (
+                        <FontAwesomeIcon icon={faHeart} />
+                     )}
+                  </IconButton>
+                  {likesNumber !== 0 && <p>{likesNumber}</p>}
                </MiddleToolBar>
                {/* -------------- Post comments -------------- */}
                {showComments && (
                   <CommentsWrapper>
                      <ul>
-                        {comments.map((comment) => {
-                           if (comment.postId === post.id) {
-                              return (
-                                 <Comment key={comment.id} comment={comment} />
-                              );
-                           } else {
-                              return null;
-                           }
-                        })}
+                        {comments.length !== 0 &&
+                           comments.map((comment) => {
+                              if (comment.postId === post.id) {
+                                 return (
+                                    <Comment
+                                       key={comment.id}
+                                       comment={comment}
+                                    />
+                                 );
+                              } else {
+                                 return null;
+                              }
+                           })}
                      </ul>
                      <NewCommentForm postId={post.id} />
                   </CommentsWrapper>

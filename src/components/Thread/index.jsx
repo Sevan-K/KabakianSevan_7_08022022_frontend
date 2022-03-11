@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../../actions/post.actions";
 import { useState } from "react";
 import { getAllComments } from "../../actions/comments.action";
+import { getPostLikes } from "../../actions/postLikes.actions";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -30,6 +31,8 @@ function Thread() {
          dispatch(getAllPosts());
          // loading all the comments into the store
          dispatch(getAllComments());
+         // loading all the postLikes
+         dispatch(getPostLikes());
          // set load as false not to load again
          setLoadPosts(false);
       }
