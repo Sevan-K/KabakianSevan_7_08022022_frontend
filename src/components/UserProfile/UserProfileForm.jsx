@@ -69,7 +69,7 @@ function UserProfileForm({
    // local state to keep track of the file
    const [file, updateFile] = useState(null);
    // local state to update bio value
-   const [bio, updateBio] = useState(userToDisplay.bio);
+   const [bio, updateBio] = useState(userToDisplay.bio||"");
 
    // local state for image url
    const [profileImageUrl, updateProfileImageUrl] = useState(
@@ -107,7 +107,7 @@ function UserProfileForm({
       if (regexForContent.test(bio)) {
          // building user to send for the update
          const modifiedUser = { ...userToDisplay, bio: bio };
-         console.log("=== modifiedUser ===>", modifiedUser);
+         // console.log("=== modifiedUser ===>", modifiedUser);
          let userToSend;
          // if there is a file to send
          if (!!file) {

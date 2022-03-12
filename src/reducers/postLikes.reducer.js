@@ -21,12 +21,12 @@ export default function postLikesReducer(state = initialState, action) {
       case GET_POSTS_LIKES:
          return action.payload;
       case ADD_LIKE:
-         return [...state, { postId: action.postId, userId: action.userId }];
+         return state.concat([action.payload]);
       case REMOVE_LIKE:
          return state.filter(
             (postUserObject) =>
-               postUserObject.postId !== action.payload.postId &&
-               postUserObject.userId !== action.payload.userId
+               postUserObject.userId !== action.payload.userId ||
+               postUserObject.postId !== action.payload.postId
          );
       default:
          return state;

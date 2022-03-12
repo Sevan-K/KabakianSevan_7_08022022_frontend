@@ -30,6 +30,11 @@ import { deletePost, updatePost } from "../../actions/post.actions";
 import { useMediaQuerry, useOnHome, useUserId } from "../../utils/hooks";
 import Comment from "../Comment";
 import NewCommentForm from "./NewCommentForm";
+import {
+   addLike,
+   getPostLikes,
+   removeLike,
+} from "../../actions/postLikes.actions";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -158,6 +163,8 @@ function Post({ post }) {
    const [commentsNumber, updateCommentsNumber] = useState(0);
    // local state to count the number of likes
    const [likesNumber, updateLikesNumber] = useState(0);
+   // local state to know if user is liking this post
+   const [isUserLiking, setIsUserLiking] = useState(false);
 
    // useEffect to stop loading once users data are available
    useEffect(() => {
@@ -182,16 +189,6 @@ function Post({ post }) {
       );
       updateCommentsNumber(commentsNumber);
    }, [comments, post]);
-
-   // useEffect toupdate the number of likes
-   useEffect(() => {
-      const likesNumber = postLikes.reduce(
-         (acc, postUserObject) =>
-            postUserObject.postId === post.id ? acc + 1 : acc,
-         0
-      );
-      updateLikesNumber(likesNumber);
-   }, [post, postLikes]);
 
    // function to end the edition of a post
    const handleStotEditPost = () => {
@@ -221,6 +218,40 @@ function Post({ post }) {
       setUpdatedContent("");
       // end loading
       setIsLoading(false);
+   };
+
+   // useEffect to check if user is liking the post and update the number of likes
+   useEffect(() => {
+      // constant to check if user is already liking this post
+      const isUserLiking = postLikes.reduce(
+         (acc, postUserObject) =>
+            postUserObject.userId === userId &&
+            postUserObject.postId === post.id
+               ? (acc = true)
+               : acc,
+         false
+      );
+      setIsUserLiking(isUserLiking);
+      // constant to calculate the number of likes
+      const likesNumber =
+         postLikes &&
+         postLikes.reduce(
+            (acc, postUserObject) =>
+               postUserObject.postId === post.id ? acc + 1 : acc,
+            0
+         );
+      updateLikesNumber(likesNumber);
+   }, [postLikes, userId, post]);
+
+   // function to handle like
+   const handleLikes = async () => {
+      // if there is no like yet
+      if (likesNumber === 0 || !isUserLiking) {
+         dispatch(addLike(post.id, userId));
+      } else {
+         dispatch(removeLike(post.id, userId));
+      }
+      // dispatch(getPostLikes());
    };
 
    // component to return
@@ -308,11 +339,11 @@ function Post({ post }) {
                      <FontAwesomeIcon icon={faCommentDots} />
                   </IconButton>
                   {commentsNumber !== 0 && <p>{commentsNumber}</p>}
-                  <IconButton>
-                     {likesNumber === 0 ? (
-                        <FontAwesomeIcon icon={faHeartRegular} />
-                     ) : (
+                  <IconButton onClick={handleLikes}>
+                     {isUserLiking ? (
                         <FontAwesomeIcon icon={faHeart} />
+                     ) : (
+                        <FontAwesomeIcon icon={faHeartRegular} />
                      )}
                   </IconButton>
                   {likesNumber !== 0 && <p>{likesNumber}</p>}
