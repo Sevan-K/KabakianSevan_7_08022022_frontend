@@ -51,7 +51,7 @@ function Home() {
          ) : (
             <>
                {/* -------------- Home page components -------------- */}
-               <PageTitle className="dev">Fil d'actualité</PageTitle>
+               <PageTitle>Fil d'actualité</PageTitle>
                {!!userId ? (
                   /* -------------- New post and Thread components if logged in -------------- */
                   <HomeMain matchesSmall={matchesSmall}>
