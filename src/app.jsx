@@ -37,6 +37,8 @@ function App() {
          {/* -------------- Differents pages -------------- */}
          <Routes>
             <Route exact path="/" element={<Home />} />
+            {/* faire le test ternaire dans l'élement à cet endroit */}
+            {/*    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!! TODO FIXME */}
             <Route path="/profile/" element={<Profile />} />
             <Route path="/profile/:pseudo" element={<Profile />} />
             <Route path="*" element={<Error />} />

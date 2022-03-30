@@ -75,6 +75,7 @@ function UserProfile() {
    const user = useSelector((state) => state.userReducer);
 
    // the user to display is either the connected one or the one which pseudo is in url
+   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!! TODO FIXME
    const userToDisplay = pseudo
       ? users.filter((user) => user.pseudo === pseudo)[0]
       : user;
