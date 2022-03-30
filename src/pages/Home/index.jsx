@@ -2,7 +2,6 @@
 /*          Imports Section          */
 /* --------------------------------- */
 import NewPostForm from "../../components/NewPostForm";
-import Auth from "../../components/Auth";
 import Thread from "../../components/Thread";
 import { useMediaQuerry, useUserId } from "../../utils/hooks/index";
 import { useEffect, useState } from "react";
@@ -52,16 +51,10 @@ function Home() {
             <>
                {/* -------------- Home page components -------------- */}
                <PageTitle>Fil d'actualité</PageTitle>
-               {!!userId ? (
-                  /* -------------- New post and Thread components if logged in -------------- */
-                  <HomeMain matchesSmall={matchesSmall}>
-                     <NewPostForm />
-                     <Thread />
-                  </HomeMain>
-               ) : (
-                  /* -------------- Authenticate component to sign up or log in -------------- */
-                  <Auth signUp={true} />
-               )}
+               <HomeMain matchesSmall={matchesSmall}>
+                  <NewPostForm />
+                  <Thread />
+               </HomeMain>
             </>
          )}
       </div>

@@ -64,7 +64,7 @@ export const OnHomeContext = createContext();
 
 // onHome provider component creation
 export function OnHomeProvider({ children }) {
-   const [onHome, setOnHome] = useState(true);
+   const [onHome, setOnHome] = useState(!window.location.href.includes("profile"));
    function updateOnHome(value) {
       setOnHome(value);
    }

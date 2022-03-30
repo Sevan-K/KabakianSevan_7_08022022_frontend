@@ -69,7 +69,7 @@ const SignUpMessage = styled.p`
 function Auth({ signUp }) {
    // local state to know if the user want to log in or to sign up
    const [signUpModal, setSignUpModal] = useState(signUp);
-
+   
    // local state to know if the signUpForm has been submited with success
    const [signUpFormSubmit, setSignUpFormSubmit] = useState(false);
 

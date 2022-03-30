@@ -17,11 +17,15 @@ import {
 } from "./utils/style/Atoms";
 
 import logo from "./assets/icon-above-font.svg";
+import { useUserId } from "./utils/hooks";
+import Auth from "./components/Auth";
 
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
 function App() {
+   // userId is required from context
+   const { userId } = useUserId();
    return (
       <>
          {/* -------------- Loader -------------- */}
@@ -36,11 +40,21 @@ function App() {
          <Header />
          {/* -------------- Differents pages -------------- */}
          <Routes>
-            <Route exact path="/" element={<Home />} />
-            {/* faire le test ternaire dans l'élement à cet endroit */}
-            {/*    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!! TODO FIXME */}
-            <Route path="/profile/" element={<Profile />} />
-            <Route path="/profile/:pseudo" element={<Profile />} />
+            {/* if a user is connected display page component if not display auth component */}
+            <Route
+               exact
+               path="/"
+               // TODO FIXME => props is used only on first render (whenpage is reloaded)
+               element={!!userId ? <Home /> : <Auth signUp={true} />}
+            />
+            <Route
+               path="/profile/"
+               element={!!userId ? <Profile /> : <Auth />}
+            />
+            <Route
+               path="/profile/:pseudo"
+               element={!!userId ? <Profile /> : <Auth />}
+            />
             <Route path="*" element={<Error />} />
          </Routes>
       </>

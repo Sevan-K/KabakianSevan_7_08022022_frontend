@@ -5,7 +5,6 @@
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import Auth from "../../components/Auth";
 import UserProfile from "../../components/UserProfile";
 import { useUserId } from "../../utils/hooks";
 import { PageTitle } from "../../utils/style/Atoms";
@@ -36,13 +35,7 @@ function Profile() {
             /* -------------- Profile components -------------- */
             <>
                <PageTitle>Informations du profil</PageTitle>
-               {!!userId ? (
-                  /* -------------- UserProfile component if logged in -------------- */
-                  <UserProfile />
-               ) : (
-                  /* -------------- Authenticate component to sign up or log in -------------- */
-                  <Auth />
-               )}
+               <UserProfile />
             </>
          )}
       </div>
