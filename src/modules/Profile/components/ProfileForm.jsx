@@ -6,17 +6,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { updateUser } from "../../actions/user.actions";
-import { updateOneOfUsers } from "../../actions/users.actions";
-import { useUserId } from "../../utils/hooks";
+import { updateUser } from "../../../actions/user.actions";
+import { updateOneOfUsers } from "../../../actions/users.actions";
+import { useUserId } from "../../../utils/hooks";
 import {
    AuthSumbitInput,
    ErrorMessage,
    ProfileImageWrapper,
-   UserProfileArticles,
-   UserProfileWrapper,
-} from "../../utils/style/Atoms";
-import { colors } from "../../utils/style/variables";
+   ProfileArticles,
+   ProfileWrapper,
+} from "../../../utils/style/Atoms";
+import { colors } from "../../../utils/style/variables";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -54,10 +54,10 @@ const StyledTextArea = styled.textarea`
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
-function UserProfileForm({
+function ProfileForm({
    userToDisplay,
    pseudo,
-   setEditingUserProfile,
+   setEditingProfile,
    defaultProfileImage,
 }) {
    // getting userId from its hook
@@ -69,7 +69,7 @@ function UserProfileForm({
    // local state to keep track of the file
    const [file, updateFile] = useState(null);
    // local state to update bio value
-   const [bio, updateBio] = useState(userToDisplay.bio||"");
+   const [bio, updateBio] = useState(userToDisplay.bio || "");
 
    // local state for image url
    const [profileImageUrl, updateProfileImageUrl] = useState(
@@ -129,7 +129,7 @@ function UserProfileForm({
          }
 
          // end profile edition
-         setEditingUserProfile(false);
+         setEditingProfile(false);
       } else {
          setError(true);
       }
@@ -143,8 +143,8 @@ function UserProfileForm({
          id="profile-update-form"
          onSubmit={handleUpdateProfile}
       >
-         <UserProfileWrapper>
-            <UserProfileArticles>
+         <ProfileWrapper>
+            <ProfileArticles>
                <h3>Photo de profil</h3>
                <ProfileImageWrapper>
                   <img src={profileImageUrl} alt="Profil de l'utilisateur" />
@@ -163,8 +163,8 @@ function UserProfileForm({
                   accept="image/png, image/jpeg, image/jpg"
                   style={{ display: "none" }}
                />
-            </UserProfileArticles>
-            <UserProfileArticles>
+            </ProfileArticles>
+            <ProfileArticles>
                <h3>A propos de {userToDisplay.pseudo}</h3>
                <StyledTextArea
                   name="profile_bio"
@@ -179,17 +179,17 @@ function UserProfileForm({
                      Entrez un contenu valide 😐 Pas de caractères spéciaux...
                   </ErrorMessage>
                )}
-            </UserProfileArticles>
+            </ProfileArticles>
             <AuthSumbitInput
                type="submit"
                value="Validez les modifications"
                id="profile_submit"
                name="profile_submit"
             />
-         </UserProfileWrapper>{" "}
+         </ProfileWrapper>{" "}
       </form>
    );
 }
 
 // export component
-export default UserProfileForm;
+export default ProfileForm;

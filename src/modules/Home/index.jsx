@@ -1,8 +1,8 @@
 /* --------------------------------- */
 /*          Imports Section          */
 /* --------------------------------- */
-import NewPostForm from "../../components/NewPostForm";
-import Thread from "../../components/Thread";
+import NewPostForm from "./components/NewPostForm";
+import Thread from "./components/Thread";
 import { useMediaQuerry, useUserId } from "../../utils/hooks/index";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

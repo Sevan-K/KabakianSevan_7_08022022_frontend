@@ -10,16 +10,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { addPost, getAllPosts } from "../../actions/post.actions";
+import { addPost, getAllPosts } from "../../../../actions/post.actions";
 import styled from "styled-components";
-import { colors, padding } from "../../utils/style/variables";
-import defaultProfileImage from "../../assets/profile.png";
+import { colors, padding } from "../../../../utils/style/variables";
+import defaultProfileImage from "../../../../assets/profile.png";
 import {
    ErrorMessage,
    IconButton,
    UserImageWrapper,
-} from "../../utils/style/Atoms";
-import { useOnHome } from "../../utils/hooks";
+} from "../../../../utils/style/Atoms";
+import { useOnHome } from "../../../../utils/hooks";
 
 /* ------------------------------------------- */
 /*          Styled components section          */

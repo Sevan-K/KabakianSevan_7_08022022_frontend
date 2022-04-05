@@ -9,7 +9,7 @@ import {
    AuthLabel,
    AuthSumbitInput,
    ErrorMessage,
-} from "../../utils/style/Atoms";
+} from "../../../utils/style/Atoms";
 
 /* ------------------------------------------- */
 /*          Styled components section          */

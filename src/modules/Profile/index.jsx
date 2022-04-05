@@ -1,7 +1,7 @@
 /* --------------------------------- */
 /*          Imports Section          */
 /* --------------------------------- */
-import Error from "../../pages/Error";
+import Error from "../../modules/Error";
 import {
    faCircleXmark,
    faPenToSquare,
@@ -19,16 +19,16 @@ import { deleteOneOfUsers } from "../../actions/users.actions";
 import defaultProfileImage from "../../assets/profile.png";
 import dateFormat from "../../utils/functions/dateFormat";
 import { useMediaQuerry, useUserId } from "../../utils/hooks";
-import { IconButton } from "../../utils/style/Atoms";
+import { IconButton, PageTitle } from "../../utils/style/Atoms";
 import { colors, mainSize } from "../../utils/style/variables";
-import UserProfileData from "./UserProfileData";
-import UserProfileForm from "./UserProfileForm";
+import ProfileData from "./components/ProfileData";
+import ProfileForm from "./components/ProfileForm";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
 /* ------------------------------------------- */
 // styled component for the main element
-const MainUserProfileData = styled.main`
+const MainProfileData = styled.main`
    width: ${({ matchesSmall }) =>
       matchesSmall ? mainSize.smallscreen : mainSize.regular};
    max-width: 50rem;
@@ -58,9 +58,9 @@ const DateText = styled.p`
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
-function UserProfile() {
-   // useState to switch between UserProfileData and UserProfileForm components
-   const [editingUserProfile, setEditingUserProfile] = useState(false);
+function Profile() {
+   // useState to switch between ProfileData and ProfileForm components
+   const [editingProfile, setEditingProfile] = useState(false);
 
    // getting userId from its hook
    const { userId } = useUserId();
@@ -125,24 +125,21 @@ function UserProfile() {
    // components to return
    return (
       <>
+         <PageTitle>Informations du profil</PageTitle>
          {isloading ? (
             <FontAwesomeIcon icon={faSpinner} className="fa-spinner" />
          ) : !!userToDisplay ? (
-            <MainUserProfileData matchesSmall={matchesSmall}>
+            <MainProfileData matchesSmall={matchesSmall}>
                <ProfileDataHeader>
                   <h2>Profil de {userToDisplay.pseudo}</h2>
                   {(userToDisplay.id === userId || user.admin === true) &&
-                     (editingUserProfile ? (
-                        <IconButton
-                           onClick={() => setEditingUserProfile(false)}
-                        >
+                     (editingProfile ? (
+                        <IconButton onClick={() => setEditingProfile(false)}>
                            <FontAwesomeIcon icon={faCircleXmark} />{" "}
                         </IconButton>
                      ) : (
                         <>
-                           <IconButton
-                              onClick={() => setEditingUserProfile(true)}
-                           >
+                           <IconButton onClick={() => setEditingProfile(true)}>
                               <FontAwesomeIcon icon={faPenToSquare} />
                            </IconButton>
                            <IconButton onClick={handleDeleteProfile}>
@@ -157,20 +154,20 @@ function UserProfile() {
                      {dateFormat(userToDisplay.createdAt)}
                   </DateText>
                )}
-               {editingUserProfile ? (
-                  <UserProfileForm
-                     setEditingUserProfile={setEditingUserProfile}
+               {editingProfile ? (
+                  <ProfileForm
+                     setEditingProfile={setEditingProfile}
                      defaultProfileImage={defaultProfileImage}
                      userToDisplay={userToDisplay}
                      pseudo={pseudo}
                   />
                ) : (
-                  <UserProfileData
+                  <ProfileData
                      defaultProfileImage={defaultProfileImage}
                      userToDisplay={userToDisplay}
                   />
                )}
-            </MainUserProfileData>
+            </MainProfileData>
          ) : (
             <Error />
          )}
@@ -178,4 +175,4 @@ function UserProfile() {
    );
 }
 
-export default UserProfile;
+export default Profile;

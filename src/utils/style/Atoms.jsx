@@ -9,7 +9,7 @@ import { colors, padding } from "./variables";
 /*          Styled components to export          */
 /* --------------------------------------------- */
 
-/* -------------------- UserProfile -------------------- */
+/* -------------------- Profile -------------------- */
 // styled component for page h1
 export const PageTitle = styled.h1`
    color: ${colors.unactiveLink};
@@ -29,8 +29,8 @@ export const ProfileImageWrapper = styled.p`
    // box-shadow: 0.25rem 0.25rem 0.5rem darkgrey;
 `;
 
-// styled component for articles on userprofile components
-export const UserProfileArticles = styled.article`
+// styled component for articles on profile components
+export const ProfileArticles = styled.article`
    // background-color: white;
    // padding: 2rem;
    // margin: 1.5rem 0;
@@ -45,8 +45,8 @@ export const UserProfileArticles = styled.article`
    }
 `;
 
-// styled component for div wrapper on userprofile components
-export const UserProfileWrapper = styled.div`
+// styled component for div wrapper on profile components
+export const ProfileWrapper = styled.div`
    background-color: white;
    padding: 2rem;
    border-radius: 1rem;

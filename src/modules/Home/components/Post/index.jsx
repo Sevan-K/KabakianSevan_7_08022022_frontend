@@ -21,20 +21,19 @@ import {
    IconButton,
    PseudoText,
    UserImageWrapper,
-} from "../../utils/style/Atoms";
-import dateFormat from "../../utils/functions/dateFormat";
+} from "../../../../utils/style/Atoms";
+import dateFormat from "../../../../utils/functions/dateFormat";
 import styled from "styled-components";
-import { colors, padding } from "../../utils/style/variables";
-import defaultProfileImage from "../../assets/profile.png";
-import { deletePost, updatePost } from "../../actions/post.actions";
-import { useMediaQuerry, useOnHome, useUserId } from "../../utils/hooks";
+import { colors, padding } from "../../../../utils/style/variables";
+import defaultProfileImage from "../../../../assets/profile.png";
+import { deletePost, updatePost } from "../../../../actions/post.actions";
+import { useMediaQuerry, useOnHome, useUserId } from "../../../../utils/hooks";
 import Comment from "../Comment";
 import NewCommentForm from "./NewCommentForm";
 import {
    addLike,
-   getPostLikes,
    removeLike,
-} from "../../actions/postLikes.actions";
+} from "../../../../actions/postLikes.actions";
 
 /* ------------------------------------------- */
 /*          Styled components section          */

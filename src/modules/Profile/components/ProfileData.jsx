@@ -5,10 +5,10 @@ import styled from "styled-components";
 
 import {
    ProfileImageWrapper,
-   UserProfileArticles,
-   UserProfileWrapper,
-} from "../../utils/style/Atoms";
-import { colors } from "../../utils/style/variables";
+   ProfileArticles,
+   ProfileWrapper,
+} from "../../../utils/style/Atoms";
+import { colors } from "../../../utils/style/variables";
 
 /* ------------------------------------------- */
 /*          Styled components section          */
@@ -21,12 +21,12 @@ const StyledText = styled.p`
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
-function UserProfileData({ userToDisplay, defaultProfileImage }) {
+function ProfileData({ userToDisplay, defaultProfileImage }) {
 
    // component to return
    return (
-      <UserProfileWrapper>
-         <UserProfileArticles>
+      <ProfileWrapper>
+         <ProfileArticles>
             <h3>Photo de profil</h3>
             <ProfileImageWrapper>
                <img
@@ -34,16 +34,16 @@ function UserProfileData({ userToDisplay, defaultProfileImage }) {
                   alt="Profil de l'utilisateur"
                />
             </ProfileImageWrapper>
-         </UserProfileArticles>
-         <UserProfileArticles>
+         </ProfileArticles>
+         <ProfileArticles>
             <h3>A propos de {userToDisplay.pseudo}</h3>
             <StyledText>
                {userToDisplay.bio || "Pas de description pour le moment..."}
             </StyledText>
-         </UserProfileArticles>
-      </UserProfileWrapper>
+         </ProfileArticles>
+      </ProfileWrapper>
    );
 }
 
 // export component
-export default UserProfileData;
+export default ProfileData;

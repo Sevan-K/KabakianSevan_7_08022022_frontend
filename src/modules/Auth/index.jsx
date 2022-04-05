@@ -6,8 +6,8 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 // importing components
-import LogInForm from "./LogInForm";
-import SignUpForm from "./SignUpForm";
+import LogInForm from "./components/LogInForm";
+import SignUpForm from "./components/SignUpForm";
 import { colors, mainSize } from "../../utils/style/variables";
 import { useMediaQuerry } from "../../utils/hooks";
 

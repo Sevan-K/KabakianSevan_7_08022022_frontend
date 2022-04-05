@@ -2,13 +2,14 @@
 /*          Imports Section          */
 /* --------------------------------- */
 import { Route, Routes } from "react-router-dom";
-// pages import
-import Home from "./pages/Home";
-import Profile from "./pages/Profile";
-import Error from "./pages/Error";
+// modules import
+import Home from "./modules/Home";
+import Profile from "./modules/Profile";
+import Error from "./modules/Error";
+import Auth from "./modules/Auth";
 
 // components import
-import Header from "./components/Header";
+import Header from "./modules/Shared/Header";
 import {
    Loader,
    LoaderSpinner,
@@ -18,7 +19,6 @@ import {
 
 import logo from "./assets/icon-above-font.svg";
 import { useUserId } from "./utils/hooks";
-import Auth from "./components/Auth";
 
 /* --------------------------------------------- */
 /*          Components creation section          */
