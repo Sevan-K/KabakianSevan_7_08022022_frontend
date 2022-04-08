@@ -9,7 +9,7 @@ import Error from "./modules/Error";
 import Auth from "./modules/Auth";
 
 // components import
-import Header from "./modules/Shared/Header";
+import Header from "./modules/Shared/components/Header";
 import {
    Loader,
    LoaderSpinner,

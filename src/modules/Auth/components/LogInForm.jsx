@@ -3,12 +3,9 @@
 /* --------------------------------- */
 import { useState } from "react";
 import axios from "axios";
-import {
-   AuthForm,
-   AuthLabel,
-   AuthSumbitInput,
-   ErrorMessage,
-} from "../../../utils/style/Atoms";
+import { AuthSumbitInput } from "../../../utils/style/Atoms";
+import { AuthForm, AuthLabel } from "../styledComponents";
+import {ErrorMessage} from "../../Shared/styledComponents";
 
 /* ------------------------------------------- */
 /*          Styled components section          */

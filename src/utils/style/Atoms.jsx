@@ -106,21 +106,6 @@ export const DateText = styled.p`
 `;
 
 // styled component fo the submit input on authentication forms
-export const AuthForm = styled.form`
-   background-color: white;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   border-radius: 1.5rem;
-   padding: 2rem;
-   box-shadow: 0.1rem 0.1rem 0.5rem lightgray;
-   margin-top: 2rem;
-   & h3 {
-      margin: 1rem 0;
-   }
-`;
-
-// styled component fo the submit input on authentication forms
 export const AuthSumbitInput = styled.input`
    // background-color: ${colors.backgroundLight};
    background-color: ${colors.primary};
@@ -140,19 +125,6 @@ export const AuthSumbitInput = styled.input`
    }
 `;
 
-// styled component fo the label on authentication forms
-export const AuthLabel = styled.label`
-   color: ${colors.darkUnactiveLink};
-   padding: 0.5rem;
-   font-style: italic;
-   margin-top: 1rem;
-`;
-
-// styled component for forms' error messages
-export const ErrorMessage = styled.p`
-   color: ${colors.error};
-   font-size: 1.2rem;
-`;
 
 /* ----------------------------------------- */
 /*         Loader component section          */

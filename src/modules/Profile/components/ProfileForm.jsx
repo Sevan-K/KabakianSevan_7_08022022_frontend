@@ -11,11 +11,11 @@ import { updateOneOfUsers } from "../../../actions/users.actions";
 import { useUserId } from "../../../utils/hooks";
 import {
    AuthSumbitInput,
-   ErrorMessage,
    ProfileImageWrapper,
    ProfileArticles,
    ProfileWrapper,
 } from "../../../utils/style/Atoms";
+import {ErrorMessage} from "../../Shared/styledComponents";
 import { colors } from "../../../utils/style/variables";
 
 /* ------------------------------------------- */

@@ -5,17 +5,17 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useMediaQuerry, useOnHome, useUserId } from "../../../utils/hooks";
+import { useMediaQuerry, useOnHome, useUserId } from "../../../../utils/hooks";
 
 // components
 import Logout from "./LogOut";
 
 // assets
-import headerLogoBigScreen from "../../../assets/icon-left-font.svg";
-import headerLogoSmallScreen from "../../../assets/icon.svg";
+import headerLogoBigScreen from "../../../../assets/icon-left-font.svg";
+import headerLogoSmallScreen from "../../../../assets/icon.svg";
 
 // style variables
-import { colors, padding } from "../../../utils/style/variables";
+import { colors, padding } from "../../../../utils/style/variables";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -26,7 +26,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 // import { faUser as faUserRegular,  } from "@fortawesome/free-regular-svg-icons";
 
-import defaultImage from "../../../assets/profile.png";
+import defaultImage from "../../../../assets/profile.png";
 
 /* ------------------------------------------- */
 /*          Styled components section          */

@@ -6,9 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { addComment, getAllComments } from "../../../../actions/comments.action";
+import {
+   addComment,
+   getAllComments,
+} from "../../../../actions/comments.action";
 import { useUserId } from "../../../../utils/hooks";
-import { ErrorMessage, IconButton } from "../../../../utils/style/Atoms";
+import { IconButton } from "../../../../utils/style/Atoms";
+import {ErrorMessage} from "../../../Shared/styledComponents";
 import { colors } from "../../../../utils/style/variables";
 
 /* ------------------------------------------- */

@@ -15,10 +15,11 @@ import styled from "styled-components";
 import { colors, padding } from "../../../../utils/style/variables";
 import defaultProfileImage from "../../../../assets/profile.png";
 import {
-   ErrorMessage,
    IconButton,
    UserImageWrapper,
 } from "../../../../utils/style/Atoms";
+import {ErrorMessage} from "../../../Shared/styledComponents";
+
 import { useOnHome } from "../../../../utils/hooks";
 
 /* ------------------------------------------- */
