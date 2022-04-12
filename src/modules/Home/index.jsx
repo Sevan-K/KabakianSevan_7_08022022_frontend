@@ -8,19 +8,9 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { PageTitle } from "../Shared/styledComponents";
-import styled from "styled-components";
-import { mainSize } from "../../utils/style/variables";
+// styled components
+import { HomeMain } from "./styledComponents";
 
-/* ------------------------------------------- */
-/*          Styled components section          */
-/* ------------------------------------------- */
-// styled component for home page main component
-const HomeMain = styled.main`
-   max-width: 60rem;
-   margin: auto;
-   width: ${({ matchesSmall }) =>
-      matchesSmall ? mainSize.smallscreen : mainSize.regular};
-`;
 
 /* --------------------------------------------- */
 /*          Components creation section          */

@@ -94,7 +94,7 @@ const EditContentForm = styled.form`
 `;
 
 // styled component for the textarea of the form to edit comment content
-const StyledTextArea = styled.textarea`
+const PostStyledTextArea = styled.textarea`
    flex: 1;
    border: none;
    background: transparent;
@@ -310,14 +310,14 @@ function Post({ post }) {
                         >
                            <FontAwesomeIcon icon={faCircleArrowLeft} />
                         </IconButton>
-                        <StyledTextArea
+                        <PostStyledTextArea
                            name=""
                            id={tempId}
                            value={updatedContent}
                            onChange={(event) =>
                               setUpdatedContent(event.target.value)
                            }
-                        ></StyledTextArea>
+                        ></PostStyledTextArea>
                         <IconButton type="submit">
                            <FontAwesomeIcon icon={faPaperPlane} />
                         </IconButton>

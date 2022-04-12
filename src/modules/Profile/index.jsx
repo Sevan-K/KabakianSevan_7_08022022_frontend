@@ -24,7 +24,7 @@ import {
    MainProfileData,
    ProfileDataHeader,
    DateText,
-} from "./StyledComponents";
+} from "./styledComponents";
 // children
 import ProfileData from "./components/ProfileData";
 import ProfileForm from "./components/ProfileForm";

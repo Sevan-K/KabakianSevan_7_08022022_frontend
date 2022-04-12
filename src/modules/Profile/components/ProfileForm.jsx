@@ -16,7 +16,7 @@ import {
    ProfileImageWrapper,
    ChangeUserPicLabel,
    StyledTextArea,
-} from "../StyledComponents";
+} from "../styledComponents";
 
 /* --------------------------------------------- */
 /*          Components creation section          */

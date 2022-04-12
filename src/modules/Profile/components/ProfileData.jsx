@@ -6,7 +6,7 @@ import {
    ProfileArticles,
    ProfileImageWrapper,
    StyledText,
-} from "../StyledComponents";
+} from "../styledComponents";
 
 /* --------------------------------------------- */
 /*          Components creation section          */

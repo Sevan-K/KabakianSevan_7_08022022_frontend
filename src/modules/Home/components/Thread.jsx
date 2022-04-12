@@ -10,10 +10,6 @@ import { useState } from "react";
 import { getAllComments } from "../../../actions/comments.action";
 import { getPostLikes } from "../../../actions/postLikes.actions";
 
-/* ------------------------------------------- */
-/*          Styled components section          */
-/* ------------------------------------------- */
-
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */

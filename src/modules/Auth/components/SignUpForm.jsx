@@ -7,11 +7,6 @@ import { useState } from "react";
 import { AuthForm, AuthLabel } from "../styledComponents";
 import {ErrorMessage, AuthSumbitInput} from "../../Shared/styledComponents";
 
-/* ------------------------------------------- */
-/*          Styled components section          */
-/* ------------------------------------------- */
-// all styled component are imported from atoms
-
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */

@@ -6,11 +6,6 @@ import axios from "axios";
 import { AuthForm, AuthLabel } from "../styledComponents";
 import { ErrorMessage, AuthSumbitInput } from "../../Shared/styledComponents";
 
-/* ------------------------------------------- */
-/*          Styled components section          */
-/* ------------------------------------------- */
-// all styled component are imported from atoms
-
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
