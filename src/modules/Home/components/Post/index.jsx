@@ -16,25 +16,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 
-import {
-   DateText,
-   IconButton,
-   PseudoText,
-   UserImageWrapper,
-} from "../../../../utils/style/Atoms";
 import dateFormat from "../../../../utils/functions/dateFormat";
 import styled from "styled-components";
 import { colors, padding } from "../../../../utils/style/variables";
 import defaultProfileImage from "../../../../assets/profile.png";
 import { deletePost, updatePost } from "../../../../actions/post.actions";
 import { useMediaQuerry, useOnHome, useUserId } from "../../../../utils/hooks";
-import Comment from "../Comment";
+import Comment from "./Comment";
 import NewCommentForm from "./NewCommentForm";
 import {
    addLike,
    removeLike,
 } from "../../../../actions/postLikes.actions";
 
+import {
+   DateText,
+   PseudoText,
+   UserImageWrapper,
+} from "../../../../utils/style/Atoms";
+import { IconButton } from "../../../Shared/styledComponents";
 /* ------------------------------------------- */
 /*          Styled components section          */
 /* ------------------------------------------- */

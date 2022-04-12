@@ -7,7 +7,7 @@ import { useMediaQuerry, useUserId } from "../../utils/hooks/index";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { PageTitle } from "../../utils/style/Atoms";
+import { PageTitle } from "../Shared/styledComponents";
 import styled from "styled-components";
 import { mainSize } from "../../utils/style/variables";
 

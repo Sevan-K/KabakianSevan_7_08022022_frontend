@@ -11,8 +11,7 @@ import {
    getAllComments,
 } from "../../../../actions/comments.action";
 import { useUserId } from "../../../../utils/hooks";
-import { IconButton } from "../../../../utils/style/Atoms";
-import {ErrorMessage} from "../../../Shared/styledComponents";
+import {ErrorMessage, IconButton} from "../../../Shared/styledComponents";
 import { colors } from "../../../../utils/style/variables";
 
 /* ------------------------------------------- */

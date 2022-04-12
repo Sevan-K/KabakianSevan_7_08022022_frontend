@@ -13,16 +13,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { deleteComment, updateComment } from "../../../../actions/comments.action";
+import {
+   deleteComment,
+   updateComment,
+} from "../../../../actions/comments.action";
 import defaultProfileImage from "../../../../assets/profile.png";
 import dateFormat from "../../../../utils/functions/dateFormat";
 import { useMediaQuerry, useOnHome, useUserId } from "../../../../utils/hooks";
 import {
    DateText,
-   IconButton,
    PseudoText,
    SmallUserImageWrapper,
 } from "../../../../utils/style/Atoms";
+
+import { IconButton } from "../../../Shared/styledComponents";
 import { colors, padding } from "../../../../utils/style/variables";
 
 /* ------------------------------------------- */

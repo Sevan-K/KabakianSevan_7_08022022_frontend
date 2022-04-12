@@ -12,49 +12,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import styled from "styled-components";
 import { deleteUser } from "../../actions/user.actions";
 import { deleteOneOfUsers } from "../../actions/users.actions";
 // default profile picture
 import defaultProfileImage from "../../assets/profile.png";
 import dateFormat from "../../utils/functions/dateFormat";
 import { useMediaQuerry, useUserId } from "../../utils/hooks";
-import { IconButton, PageTitle } from "../../utils/style/Atoms";
-import { colors, mainSize } from "../../utils/style/variables";
+// styled components
+import { IconButton, PageTitle } from "../Shared/styledComponents";
+import {
+   MainProfileData,
+   ProfileDataHeader,
+   DateText,
+} from "./StyledComponents";
+// children
 import ProfileData from "./components/ProfileData";
 import ProfileForm from "./components/ProfileForm";
 
-/* ------------------------------------------- */
-/*          Styled components section          */
-/* ------------------------------------------- */
-// styled component for the main element
-const MainProfileData = styled.main`
-   width: ${({ matchesSmall }) =>
-      matchesSmall ? mainSize.smallscreen : mainSize.regular};
-   max-width: 50rem;
-   margin: auto;
-   padding: 3rem;
-   background-color: ${colors.backgroundLight};
-   border-radius: 1.5rem;
-`;
-
-const ProfileDataHeader = styled.header`
-   display: flex;
-   align-items: center;
-   justify-content: end;
-   & > h2 {
-      margin-right: auto;
-      color: ${colors.darkUnactiveLink};
-      font-size: 2rem;
-   }
-`;
-
-// styled component for date in post an comment cards
-const DateText = styled.p`
-   color: ${colors.darkUnactiveLink};
-   font-style: italic;
-   font-size: 1.3rem;
-`;
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */

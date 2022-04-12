@@ -3,7 +3,7 @@
 /* --------------------------------- */
 import styled from "styled-components";
 import errorImage from "../../assets/404error.png";
-import { PageTitle } from "../../utils/style/Atoms";
+import { PageTitle } from "../Shared/styledComponents";
 import { colors, mainSize } from "../../utils/style/variables";
 
 /* ------------------------------------------- */

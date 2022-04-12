@@ -1,28 +1,17 @@
 /* --------------------------------- */
 /*          Imports Section          */
 /* --------------------------------- */
-import styled from "styled-components";
-
 import {
-   ProfileImageWrapper,
-   ProfileArticles,
    ProfileWrapper,
-} from "../../../utils/style/Atoms";
-import { colors } from "../../../utils/style/variables";
-
-/* ------------------------------------------- */
-/*          Styled components section          */
-/* ------------------------------------------- */
-const StyledText = styled.p`
-   font-size: 1.3rem;
-   color: ${colors.darkUnactiveLink};
-`;
+   ProfileArticles,
+   ProfileImageWrapper,
+   StyledText,
+} from "../StyledComponents";
 
 /* --------------------------------------------- */
 /*          Components creation section          */
 /* --------------------------------------------- */
 function ProfileData({ userToDisplay, defaultProfileImage }) {
-
    // component to return
    return (
       <ProfileWrapper>

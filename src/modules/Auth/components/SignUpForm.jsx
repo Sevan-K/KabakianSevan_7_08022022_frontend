@@ -4,9 +4,8 @@
 
 import axios from "axios";
 import { useState } from "react";
-import { AuthSumbitInput } from "../../../utils/style/Atoms";
 import { AuthForm, AuthLabel } from "../styledComponents";
-import {ErrorMessage} from "../../Shared/styledComponents";
+import {ErrorMessage, AuthSumbitInput} from "../../Shared/styledComponents";
 
 /* ------------------------------------------- */
 /*          Styled components section          */

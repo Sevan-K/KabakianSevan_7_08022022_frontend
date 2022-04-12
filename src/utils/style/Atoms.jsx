@@ -9,66 +9,6 @@ import { colors, padding } from "./variables";
 /*          Styled components to export          */
 /* --------------------------------------------- */
 
-/* -------------------- Profile -------------------- */
-// styled component for page h1
-export const PageTitle = styled.h1`
-   color: ${colors.unactiveLink};
-   margin-bottom: 1rem;
-   padding: ${padding.icons};
-   text-align: center;
-   font-size: 2.5rem;
-`;
-
-// styled component for image wrapper on profile components (data and form)
-export const ProfileImageWrapper = styled.p`
-   border-radius: 50%;
-   overflow: hidden;
-   width: 17rem;
-   height: 17rem;
-   border: 0.2rem solid ${colors.darkUnactiveLink};
-   // box-shadow: 0.25rem 0.25rem 0.5rem darkgrey;
-`;
-
-// styled component for articles on profile components
-export const ProfileArticles = styled.article`
-   // background-color: white;
-   // padding: 2rem;
-   // margin: 1.5rem 0;
-   // border-radius: 1rem;
-   // box-shadow: 0.25rem 0.25rem 0.5rem darkgrey;
-   width: 100%;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   & h3 {
-      margin: 1rem 0;
-   }
-`;
-
-// styled component for div wrapper on profile components
-export const ProfileWrapper = styled.div`
-   background-color: white;
-   padding: 2rem;
-   border-radius: 1rem;
-   box-shadow: 0.25rem 0.25rem 0.5rem ${colors.unactiveLink};
-   margin: 1.5rem 0;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-`;
-
-// styled component for the log in link
-export const IconButton = styled.button`
-   padding: ${padding.icons};
-   font-size: 2.1rem;
-   background: none;
-   color: ${({ color }) => (color ? color : colors.unactiveLink)};
-   transition: 300ms;
-   &:hover {
-      color: ${colors.primary};
-   }
-`;
-
 // styled component for round user  image wrapper
 export const UserImageWrapper = styled(Link)`
    width: 10vw;
@@ -103,26 +43,6 @@ export const DateText = styled.p`
    color: ${({ color }) => (color ? color : colors.unactiveLink)};
    font-style: italic;
    font-size: 1.2rem;
-`;
-
-// styled component fo the submit input on authentication forms
-export const AuthSumbitInput = styled.input`
-   // background-color: ${colors.backgroundLight};
-   background-color: ${colors.primary};
-   color: white;
-   border: none;
-   border-radius: 1rem;
-   padding: 1rem 2rem;
-   margin: 2rem 0;
-   font-weight: bold;
-   transition: all 200ms linear;
-   max-width: 90%;
-   box-shadow: 0.1rem 0.1rem 0.2rem ${colors.unactiveLink};
-   &:hover {
-      box-shadow: 0.3rem 0.3rem 0.6rem ${colors.unactiveLink};
-      background-color: ${colors.primary};
-      color: white;
-   }
 `;
 
 

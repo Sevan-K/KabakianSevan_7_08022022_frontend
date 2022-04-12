@@ -4,7 +4,7 @@
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { IconButton } from "../../../../utils/style/Atoms";
+import {IconButton} from '../styledComponents'
 
 /* --------------------------------------------- */
 /*          Components creation section          */

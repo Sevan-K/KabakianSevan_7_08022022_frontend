@@ -5,51 +5,18 @@ import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
 import { updateUser } from "../../../actions/user.actions";
 import { updateOneOfUsers } from "../../../actions/users.actions";
 import { useUserId } from "../../../utils/hooks";
+// styled components
+import { ErrorMessage, AuthSumbitInput } from "../../Shared/styledComponents";
 import {
-   AuthSumbitInput,
-   ProfileImageWrapper,
-   ProfileArticles,
    ProfileWrapper,
-} from "../../../utils/style/Atoms";
-import {ErrorMessage} from "../../Shared/styledComponents";
-import { colors } from "../../../utils/style/variables";
-
-/* ------------------------------------------- */
-/*          Styled components section          */
-/* ------------------------------------------- */
-// styled component : label to change picture
-const ChangeUserPicLabel = styled.label`
-   background-color: ${colors.darkUnactiveLink};
-   position: relative;
-   bottom: 3.5rem;
-   left: 6rem;
-   color: white;
-   width: 2.75rem;
-   height: 2.75rem;
-   border-radius: 2.75rem;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   transition: 300ms;
-   &:hover {
-      background-color: ${colors.primary};
-      // & ~ p {
-      //    border: 0.1rem solid red;
-      // }
-   }
-`;
-
-// styled component : text area to change description
-const StyledTextArea = styled.textarea`
-   font-size: 1.3rem;
-   width: 100%;
-   max-width: 40rem;
-   color: ${colors.darkUnactiveLink};
-`;
+   ProfileArticles,
+   ProfileImageWrapper,
+   ChangeUserPicLabel,
+   StyledTextArea,
+} from "../StyledComponents";
 
 /* --------------------------------------------- */
 /*          Components creation section          */
