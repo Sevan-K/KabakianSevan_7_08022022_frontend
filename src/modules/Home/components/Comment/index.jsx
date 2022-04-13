@@ -12,7 +12,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import {
    deleteComment,
    updateComment,
@@ -20,73 +19,20 @@ import {
 import defaultProfileImage from "../../../../assets/profile.png";
 import dateFormat from "../../../../utils/functions/dateFormat";
 import { useMediaQuerry, useOnHome, useUserId } from "../../../../utils/hooks";
-import {
-   DateText,
-   PseudoText,
-   SmallUserImageWrapper,
-} from "../../../../utils/style/Atoms";
-
+// styled components
 import { IconButton } from "../../../Shared/styledComponents";
-import { colors, padding } from "../../../../utils/style/variables";
-
-/* ------------------------------------------- */
-/*          Styled components section          */
-/* ------------------------------------------- */
-// styled component for comment container
-const CommentContainer = styled.li`
-   display: grid;
-   grid-template-columns: ${({ matchesMedium }) =>
-      matchesMedium
-         ? "calc(10vw + 1rem) 1fr repeat(2, 8%)"
-         : "calc(6rem) 1fr repeat(2, 3.7rem)"};
-   grid-template-areas:
-      "img comment edit delete"
-      "img date edit delete";
-   margin-bottom: 0.7rem;
-   & a {
-      grid-area: img;
-   }
-   & p:nth-child(2) {
-      grid-area: pseudo;
-   }
-   & > button {
-      &:first-of-type {
-         grid-area: edit;
-      }
-      &:last-of-type {
-         grid-area: delete;
-      }
-   }
-`;
-
-// styled component for comment PseudoContentWrapper
-const PseudoContentWrapper = styled.div`
-   grid-area: comment;
-   background-color: ${({ isAuthorConnected }) =>
-      isAuthorConnected ? colors.ownCommentBg : colors.backgroundLight};
-   padding: ${padding.comment};
-   border-radius: 1rem;
-   border-top-left-radius: 0;
-`;
-
-// styled component for the form to edit comment content
-const EditContentForm = styled.form`
-   display: flex;
-   align-items: center;
-`;
-
-// styled component for the textarea of the form to edit comment content
-const PostStyledTextArea = styled.textarea`
-   flex: 1;
-   border: none;
-   background: transparent;
-   font-size: 1.3rem;
-`;
-
-// styled component for comment content
-const PostContent = styled.p`
-   font-size: 1.3rem;
-`;
+import {
+   EditContentForm,
+   PostStyledTextArea,
+   PseudoText,
+   DateText,
+} from "../../styledComponents";
+import {
+   SmallUserImageWrapper,
+   CommentContainer,
+   PseudoContentWrapper,
+   CommentContent,
+} from "./styledComponents";
 
 /* --------------------------------------------- */
 /*          Components creation section          */
@@ -201,7 +147,7 @@ function Comment({ comment }) {
                <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
             ) : (
                /* -------------- Comment content -------------- */
-               <PostContent>{comment.content}</PostContent>
+               <CommentContent>{comment.content}</CommentContent>
             )}
          </PseudoContentWrapper>
          {/* -------------- Comment publication date -------------- */}

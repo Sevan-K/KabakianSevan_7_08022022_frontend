@@ -2,22 +2,7 @@
 /*          Imports Section          */
 /* --------------------------------- */
 import styled from "styled-components";
-import { colors, mainSize, padding } from "../../../utils/style/variables";
-
-/* ------------------------------------------------------------- */
-/*         Home module shared styled components section          */
-/* ------------------------------------------------------------- */
-
-/* --------------------------------------------------------- */
-/*         Home component styled components section          */
-/* --------------------------------------------------------- */
-// styled component for home page main component
-export const HomeMain = styled.main`
-   max-width: 60rem;
-   margin: auto;
-   width: ${({ matchesSmall }) =>
-      matchesSmall ? mainSize.smallscreen : mainSize.regular};
-`;
+import { colors, padding } from "../../../../utils/style/variables";
 
 /* ---------------------------------------------------------------- */
 /*         NewPostForm component styled components section          */

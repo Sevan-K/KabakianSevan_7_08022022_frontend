@@ -5,49 +5,15 @@ import { faCircleXmark, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
 import {
    addComment,
    getAllComments,
 } from "../../../../actions/comments.action";
 import { useUserId } from "../../../../utils/hooks";
-import {ErrorMessage, IconButton} from "../../../Shared/styledComponents";
 import { colors } from "../../../../utils/style/variables";
-
-/* ------------------------------------------- */
-/*          Styled components section          */
-/* ------------------------------------------- */
-// styled component for the new comment form
-const StyledForm = styled.form`
-   background-color: ${colors.newCommentBg};
-   display: flex;
-   flex-flow: row wrap;
-   justify-content: flex-end;
-   align-items: center;
-   padding: 0.7rem;
-   border-radius: 3rem;
-   &:focus-within {
-      box-shadow: 0.1rem 0.1rem 0.25rem ${colors.unactiveLink};
-   }
-   & button {
-      width: 15%;
-   }
-   p {
-      width: 100%;
-      text-align: center;
-      margin-top: 1rem;
-   }
-`;
-
-// styled component for the new comment textare
-const StyledTextArea = styled.textarea`
-   width: 70%;
-   border: none;
-   background-color: transparent;
-   font-size: 1.3rem;
-   resize: vertical;
-   min-height: 1.5rem;
-`;
+// styled components
+import { ErrorMessage, IconButton } from "../../../Shared/styledComponents";
+import { NewCommentStyledForm, NewCommentTextArea } from "./styledComponents";
 
 /* --------------------------------------------- */
 /*          Components creation section          */
@@ -90,7 +56,7 @@ function NewCommentForm({ postId }) {
 
    // component to return
    return (
-      <StyledForm action="" onSubmit={handleNewCommentSubmit}>
+      <NewCommentStyledForm action="" onSubmit={handleNewCommentSubmit}>
          {/* -------------- Cancel button, if content is not null -------------- */}
          {newCommentContent && (
             <IconButton
@@ -105,13 +71,13 @@ function NewCommentForm({ postId }) {
             </IconButton>
          )}
          {/* -------------- Visible part (textarea and sumbit button) -------------- */}
-         <StyledTextArea
+         <NewCommentTextArea
             name=""
             id=""
             placeholder="Votre réaction..."
             value={newCommentContent}
             onChange={(event) => setNewCommentContent(event.target.value)}
-         ></StyledTextArea>
+         ></NewCommentTextArea>
          <IconButton color={colors.darkUnactiveLink} type="submit">
             <FontAwesomeIcon icon={faPaperPlane} />
          </IconButton>
@@ -121,7 +87,7 @@ function NewCommentForm({ postId }) {
                Entrez un contenu valide 😐 Pas de caractères spéciaux...
             </ErrorMessage>
          )}
-      </StyledForm>
+      </NewCommentStyledForm>
    );
 }
 

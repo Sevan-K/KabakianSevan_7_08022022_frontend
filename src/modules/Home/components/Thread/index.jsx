@@ -3,12 +3,12 @@
 /* --------------------------------- */
 
 import { useEffect } from "react";
-import Post from "./Post";
+import Post from "../Post";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts } from "../../../actions/post.actions";
+import { getAllPosts } from "../../../../actions/post.actions";
 import { useState } from "react";
-import { getAllComments } from "../../../actions/comments.action";
-import { getPostLikes } from "../../../actions/postLikes.actions";
+import { getAllComments } from "../../../../actions/comments.action";
+import { getPostLikes } from "../../../../actions/postLikes.actions";
 
 /* --------------------------------------------- */
 /*          Components creation section          */
@@ -44,9 +44,7 @@ function Thread() {
 
    // component to return
    return (
-      <div>
          <ul>{PostsComponents}</ul>
-      </div>
    );
 }
 

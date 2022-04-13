@@ -15,7 +15,7 @@ import {
    LoaderSpinner,
    LoaderLogo,
    LoaderText,
-} from "./utils/style/Atoms";
+} from "./utils/style/Loader";
 
 import logo from "./assets/icon-above-font.svg";
 import { useUserId } from "./utils/hooks";

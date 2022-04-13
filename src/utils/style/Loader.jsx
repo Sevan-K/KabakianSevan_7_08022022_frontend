@@ -1,50 +1,8 @@
 /* --------------------------------- */
 /*          Imports Section          */
 /* --------------------------------- */
-import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
-import { colors, padding } from "./variables";
-
-/* --------------------------------------------- */
-/*          Styled components to export          */
-/* --------------------------------------------- */
-
-// styled component for round user  image wrapper
-export const UserImageWrapper = styled(Link)`
-   width: 10vw;
-   max-width: 6rem;
-   height: 10vw;
-   max-height: 6rem;
-   border-radius: 5vw;
-   overflow: hidden;
-   margin-right: ${padding.icons};
-`;
-
-// styled component for round user  image wrapper
-export const SmallUserImageWrapper = styled(Link)`
-   width: 8vw;
-   max-width: 4rem;
-   height: 8vw;
-   max-height: 4rem;
-   border-radius: 5vw;
-   overflow: hidden;
-   margin-right: ${padding.icons};
-`;
-
-// styled component for pseudo in post an comment cards
-export const PseudoText = styled.p`
-   font-weight: bold;
-   color: ${colors.darkUnactiveLink};
-`;
-
-// styled component for date in post an comment cards
-export const DateText = styled.p`
-   grid-area: date;
-   color: ${({ color }) => (color ? color : colors.unactiveLink)};
-   font-style: italic;
-   font-size: 1.2rem;
-`;
-
+import { colors } from "./variables";
 
 /* ----------------------------------------- */
 /*         Loader component section          */
